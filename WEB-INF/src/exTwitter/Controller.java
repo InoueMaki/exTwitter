@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author matsuda
+ * doPostメソッドでjspからデータの受け取り、画面遷移を行うクラス。
+ */
 @SuppressWarnings("serial")
 public class Controller extends HttpServlet {
 	
@@ -32,6 +36,7 @@ public class Controller extends HttpServlet {
 		
 		//以下ボタンごとの処理
 		if(command!=null && command .equals("ログイン")){
+			
 				String userName = request.getParameter("user_name");
 				String password =request.getParameter("password");
 				User user = new User();
@@ -45,7 +50,7 @@ public class Controller extends HttpServlet {
 					url = "loginUI.jsp";
 				}
 			
-		}else if(hasSession(session)){//ログイン以外、かつ、sessionある時
+		}else if(session!=null && hasSession(session)){//ログイン以外、かつ、sessionある時
 			
 				if(command .equals("ログアウト")){
 					User user = new User();
@@ -127,10 +132,13 @@ public class Controller extends HttpServlet {
 					routine.getRoutineBean(session);
 				
 					url = "RoutinedelUI.jsp";
+					
+					//新しい画面が増えたときはここに追加
 				
 				}else{
 					PrintWriter out = response.getWriter();
 					out.println("正常に処理が行われませんでした。");
+					System.err.println("登録されていないボタン："+command);
 				}
 			
 		}else{//セッション切れの時
