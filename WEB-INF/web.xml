@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   version="2.5">
+   
+	<servlet>
+		<servlet-name>Bt</servlet-name>
+		<servlet-class>exTwitter.Bt</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Bt</servlet-name>
+		<url-pattern>/Bt</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>exBot.test</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>Tweet</servlet-name>
+	<servlet-class>exTwitter.Tweet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Tweet</servlet-name>
+		<url-pattern>/Tweet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Routine</servlet-name>
+		<servlet-class>exTwitter.Routine</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Routine</servlet-name>
+		<url-pattern>/Routine</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>exTwitter.Controller</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/Controller</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>exTwitter.Logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Routinedel</servlet-name>
+		<servlet-class>exTwitter.Routinedel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Routinedel</servlet-name>
+		<url-pattern>/Routinedel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RoutineUpdate</servlet-name>
+		<servlet-class>exTwitter.RoutineUpdate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RoutineUpdate</servlet-name>
+		<url-pattern>/RoutineUpdate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Once</servlet-name>
+		<servlet-class>exTwitter.Once</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Once</servlet-name>
+		<url-pattern>/Once</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>OnceDel</servlet-name>
+		<servlet-class>exTwitter.OnceDel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OnceDel</servlet-name>
+		<url-pattern>/OnceDel</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OnceUpdate</servlet-name>
+		<servlet-class>exTwitter.OnceUpdate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OnceUpdate</servlet-name>
+		<url-pattern>/OnceUpdate</url-pattern>
+	</servlet-mapping>
+
+</web-app>
