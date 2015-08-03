@@ -9,7 +9,8 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author excite_2
+ * @author matsuda
+ * 単発ツイートのクラス
  *
  */
 public class Once {
@@ -19,14 +20,20 @@ public class Once {
 	/**
 	 * 単発ツイート一覧を表示するためのBeanを作る。
 	 * 作成したBeanはセッション情報に保存する。
+	 * DBに接続できなかったときfalseを返す。
 	 * @param session
 	 */
-	public void getOnceBean(HttpSession session) {
+	public boolean getOnceBean(HttpSession session) {
 		
 			onceList = new ArrayList<OnceBean>();	//onceListを初期化
 			
 			DBManager dbm = new DBManager();	//DB接続クラスのインスタンス
-			dbm.getConnection();
+			try {
+				dbm.getConnection("excite");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return false;
+			}
 			
 			ResultSet rs = dbm.getResultSet("select * from once where posted = 0");	
 
@@ -43,15 +50,19 @@ public class Once {
 			} catch (SQLException e) {
 				System.err.println("error:getOnceBean()");
 				e.printStackTrace();
+				return false;
+				
+			}finally{
+				dbm.closeConnection();
 			}
 			
-			dbm.closeConnection();
-	
+			return true;
 	}
 	
 
 	/**
-	 * DBに
+	 * DBに単発ツイートを登録する。
+	 * DBに接続できなかったときfalseを返す。
 	 * @param （入力された単発ツイートの情報）
 	 * @param text
 	 * @param chk
@@ -61,7 +72,7 @@ public class Once {
 	 * @param hour
 	 * @param minute
 	 */
-	public void insertOnceTweet(String text, String chk, String year,
+	public boolean insertOnceTweet(String text, String chk, String year,
 			String month, String day, String hour, String minute) {
 
 		String qry = "";
@@ -82,19 +93,26 @@ public class Once {
 		System.out.println(qry);	//デバッグ用
 
 		DBManager dbm = new DBManager();
-		dbm.getConnection();
+		try {
+			dbm.getConnection("excite");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		int count=0;
 		count = dbm.exeUpdate(qry);
 		System.out.println("onceInsertCount:"+count);
 		
 		dbm.closeConnection();
-
+		
+		return true;
 	}
 	
 
 	/**
 	 * DBからonceIdを取得する。
+	 * DBに接続できなかったとき -1 を返す。
 	 * @return onceId
 	 */
 	private int getOnceIdFromDB() {
@@ -102,7 +120,12 @@ public class Once {
 		int onceId = -1;
 		
 			DBManager dbm = new DBManager();
-			dbm.getConnection();
+			try {
+				dbm.getConnection("excite");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return onceId;
+			}
 			
 			ResultSet rs = dbm.getResultSet("SELECT * FROM numbering");
 			
@@ -113,6 +136,7 @@ public class Once {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				System.err.println("error:getOnceIdFromDB()");
+				return onceId;
 			}
 			
 			dbm.exeUpdate("UPDATE numbering SET once_id="+(onceId+1));
@@ -124,14 +148,20 @@ public class Once {
 	
 
 	/**
-	 * 指定された単発ツイートをDBから削除する
+	 * 指定された単発ツイートをDBから削除する。
+	 * DBに接続できなかったときfalseを返す。
 	 * @param onceId
 	 */
-	public void deleteOnceTweet(String onceId) {
+	public boolean deleteOnceTweet(String onceId) {
 
 		//DB接続の準備
 		DBManager dbm = new DBManager();
-		dbm.getConnection();
+		try {
+			dbm.getConnection("excite");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		//postedを1に変更(検索にひっかからなくするため)
 		String qry = "UPDATE once SET posted = 1 where once_id = "+ onceId;
@@ -142,6 +172,8 @@ public class Once {
 		
 		//接続クローズ
 		dbm.closeConnection();
+		
+		return true;
 	}
 	
 	/**

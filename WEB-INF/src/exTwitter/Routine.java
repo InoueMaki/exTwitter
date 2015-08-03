@@ -26,13 +26,14 @@ public class Routine {
 	
 	/**
 	 * DBに登録されている有効な定期ツイートの一覧を取得
+	 * DBに接続できなかったとき「null」が返る。
 	 * @return　ツイート情報一覧のArrayList
 	 */
 	private ArrayList<RoutineBean> getRoutineTweet() {
 
 		// 必要なインスタンスを生成
 		ArrayList<RoutineBean> twt = new ArrayList<RoutineBean>();
-		DBManager DBM = new DBManager();
+		DBManager dbm = new DBManager();
 		Date date = new Date();
 		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -43,10 +44,15 @@ public class Routine {
 					+ sdfDate.format(date) + "'";
 
 			// DBコネクションの確立
-			DBM.getConnection();
+			try {
+				dbm.getConnection("excite");
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
 
 			// 定期ツイートのリザルトセットを取得
-			ResultSet rs = DBM.getResultSet(qry);
+			ResultSet rs = dbm.getResultSet(qry);
 
 			// リザルトセットをアレイリストに直す
 			int i = 0;
@@ -65,10 +71,12 @@ public class Routine {
 			}
 
 			// DBコネクション切断
-			DBM.closeConnection();
+			dbm.closeConnection();
 
 		} catch (Exception e) {
-			System.err.println("error");
+			e.printStackTrace();
+			System.err.println("error : getRoutineTweet()");
+			return null;
 		}
 
 		return twt;
@@ -77,6 +85,7 @@ public class Routine {
 	
 	/**
 	 * routineTBLに定期ツイートを登録する。
+	 * 例外発生時はfalseを返す。
 	 * @(定期ツイート情報)
 	 * @param title
 	 * @param text
@@ -93,7 +102,7 @@ public class Routine {
 	 * @param weekdaysStr
 	 * @param daysStr
 	 */
-	public void insertRoutineTweet(String title, String text, String startYear,
+	public boolean insertRoutineTweet(String title, String text, String startYear,
 			String startMonth, String startDay, String endYear,
 			String endMonth, String endDay, String tweetHour,
 			String tweetMinute, String entryPlan, String monthEnd,
@@ -112,7 +121,12 @@ public class Routine {
 		ArrayList<Integer> intDays = new ArrayList<Integer>();
 		for(int i=0; i<strDays.length;i++){
 			if(strDays[i]!=null){
-				intDays.add(Integer.parseInt(strDays[i]));
+				try {
+					intDays.add(Integer.parseInt(strDays[i]));
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+					return false;
+				}
 			}
 		}
 		
@@ -122,7 +136,12 @@ public class Routine {
 		}
 
 			DBManager dbm = new DBManager();
-			dbm.getConnection();
+			try {
+				dbm.getConnection("excite");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
 
 			//numberingTBLからID取得
 			int routineID = getRoutineId();
@@ -147,11 +166,14 @@ public class Routine {
 			}
 			
 			dbm.closeConnection();
+			
+			return true;
 	}
 	
 
 	/**
 	 * routineIdを取得する
+	 * DBに接続できなかったとき -1 を返す。
 	 * @return routineId
 	 */
 	private int getRoutineId() {
@@ -159,6 +181,12 @@ public class Routine {
 		int routineId = -1;
 		
 		DBManager dbm = new DBManager();
+		try {
+			dbm.getConnection("excite");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			return routineId;
+		}
 		
 		ResultSet rs = dbm.getResultSet("SELECT * FROM numbering");
 		
@@ -168,6 +196,7 @@ public class Routine {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return routineId;
 		}
 		
 		dbm.exeUpdate("UPDATE numbering SET routine_id="+(routineId+1));
@@ -179,13 +208,19 @@ public class Routine {
 
 	/**
 	 * 指定された定期ツイートに対応する日付をmonthlyTBLに挿入する。
+	 * 失敗時はfalseを返す。
 	 * @param routineID
 	 * @param days
 	 */
-	private void insertIntoMonthly(int routineID,ArrayList<Integer> days) {
+	private boolean insertIntoMonthly(int routineID,ArrayList<Integer> days) {
 		
 		DBManager dbm = new DBManager();
-		dbm.getConnection();
+		try {
+			dbm.getConnection("excite");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		String qry = "INSERT INTO monthly values";
 		
@@ -204,6 +239,8 @@ public class Routine {
 		System.out.println(count);
 		
 		dbm.closeConnection();
+		
+		return true;
 }
 
 /**
@@ -211,10 +248,15 @@ public class Routine {
  * @param routineID
  * @param days
  */
-private void insertIntoWeekly(int routineID,ArrayList<Integer>  days) {
+private boolean insertIntoWeekly(int routineID,ArrayList<Integer>  days) {
 
 	DBManager dbm = new DBManager();
-	dbm.getConnection();
+	try {
+		dbm.getConnection("excite");
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
 	
 	String qry = "INSERT INTO weekly values";
 	
@@ -235,17 +277,24 @@ private void insertIntoWeekly(int routineID,ArrayList<Integer>  days) {
 	System.out.println(count);
 	
 	dbm.closeConnection();
+	
+	return true;
 }
 
 	/**
 	 * 指定された定期ツイートを削除する
 	 * @param routineId
 	 */
-	public void deleteRoutineTweet(String routineId) {
+	public boolean deleteRoutineTweet(String routineId) {
 		
 		//DB接続の準備
 		DBManager dbm = new DBManager();
-		dbm.getConnection();
+		try {
+			dbm.getConnection("excite");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		//postedを1に変更(検索にひっかからなくするため)
 		String qry = "UPDATE routine SET posted = 1 where routine_id = "+ routineId;
@@ -256,15 +305,13 @@ private void insertIntoWeekly(int routineID,ArrayList<Integer>  days) {
 		//接続クローズ
 		dbm.closeConnection();
 		
+		return true;
 	}
 	
 	/**
 	 * DBに書き込むために月日や時間の文字列を修正する。<br>
 	 * 1ケタのものを2ケタにする。他はそのまま。<br><br>
-	 * 例：<br>
-	 * 1→01　
-	 * 5→05　
-	 * 12→12<br>
+	 * 例：<br> 1→01　 5→05　 12→12<br>
 	 * @param str
 	 * @return ２ケタのstr
 	 */
