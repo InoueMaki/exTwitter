@@ -1,14 +1,17 @@
-body {
-	background: #fffaf0;
-	font-size:25;
-}
 
 table.center{
+    margin: 0 auto;  
 	text-align:center;
 }
 
 table.login{
+    margin: 0 auto;  
 	text-align:center;
+}
+
+.textLogin {
+	width:800px;
+	margin: 0 auto;
 }
 
 #a {
@@ -19,7 +22,15 @@ table.login{
 	padding: 20px;
 }
 
-#header {
+#mobile{
+	display:none;
+}
+
+#b {
+	display: none;
+}
+
+#header1 {
 	width: 900px;
 	margin: 0 auto;
 	border: 1px solid #103460;
@@ -27,6 +38,10 @@ table.login{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background: #1e90ff;
+}
+
+#header2{
+	display: none;
 }
 
 .headerButton {
@@ -56,4 +71,144 @@ table.login{
 	font-size: 300%;
 	text-align: center;
 	padding: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+
+	.textLogin {
+		width:600px;
+		margin: 0 auto;
+	}
+	
+	#header1 {
+		width: 90%;
+		margin: 0 auto;
+		border: 1px solid #103460;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		background: #1e90ff;
+	}
+	#a {
+		width: 90%;
+		margin: 0 auto;
+		border: 1px solid #103460;
+		background: #d6dfec;
+	}
+	.headerButton {
+		font-weight:bold;
+		font-size:120%;
+		background-color:yellow;
+		WIDTH:130px;
+		HEIGHT:40px;
+	}
+}
+@media screen and (max-width: 750px) {
+
+	.textLogin {
+		width: 400px;
+		margin: 0 auto;
+	}
+	
+	.menuButton{
+		font-weight:bold;
+		background-color:glay;
+		color:#001000;
+		margin:8px;
+		font-size:30px;
+	}
+	.box {
+    	border: 1px solid #FF3400;
+		font-size:18px;
+	}
+	.headerButton {
+		font-weight:bold;
+		font-size:90%;
+		background-color:yellow;
+		WIDTH:100px;
+		HEIGHT:30px;
+	}
+}
+@media screen and (max-width: 500px) {
+	
+	head{
+		margin: auto;
+	}
+	
+	body{
+		background: #d6dfec;
+		margin: 0 auto;
+	}
+	#header1 {
+		display: none;
+	}
+
+	#a {
+		border: none;
+	}
+	
+	#header2{
+		display: block;
+		background: #1e90ff;
+		margin: 0px;
+	}
+	#header2 a{
+		font-size: 18px;
+		display: block;
+		width:90%;
+		text-decoration: none;
+		padding: 10px;
+		color: #000;
+	}
+	li,ui{
+		display:inline;
+		height:auto;
+		list-style-type:none;
+	}
+	#header2 li ul{
+		display: none;
+	}
+	
+	#pc{
+		display: none;
+	}
+	
+	#mobile {
+		padding:1px;
+		display: block;
+		margin: 0 auto;
+		border: none;
+		background: #d6dfec;
+	}
+	.menuButton{
+		font-weight:bold;
+		background-color:glay;
+		color:#001000;
+		margin:8px;
+		font-size:30px;
+	}
+	
+	.box {
+		display: block;
+    	border: none;
+		font-size:25px;
+	}
+	
+	.headerButton {
+		display: block;
+		font-size: 1.0em;
+	}
+	
+	.textLogin {
+		width: 300px;
+		margin: 0 auto;
+	}
+}
+@media screen and (max-width: 350px) {
+	.textLogin {
+		width: 250px;
+		margin: 0 auto;
+	}
+	.box {
+		font-size:18px;
+	}
 }
