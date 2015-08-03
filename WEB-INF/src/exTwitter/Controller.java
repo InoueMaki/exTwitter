@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
 					url = "loginUI.jsp";
 				}
 			
-		}else if(command!=null && hasSession(session)){//ログイン以外、かつ、sessionある時
+		}else if(hasSession(session)){//ログイン以外、かつ、sessionある時
 			
 				if(command .equals("ログアウト")){
 					User user = new User();
@@ -133,8 +133,6 @@ public class Controller extends HttpServlet {
 					out.println("正常に処理が行われませんでした。");
 				}
 			
-				request.setAttribute("command", command);
-			
 		}else{//セッション切れの時
 			url="redirect.jsp";
 		}
@@ -145,6 +143,10 @@ public class Controller extends HttpServlet {
 		
 	}
 
+	/**
+	 * @param session
+	 * @return セッションあり→true、なし→false
+	 */
 	private boolean hasSession(HttpSession session) {
 		if(session.getAttribute("loginFlag")!=null){
 			return true;
