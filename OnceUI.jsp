@@ -53,11 +53,11 @@
 					<textarea name="text" style="width:400px;height:200px;resize:none;font-size:22" maxlength="140" placeholder="ツイートを入力してね" required></textarea><br>
 				<!-- ツイート終わり -->
 				<!-- 日付指定チェックボックス -->
-					<dev id="check">
+					<div id="check">
 						<br>
 						<input type="checkbox" id="chk1" name="chk1" onclick='chkdisp(this)' /><label for="chk1">日付指定する</label>
 						<br>
-					</dev>
+					</div>
 				<!--ツイート日時の入力フォーム-->
 					<div id="select_t">
 						<br>
@@ -91,7 +91,7 @@
 						<th>　　ツイート　　</th>
 						<th>　　予約日 / 時間　　</th>
 					</tr>
-					
+					<%--
 					<%
 						if(Once.onceList != null){
 							for(int i=0;i<Once.onceList.size();i++){
@@ -102,7 +102,16 @@
 							}
 						}
 					%>
+				--%>
 				
+				<%-- 1.out.print()で直接書くのは可読性が下がるのでなるべくさける --%>
+				<%-- 2.foreach(forの拡張構文)を使う --%>
+				<% for (OnceBean bean : Once.onceList) { %>
+				<tr>
+				  <td style="text-align:center"><%= bean.getText() %></td>
+				  <td style="text-align:center"><%= bean.getReserveTime() %></td>
+				</tr>
+				<% } %>
 				</table><!--テーブル終わり-->
 			</center>			
 		</div>
