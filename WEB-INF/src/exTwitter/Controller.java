@@ -2,8 +2,6 @@ package exTwitter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,7 +87,7 @@ public class Controller extends HttpServlet {
 					once.deleteOnceTweet(onceId);
 					once.getOnceBean(session);
 					
-					session.setAttribute("delflg", 1);
+					//session.setAttribute("delflg", 1);
 				
 					url = "OnceDelUI.jsp";
 			
@@ -126,7 +124,7 @@ public class Controller extends HttpServlet {
 				
 				}else if(command .equals("定期削除")){
 					String routineId = request.getParameter("del");
-				
+					
 					Routine routine = new Routine();
 					routine.deleteRoutineTweet(routineId);
 					routine.getRoutineBean(session);

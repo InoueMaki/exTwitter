@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 public class Hash {
 
 	//Stringのハッシュ値を計算するメソッド
-	public static String hash(String text){
+	public String hash(String text){
 
 		// 変数初期化
 		MessageDigest md = null;
