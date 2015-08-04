@@ -4,7 +4,7 @@
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.lang.Integer"%>
 <%@page import="java.util.ArrayList"%>
-
+<!doctype html>
 <html>
 	<%	
 		//現在時刻の取得
@@ -27,18 +27,10 @@
   		else{
   			flgInt = flg.intValue();	//フラグの値を代入
   		}
-	%>
-	
-	<link rel="stylesheet" type="text/css" href="style.css">
-	
+	%>	
 	<head>
 		<title>単発ツイート作成</title>
-	</head>
-
-	<body>
-
-	<jsp:include page="header.jsp" />
-		
+		<jsp:include page="header.jsp" />	
 	<!-- タイトル -->
 		<div id="a">
 			<div id="label">
@@ -46,65 +38,65 @@
 			</div>
 			
 			<!-- 以下、フォームの配置 -->
-			<form method="post" action="Controller" onSubmit="return twbtn(this)">
 				<center>
-					
+					<form method="post" action="Controller" onSubmit="return twbtn(this)">
 				<!-- ツイートのタイトルと本文の入力フォーム -->
-					<textarea name="text" style="width:400px;height:200px;resize:none;font-size:22" maxlength="140" placeholder="ツイートを入力してね" required></textarea><br>
+					<textarea name="text" maxlength="140" placeholder="ツイートを入力してね" required></textarea><br>
 				<!-- ツイート終わり -->
 				<!-- 日付指定チェックボックス -->
 					<dev id="check">
 						<br>
-						<input type="checkbox" id="chk1" name="chk1" onclick='chkdisp(this)' /><label for="chk1">日付指定する</label>
+							<input type="checkbox" id="chk1" name="chk1" onclick='chkdisp(this)' /><label for="chk1">日時指定する</label>
 						<br>
 					</dev>
 				<!--ツイート日時の入力フォーム-->
 					<div id="select_t">
 						<br>
-						日付指定
-						<% out.println("<input type=\"number\" style=\"width:70px;height:30;font-size:20\" name=\"year\" require max=2020 min=2015 value="+ now_year +" step=1>年</input>"); %>
-						<% out.println("<input type=\"number\" style=\"width:50px;height:30;font-size:20\" name=\"month\" require max=12 min=1 value="+ now_month +" step=1>月</input>"); %>
-						<% out.println("<input type=\"number\" style=\"width:50px;height:30;font-size:20\" name=\"day\" require max=31 min=1 value="+ now_day +" step=1>日</input>"); %>
+						日付
+						<% out.println("<input id=\"year\" type=\"number\" name=\"year\" require max=2020 min=2015 value="+ now_year +" step=1>年</input>"); %>
+						<% out.println("<input type=\"number\" name=\"month\" require max=12 min=1 value="+ now_month +" step=1>月</input>"); %>
+						<% out.println("<input type=\"number\" name=\"day\" require max=31 min=1 value="+ now_day +" step=1>日</input>"); %>
 						<br><br>
-						時刻指定
-						<% out.println("<input type=\"number\" style=\"width:50px;height:30;font-size:20\" name=\"hour\" require max=23 min=0 value="+ now_hour +" step=1>時</input>"); %>
-						<% out.println("<input type=\"number\" style=\"width:50px;height:30;font-size:20\" name=\"minute\" require max=59 min=0 value="+ now_minute +" step=5>分</input>"); %>
+						時刻
+						<% out.println("<input type=\"number\" name=\"hour\" require max=23 min=0 value="+ now_hour +" step=1>時</input>"); %>
+						<% out.println("<input type=\"number\" name=\"minute\" require max=59 min=0 value="+ now_minute +" step=5>分</input>"); %>
 					</div>
 					<!--日時ここまで-->
 				<br>
-				<div id="botton">
-					<button style="width:140px;height:40px;font-size:20" name="btn" value="単発登録">ツイート登録</button>
-				</div>
+				<button id="botton" name="btn" value="単発登録">ツイート登録</button>
 			</form>
 			<br>
-			<br>
-			<div Align="left">登録されている時間指定ツイート一覧</div>
+			<div Align="left">登録ツイート一覧</div>
 			<div align="right">
 				<form method="post" action="Controller">
-					<button style="width:120px;height:40px;font-size:20" name="btn" value="単発削除">削除画面へ</button>
+					<button id="botton" name="btn" value="単発削除">削除画面へ</button>
 				</form>
 			</div>
-			<center>
-				<!--テーブル-->
-				<table border="2" style="font-size:20">
-					<tr>
-						<th>　　ツイート　　</th>
-						<th>　　予約日 / 時間　　</th>
-					</tr>
-					
-					<%
-						if(Once.onceList != null){
-							for(int i=0;i<Once.onceList.size();i++){
-								out.print("<tr>");
-								out.print("<td align=\"center\">" + Once.onceList.get(i).getText() + "</td>");
-								out.print("<td align=\"center\">" + Once.onceList.get(i).getReserveTime() + "</td>");
-								out.print("</tr>");
-							}
-						}
-					%>
-				
-				</table><!--テーブル終わり-->
-			</center>			
+			<br>
+			<!--テーブル-->
+		<table class="tweet">
+			<thead>
+				<tr>
+					<th>ツイート</th>
+					<th>予約日時</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td data-label="ツイート">あああああああああああああああああああああああああああああああああ</td>
+					<td data-label="予約日時">2015-04-08 13:20</td>
+				</tr>
+				<tr>
+					<td data-label="ツイート">あああああ</td>
+					<td data-label="予約日時">2015-04-08 13:20</td>
+				</tr>
+				<tr>
+					<td data-label="ツイート">あああああ</td>
+					<td data-label="予約日時">2015-04-08 13:20</td>
+				</tr>
+			</tbody>
+		</table>
+				<!--テーブル終わり-->
 		</div>
 	
 	<!-- 以下、javascript -->
