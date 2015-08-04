@@ -16,9 +16,13 @@ import exTwitter.DBManager;
  */
 public class User {
 
+	/**
+	 * ユーザー認証とセッション開始をする
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
 	public boolean login(String userName, String password) {
-
-		Boolean bool = false;
 		
 		//passwordのハッシュ値計算
 		Hash hash = new Hash();
@@ -26,30 +30,40 @@ public class User {
 		
 		// クエリ生成
 		String qry = "SELECT * from user where " + "(user_name = '" + userName
-				+ "' " + "and password = '" + hashPW + "');";
+				+ "' " + "and password = '" + hashPW + "')";
+		
+		System.out.println(qry);
+		
+		boolean bool;
+		DBManager dbm = new DBManager();
 		
 		try {
-			// DB接続
-			DBManager dbm = new DBManager();
-			
 			dbm.getConnection("excite");
 
 			ResultSet rs = dbm.getResultSet(qry);
 			
-			// 該当ユーザ存在
-			if (rs.next()) {
+			if (rs.next()) {//ユーザーが存在する時
 				bool = true;
+				
+			}else{//存在しない時
+				bool = false;
 			}
 			
-			// コネクション切断
-			dbm.closeConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			bool = false;
 			
-		} catch (Exception e) {
-			System.err.println("login Error");
+		}finally{
+			dbm.closeConnection();
 		}
+		
 		return bool;
 	}
 
+	/**
+	 * ログアウト処理としてセッションを無効にする
+	 * @param session
+	 */
 	public void logout(HttpSession session) {
 		if(null != session){
 			session.invalidate();
