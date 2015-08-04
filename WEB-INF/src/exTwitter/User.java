@@ -77,6 +77,7 @@ public class User {
 			dbm.exeUpdate(qry);
 			
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
 		}
 	}
