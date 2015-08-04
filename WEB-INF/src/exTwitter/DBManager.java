@@ -50,7 +50,7 @@ public class DBManager {
 			config.load(inputStream);
 			// プロパティファイル内の変数読み出し
 			db_base = config.getProperty("db_base");
-			System.out.println("\tproterty: db_base='" + db_base + "'");
+			//System.out.println("\tproterty: db_base='" + db_base + "'");
 		} catch (IOException e) {
 			System.err.println("Property Load Error\n");
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class DBManager {
 	 * @throws SQLException
 	 */
 	public void getConnection() throws SQLException {
-		System.out.println("DB url: " + db_base + "sample");
+		//System.out.println("DB url: " + db_base + "sample");
 		for (int i = 0; i < 3; i++) {
 			try {
 				this.con = DriverManager.getConnection(this.db_base + "sample");
@@ -102,7 +102,7 @@ public class DBManager {
 			try {
 				this.con = DriverManager.getConnection(this.db_base + DB_name);
 				this.smt = con.createStatement();
-				System.out.println("Create Connection");
+				System.out.println("----------Create Connection----------\n");
 				break;
 			} catch (SQLException e) {
 
@@ -161,12 +161,12 @@ public class DBManager {
 	 * コネクション・ステートメント切断に失敗した場合スタックトレースを出力する </blockquote>
 	 */
 	public void closeConnection() {
-		System.out.println("Closing...");
+		//System.out.println("Closing...");
 		// ResultSetの切断
 		if (null != this.rs) {
 			try {
 				this.rs.close();
-				System.out.println("\tResultSet  Closed");
+				//System.out.println("\tResultSet  Closed");
 			} catch (SQLException e) {
 				// Select文が一度も実行されていない
 			}
@@ -175,13 +175,13 @@ public class DBManager {
 		// StatementとConnectionの切断
 		try {
 			this.smt.close();
-			System.out.println("\tStatement  Closed");
+			//System.out.println("\tStatement  Closed");
 			this.con.close();
-			System.out.println("\tConnection Closed");
+			//System.out.println("\tConnection Closed");
 		} catch (SQLException e) {
 			System.err.println("\tClose Error\n");
 			e.printStackTrace();
 		}
-		System.out.println("Closed\n");
+		System.out.println("----------ConnectionClosed----------\n");
 	}
 }
