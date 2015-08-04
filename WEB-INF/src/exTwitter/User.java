@@ -72,7 +72,7 @@ public class User {
 		try {
 			dbm.getConnection("C:/servletbook/apache-tomcat/excite");
 			
-			String qry = "INSERT INTO user VALUES(120,'"+userName+"','"+hashPW+"',1)";
+			String qry = "INSERT INTO user VALUES(121,'"+hashPW+"',1,'"+userName+"')";
 			
 			dbm.exeUpdate(qry);
 			
