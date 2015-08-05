@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,8 +22,10 @@ import java.util.Properties;
 public class DBManager {
 	private Connection con = null;
 	private Statement smt = null;
+	private PreparedStatement preSmt = null;
 	private ResultSet rs = null;
 	private String db_base = "";
+	private String db_name = "";
 
 	static {
 		try {
@@ -46,11 +49,12 @@ public class DBManager {
 		try {
 			// プロパティファイルの読み出し
 			InputStream inputStream = new FileInputStream(new File(
-					"excite.properties"));
+			"excite.properties"));
 			config.load(inputStream);
 			// プロパティファイル内の変数読み出し
 			db_base = config.getProperty("db_base");
-			//System.out.println("\tproterty: db_base='" + db_base + "'");
+			db_name = config.getProperty("db_name");
+			//System.out.println("proterty: db_base='" + db_base + "'");
 		} catch (IOException e) {
 			System.err.println("Property Load Error\n");
 			e.printStackTrace();
@@ -70,9 +74,10 @@ public class DBManager {
 		//System.out.println("DB url: " + db_base + "sample");
 		for (int i = 0; i < 3; i++) {
 			try {
-				this.con = DriverManager.getConnection(this.db_base + "sample");
+				System.out.println(this.db_base+this.db_name);
+				this.con = DriverManager.getConnection(this.db_base + this.db_name);
 				this.smt = con.createStatement();
-				System.out.println("Create Connection");
+				System.out.println("---------- Create Connection ----------\n");
 				break;
 			} catch (SQLException e) {
 				System.err.println("Connection Error");
@@ -102,7 +107,7 @@ public class DBManager {
 			try {
 				this.con = DriverManager.getConnection(this.db_base + DB_name);
 				this.smt = con.createStatement();
-				System.out.println("----------Create Connection----------\n");
+				System.out.println("---------- Create Connection ----------\n");
 				break;
 			} catch (SQLException e) {
 
@@ -129,10 +134,11 @@ public class DBManager {
 	 */
 	public int exeUpdate(String sql) throws SQLException {
 		int count = 0;
-		System.out.println("\ttry '" + sql + "'\t");
+		System.out.println("try '" + sql +"'");
 		// データの挿入
 		count = smt.executeUpdate(sql);
 		System.out.println("... O.K.");
+		System.out.println(count + " done");
 		return count;
 	}
 
@@ -147,11 +153,85 @@ public class DBManager {
 	 * @throws SQLException
 	 */
 	public ResultSet getResultSet(String sql) throws SQLException {
-		System.out.print("\ttry '" + sql + "'\t");
+		System.out.println("try '" + sql +"'");
 		this.rs = smt.executeQuery(sql);
 		System.out.println("... O.K.");
 		return this.rs;
 	}
+
+	/**
+	 * <b>CreatePreparedStatement</b><br/>
+	 * public void CreatePreparedStatement(String sql) throws SQLException<br/>
+	 * <blockquote> PreparedStatementを生成する<br>
+	 * </blockquote>
+	 * @param sql
+	 * @throws SQLException
+	 */
+	public void createPreparedStatement(String sql) throws SQLException{
+		System.out.println("create prsmt '" + sql +"'");
+		this.preSmt = this.con.prepareStatement(sql);
+		System.out.println("... O.K.");
+	}
+
+	/**
+	 *  <b>getRSByPreparedSmt</b><br/>
+	 * public ResultSet getRSByPreparedSmt() throws SQLException<br/>
+	 * <blockquote> 要素の取得を行う<br>
+	 * </blockquote>
+	 * @return ResultSet
+	 */
+	public ResultSet getRSByPreSmt()throws SQLException{
+		System.out.println("try  ' get ResultSet By Prepared Statement '");
+		this.rs = preSmt.executeQuery();
+		System.out.println("... O.K.");
+		return this.rs;
+	}
+
+	/**
+	 * *  <b>getRSByPreparedSmt</b><br/>
+	 * public ResultSet exeUpdateByPreparedSmt() throws SQLException<br/>
+	 * <blockquote> 要素の取得を行う<br>
+	 * </blockquote>
+	 * @return int
+	 * @throws SQLException
+	 */
+	public int exeUpdateByPreSmt()throws SQLException{
+
+		System.out.println("try  ' execute Update By Prepared Statement '");
+		int count = preSmt.executeUpdate();
+		System.out.println("... O.K.");
+		System.out.println(count + " done");
+
+		return count;
+	}
+	
+	public void setInt(int index,int data){
+		try {
+			preSmt.setInt(index,data);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setString(int index,String data){
+		try {
+			preSmt.setString(index,data);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void addBatch(){
+		try {
+			preSmt.addBatch();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 
 	/**
 	 * <b>closeConnection</b><br/>
@@ -182,6 +262,6 @@ public class DBManager {
 			System.err.println("\tClose Error\n");
 			e.printStackTrace();
 		}
-		System.out.println("----------ConnectionClosed----------\n");
+		System.out.println("\n---------- ConnectionClosed ----------\n");
 	}
 }
