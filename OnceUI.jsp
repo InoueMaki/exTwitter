@@ -63,13 +63,13 @@
 					</div>
 					<!--日時ここまで-->
 				<br>
-				<button id="botton" name="btn" value="単発登録">ツイート登録</button>
+				<button id="button" name="btn" value="単発登録">ツイート登録</button>
 			</form>
 			<br>
 			<div Align="left">登録ツイート一覧</div>
 			<div align="right">
 				<form method="post" action="Controller">
-					<button id="botton" name="btn" value="単発削除">削除画面へ</button>
+					<button id="button" name="btn" value="単発削除">削除画面へ</button>
 				</form>
 			</div>
 			<br>
@@ -77,23 +77,21 @@
 		<table class="tweet">
 			<thead>
 				<tr>
-					<th>ツイート</th>
+					<th width=70% >ツイート</th>
 					<th>予約日時</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td data-label="ツイート">あああああああああああああああああああああああああああああああああ</td>
-					<td data-label="予約日時">2015-04-08 13:20</td>
-				</tr>
-				<tr>
-					<td data-label="ツイート">あああああ</td>
-					<td data-label="予約日時">2015-04-08 13:20</td>
-				</tr>
-				<tr>
-					<td data-label="ツイート">あああああ</td>
-					<td data-label="予約日時">2015-04-08 13:20</td>
-				</tr>
+				<%
+					if(Once.onceList != null){
+						for(int i=0;i<Once.onceList.size();i++){
+							out.print("<tr>");
+							out.print("<td data-label=\"ツイート\" align=\"center\">" + Once.onceList.get(i).getText() + "</td>");
+							out.print("<td data-label=\"予約日時\" align=\"center\">" + Once.onceList.get(i).getReserveTime() + "</td>");
+							out.print("</tr>");
+						}
+					}
+				%>
 			</tbody>
 		</table>
 				<!--テーブル終わり-->

@@ -18,13 +18,11 @@
  	}
  %>
  
+<!doctype html>
 <html>
-	<link rel="stylesheet" type="text/css" href="style.css">
 	<head>
 		<title>単発ツイート削除</title>
-	</head>
-	
-	<jsp:include page="header.jsp" />
+		<jsp:include page="header.jsp" />
 	
 	<!-- タイトル -->
 		<div id="a">
@@ -35,32 +33,34 @@
 			<form method="post" action="Controller" onsubmit="return jump();">
 				<center>
 				<!-- テーブル -->
-					<table border="2" style="font-size:20">
-						<tr>
-							<th>　　　</th>
-							<th>　　ツイート　　</th>
-							<th>　　予約日 / 時間　　</th>
-						</tr>
-						
+					<table class="tweet">
+						<thead>
+							<tr>
+								<th width=10%>　</th>
+								<th width=50%>ツイート</th>
+								<th>予約日時</th>
+							</tr>
+						</thead>
+						<tbody>
 						<%
 							if(Once.onceList != null){
 								for(int i=0;i<Once.onceList.size();i++){
 									out.println("<tr>");
-									out.println("<td align=\"center\"><button style=\"width:50px;height:30px;font-size:15\" onclick=\"delBtn("+i+")\" name=\"btn\" value=\"単発削除\">削除</button></td>");
-									out.println("<td align=\"center\">" + Once.onceList.get(i).getText() + "</td>");
-									out.println("<td align=\"center\">" + Once.onceList.get(i).getReserveTime() + "</td>");
+									out.println("<td data-label=\"　\" align=\"center\"><button id=\"button\" onclick=\"delBtn("+i+")\" name=\"btn\" value=\"単発削除\">削除</button></td>");
+									out.println("<td data-label=\"ツイート\" align=\"center\">" + Once.onceList.get(i).getText() + "</td>");
+									out.println("<td data-label=\"予約日時\" align=\"center\">" + Once.onceList.get(i).getReserveTime() + "</td>");
 									out.print("<input type=\"hidden\" id=\"del"+i+"\"value=\""+Once.onceList.get(i).getOnceId()+"\">");
 									out.print("</tr>");
 								}
 							}
 						%>
-					
+						</tbody>
 					</table>
 				<!-- こここまでTBL -->
 				</form>
 				<br>
 				<form method="post" action="Controller">
-					<button style="width:100px;height:40px;font-size:20" name="btn"  value="単発">戻る</button>
+					<button id="button" name="btn"  value="単発">戻る</button>
 				</form>
 			</center>
 		</div>

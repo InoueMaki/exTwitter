@@ -11,62 +11,14 @@ Integer flg = (Integer)(session.getAttribute("flg"));
 session.setAttribute("flg",0);
 %>
 
-
+<!doctype html>
 <html>
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 	
 	<head>
 		<title>定期ツイート作成</title>
-		
-		<!--各入力フォームのスタイル記述-->
-		<style type="text/css">
-		
-			/*ツイートのタイトルの設定*/
-			.twt_title { width:200px;
-				   height:30px;
-				   font-size:20;
-				 }
-						
-			/*ツイートの本文の設定*/
-			.twt_text { width:400px;
-					    height:200px;
-					    resize:none;
-					    font-size:22;
-					  }
-		
-			/*４桁の数字を入力する部分用*/
-			.inp_4num { width:70px;
-					   height:30px;
-					   font-size:20;}
-			/*２桁の数字を入力する部分用*/ 
-			.inp_2num { width:50px;
-					    height:30px;
-					    font-size:20;
-				      }
-				      
-			/*ラジオボタン＆チェックボックス*/
-			.rad_chk { width:20px;
-					   height:20px;
-					 }
-					 
-			/*ツイート一覧の設定*/
-			.tbl { font-size:24;
-				 }
-				 
-			/*ボタンの設定*/
-			.btn { width:130px;
-				   height:40px;
-				   font-size:20;
-				 }
-			
-		</style>
-		<!--スタイル終わり-->
-	</head>
-
-	<body>
 		<jsp:include page="header.jsp" />
-		
 		<!-- タイトル -->
 		<div id="a">
 			<div id="label">
@@ -82,118 +34,116 @@ session.setAttribute("flg",0);
 					<input type="text" required class="twt_title" size="7" id="title" name="title" maxlength="10" require autofocusend placeholder="ツイートのタイトル">
 						10文字まで<br><br>
 					<textarea id="text" required name="text" class="twt_text" maxlength="140" placeholder="ツイートを入力してね"></textarea><br>
-				<!-- ツイート終わり -->
-					
-					<br>
-					
+				<!-- ツイート終わり -->					
+					<br>					
 				<!--ツイートの期間と時刻の入力フォーム-->
 					<div id="inputbox">
-						期間　
-						<input type="number" class="inp_4num" id="start_year" name="st_y" value=2015 max=2020 min=2015 step=1 >年</input>
-						<input type="number" class="inp_2num" id="start_month" name="st_m" value=1 max=12 min=1 step=1 >月</input>
-						<input type="number" class="inp_2num" id="start_day" name="st_d" value=1 max=31 min=1 step=1 >日</input>
-						 ～ <input type="number" class="inp_4num" id="end_year" name="end_y" value=2015 max=2020 min=2015 step=1 >年</input>
-						<input type="number" class="inp_2num" id="end_month" name="end_m" value=1 max=12 min=1 step=1 >月</input>
-						<input type="number" class="inp_2num" id="end_day" name="end_d" value=1 max=31 min=1 step=1 >日</input>
-					
-						<br><br>
-						ツイートする時刻　　
-						<input type="number" class="inp_2num" id="tweet_hour" name="twt_h" value=0 max=23 min=0 step=1 >時</input>
-						<input type="number" class="inp_2num" id="tweet_minute" name="twt_m" value=0 max=55 min=0 step=5 >分</input>
+						<div id="time">
+							期間
+						</div>
+						<div id="time">
+							<input type="number" class="inp_4num" id="start_year" name="st_y" value=2015 max=2020 min=2015 step=1 >年</input>
+							<input type="number" class="inp_2num" id="start_month" name="st_m" value=1 max=12 min=1 step=1 >月</input>
+							<input type="number" class="inp_2num" id="start_day" name="st_d" value=1 max=31 min=1 step=1 >日</input>
+						</div>
+						<div id="time">～　
+							<input type="number" class="inp_4num" id="end_year" name="end_y" value=2015 max=2020 min=2015 step=1 >年</input>
+							<input type="number" class="inp_2num" id="end_month" name="end_m" value=1 max=12 min=1 step=1 >月</input>
+							<input type="number" class="inp_2num" id="end_day" name="end_d" value=1 max=31 min=1 step=1 >日</input>
+						</div>
+							<br>
+						<div id="time">
+							ツイートする時刻
+						</div>
+						<div id="time">
+							<input type="number" class="inp_2num" id="tweet_hour" name="twt_h" value=0 max=23 min=0 step=1 >時</input>
+							<input type="number" class="inp_2num" id="tweet_minute" name="twt_m" value=0 max=55 min=0 step=5 >分</input>
+						</div>
 					</div>
 				<!--期間と時刻終わり-->
-					
-					<br><br>
-					
 				<!--ツイート周期の入力フォーム-->
-					ツイート周期　
-					<!-- 曜日or日付 -->
-					<input type="radio" class="rad_chk" id="weekday" name="entryPlan" value="hoge1" onclick="entryChange();" checked="checked" /><label for="weekday">曜日指定</label>　
-					<input type="radio" class="rad_chk" id="day" name="entryPlan" value="hoge2" onclick="entryChange();" /><label for="day">日付指定</label>
-					
-					
+					<div id="routine">
+						<div id="routine_in">ツイート周期
+						</div>
+						<!-- 曜日or日付 -->
+						<div id="routine_in">
+							<input type="radio" class="rad_chk" id="weekday" name="entryPlan" value="hoge1" onclick="entryChange();" checked="checked" /><label for="weekday">曜日指定</label>
+							<input type="radio" class="rad_chk" id="day" name="entryPlan" value="hoge2" onclick="entryChange();" /><label for="day">日付指定</label>
+						</div>
+					</div>
 					<!--曜日指定フォームの表示-->
 					<div id="week" name="weekly">
-						<br>
-						<input type="checkbox" class="rad_chk" name="chk" value=1 id="chk1"/><label for="chk1">月 </label>
-						<input type="checkbox" class="rad_chk" name="chk" value=2 id="chk2"/><label for="chk2">火 </label>
-						<input type="checkbox" class="rad_chk" name="chk" value=3 id="chk3"/><label for="chk3">水 </label>
-						<input type="checkbox" class="rad_chk" name="chk" value=4 id="chk4"/><label for="chk4">木 </label>
-						<input type="checkbox" class="rad_chk" name="chk" value=5 id="chk5"/><label for="chk5">金 </label>
-						<input type="checkbox" class="rad_chk" name="chk" value=6 id="chk6"/><label for="chk6">土 </label>
-						<input type="checkbox" class="rad_chk" name="chk" value=7 id="chk7"/><label for="chk7">日 </label>
-						<input type="checkbox" class="rad_chk" id="chk8" onclick="chkWeek();" /><label for="chk8">平日</label>
+						<div id="chk">
+							<input type="checkbox" class="rad_chk" name="chk" value=1 id="chk1"/><label for="chk1">月</label>
+							<input type="checkbox" class="rad_chk" name="chk" value=2 id="chk2"/><label for="chk2">火</label>
+							<input type="checkbox" class="rad_chk" name="chk" value=3 id="chk3"/><label for="chk3">水</label>
+							<input type="checkbox" class="rad_chk" name="chk" value=4 id="chk4"/><label for="chk4">木</label>
+						</div>
+						<div id="chk">
+							<input type="checkbox" class="rad_chk" name="chk" value=5 id="chk5"/><label for="chk5">金</label>
+							<input type="checkbox" class="rad_chk" name="chk" value=6 id="chk6"/><label for="chk6">土</label>
+							<input type="checkbox" class="rad_chk" name="chk" value=7 id="chk7"/><label for="chk7">日</label>
+							<input type="checkbox" class="rad_chk" id="chk8" onclick="chkWeek();" /><label for="chk8">平日</label>
+						</div>
 					</div>
-
 					<!--日付指定フォームの表示-->
 					<div id="month">
-						<br>
-						<table style="font-size:25">
+						<table>
 						<tbody id="seldays">
 							<tr>
-								<td>
-								<td><input type="number" class="inp_2num" name="days" id="num0" value=1  max=31 min=1 step=1 >日</input>
-								<td><input type="checkbox" class="rad_chk" name="monthend" id="monthend"><label for="monthend">月末</label>
+								<td></td>
+								<td><input type="number" class="inp_2num" name="days" id="num0" value=1  max=31 min=1 step=1 >日</input></td>
+								<td><input type="checkbox" class="rad_chk" name="monthend" id="monthend"><label for="monthend">月末</label></td>
 						</tbody>
 						</table>
 						<input type="button" value="追加入力" onclick="addElement()"> 
 					</div>
-
-					<br><br>
-					<button name="btn" class="btn" value="定期登録">ツイート登録</button>
-					
-					
+					<br>
+					<button name="btn" id="button" class="btn" value="定期登録">ツイート登録</button>
 				</center>
 				
 			</form>
 			<!--</form>-->
 			<!-- ここまでフォームの配置 -->
-			
-			<br>
-			
 			<%
 				if(tweetList.size()!=0){
 					/*以下、定期ツイート一覧の表示*/
-					out.print("登録されている定期ツイート一覧");
+					out.print("<br><div align=\"left\"><font size=\"4\">登録ツイート一覧</font></div>");
+					out.print("<br>");
 					out.print("<div align=\"right\"><font size=\"5\">");
 					out.print("<form action=\"Controller\" method=\"post\">");
-						out.print("<button class=\"btn\" name=\"btn\" value=\"定期削除\">削除画面へ</button>");
+						out.print("<button class=\"btn\" id=\"button\"  name=\"btn\" value=\"定期削除\">削除画面へ</button>");
 					out.print("</form>");
-					out.print("</font></div>");
-					
-					out.print("<center>");
+					out.print("</font></div><br>");
 					/*テーブル*/
-					out.print("<table border=\"2\" class=\"tbl\">");
-						out.print("<tr>");
-							out.print("<th>　タイトル　</th>");
-							out.print("<th>　本文　</th>");
-							out.print("<th> 指定時刻 </th>");
-							out.print("<th>　開始日　</th>");
-							out.print("<th>　終了日　</th>");
-						out.print("</tr>");
-					
-					
+					out.print("<center>");
+					out.print("<table class=\"tweet\">");
+						out.print("<thead>");
+							out.print("<tr>");
+								out.print("<th>タイトル</th>");
+								out.print("<th>本文</th>");
+								out.print("<th>時刻</th>");
+								out.print("<th>開始日</th>");
+								out.print("<th>終了日</th>");
+							out.print("</tr>");
+						out.print("</thead>");
+						out.print("<tbody>");
 						for(int i=0;i<tweetList.size();i++){
 							out.print("<tr>");
-							out.print("<td>" + tweetList.get(i).getTitle() + "</td>");
-							out.print("<td>" + tweetList.get(i).getSnippet() + "</td>");
-							out.print("<td>" + tweetList.get(i).getPostTime() + "</td>");
-							out.print("<td>" + tweetList.get(i).getStartDate() + "</td>");
-							out.print("<td>" + tweetList.get(i).getEndDate() + "</td>");
+							out.print("<td data-label=\"タイトル\">" + tweetList.get(i).getTitle() + "</td>");
+							out.print("<td data-label=\"本文\">" + tweetList.get(i).getSnippet() + "</td>");
+							out.print("<td data-label=\"時間\">" + tweetList.get(i).getPostTime() + "</td>");
+							out.print("<td data-label=\"開始日\">" + tweetList.get(i).getStartDate() + "</td>");
+							out.print("<td data-label=\"終了日\">" + tweetList.get(i).getEndDate() + "</td>");
 							out.print("</tr>");
 						}
-					
-				
+						out.print("</tbody>");/*テーブル終わり*/
 					out.print("</table>");/*テーブル終わり*/
-					out.print("</center>");
+					out.print("</center>");/*テーブル終わり*/
 				}
 			%>
-			
 			<!--定期ツイート一覧表示終わり-->
-			
 		</div><!--<div id="a">終わり-->
-	
-	
 	
 	<!-- 以下、javascript -->
 	<script type="text/javascript">
@@ -218,7 +168,6 @@ session.setAttribute("flg",0);
 				i = i+1;
 			}
 		} 
-	
 	
 		/*追加した要素を削除する関数*/
 		function removeElement(id) { 
@@ -374,10 +323,8 @@ session.setAttribute("flg",0);
 			}else if ( typeof window.attachEvent != "undefined" ){  
 			    window.attachEvent( "onload", fnc );  
 			}
-		}
-		
+		}	
 	</script>
 	<!-- ここまでjavascript -->
-	
 	</body>
 </html>
