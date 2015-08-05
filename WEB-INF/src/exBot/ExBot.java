@@ -6,8 +6,14 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import exTwitter.DBManager;
 
+/**
+ * DBから投稿条件に該当するツイートを収集しツイートする
+ * @author excite
+ *
+ */
 public class ExBot {
 
 	// main関数
@@ -54,7 +60,7 @@ public class ExBot {
 	}
 
 	// 定期ツイート収集
-	public static ArrayList<String> getRoutineTweet() {
+	private static ArrayList<String> getRoutineTweet() {
 		ArrayList<String> tweets = new ArrayList<String>();
 
 		// 今日の日時
@@ -73,28 +79,33 @@ public class ExBot {
 		// クエリの生成
 		String monthly = "routine inner join monthly on routine.routine_id=monthly.routine_id ";
 		String weekly = "routine inner join weekly  on routine.routine_id=weekly.routine_id  ";
-		String span = "start_date <='" + date + "' && end_date >= '" + date
-				+ "' && posted=0";
-		String time = "post_time >= '" + start_time + "' && post_time <'"
+		String span = "start_date <='" + date + "' and end_date >= '" + date
+				+ "' and posted=0";
+		String time = "post_time >= '" + start_time + "' and post_time <'"
 				+ end_time + "'";
 
 		String qry1 = "SELECT text FROM " + monthly + "WHERE (" + span
-				+ "&& day=" + day + " && " + time + ");";
+				+ " and day=" + day + " and " + time + ");";
 		
 		// 月末用クエリ（day=0）
 		String qry2 = "SELECT text FROM " + monthly + "WHERE (" + span
-		+ "&& day=0 && " + time + ");";
+		+ " and day=0 and " + time + ");";
 		
 		String qry3 = "SELECT text FROM " + weekly + "WHERE (" + span
-				+ "&& day=" + week + " && " + time + ");";
+				+ " and day=" + week + " and " + time + ");";
 
 		// コネクション確立
 		DBManager DBM = new DBManager();
-		DBM.getConnection();
+		try {
+			DBM.getConnection("excite");
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 
 		// monthly
-		ResultSet rs1 = DBM.getResultSet(qry1);
+		
 		try {
+			ResultSet rs1 = DBM.getResultSet(qry1);
 			while (rs1.next()) {
 				tweets.add(rs1.getString("text"));
 			}
@@ -104,8 +115,9 @@ public class ExBot {
 		
 		//monthly月末
 		if(isLastDay()){
-			ResultSet rs2 = DBM.getResultSet(qry2);
+			
 			try {
+				ResultSet rs2 = DBM.getResultSet(qry2);
 				while (rs2.next()) {
 					tweets.add(rs2.getString("text"));
 				}
@@ -115,8 +127,9 @@ public class ExBot {
 		}
 		
 		// weekly
-		ResultSet rs3 = DBM.getResultSet(qry3);
+		
 		try {
+			ResultSet rs3 = DBM.getResultSet(qry3);
 			while (rs3.next()) {
 				tweets.add(rs3.getString("text"));
 			}
@@ -131,7 +144,7 @@ public class ExBot {
 	}
 
 	// 単発ツイート収集
-	public static ArrayList<String> getOnceTweet() {
+	private static ArrayList<String> getOnceTweet() {
 		ArrayList<String> tweets = new ArrayList<String>();
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		
@@ -144,27 +157,36 @@ public class ExBot {
 		
 		
 		// クエリ作成
-		String qry1 = "SELECT text,once_id from once where posted =0 && reserve_time < '"
-				+ now + "';";
+		String qry1 = "SELECT text,once_id from once where (posted =0 and reserve_time < '"
+				+ now + "');";
 		// コネクション確立
 		DBManager DBM = new DBManager();
-		DBM.getConnection();
-		ResultSet rs1 = DBM.getResultSet(qry1);
 		try {
+			DBM.getConnection("excite");
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		int c = 0;
+		try {
+			ResultSet rs1 = DBM.getResultSet(qry1);
 			while (rs1.next()) {
+				c++;
 				tweets.add(rs1.getString("text"));
 				ids.add(rs1.getInt("once_id"));
 			}
 		} catch (SQLException e) {
 			System.err.println("単発ツイート検索できません");
 		}
+		System.out.println(c);
 
 		// 投稿完了に更新
 		String conf = "";
 		int i;
 		// IDから条件を作成
 		for (i = 0; i < ids.size() - 1; i++) {
-			conf += "once_id=" + ids.get(i) + "||";
+			conf += "once_id=" + ids.get(i) + " or ";
 		}
 		// IDが取得されない場合偽
 		if (i < ids.size()) {
@@ -174,10 +196,15 @@ public class ExBot {
 			String qry2 = "UPDATE once set posted=1 where " + conf + ";";
 
 			// 更新
-			int count = DBM.exeUpdate(qry2);
+			int count = 0;
+			try {
+				count = DBM.exeUpdate(qry2);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
 			System.out.println(count + "件を投稿済みにしました");
-		}
+		}System.out.println(conf);
 		// コネクション切断
 		DBM.closeConnection();
 
