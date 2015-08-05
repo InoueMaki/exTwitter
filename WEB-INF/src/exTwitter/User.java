@@ -23,7 +23,7 @@ public class User {
 	 * @return
 	 */
 	public boolean login(String userName, String password) {
-		
+		System.out.println("\nlogin()\n");
 		//passwordのハッシュ値計算
 		Hash hash = new Hash();
 		String hashPW = hash.hash(password);
@@ -38,7 +38,7 @@ public class User {
 		DBManager dbm = new DBManager();
 		
 		try {
-			dbm.getConnection("excite");
+			dbm.getConnection();
 
 			ResultSet rs = dbm.getResultSet(qry);
 			
@@ -65,9 +65,10 @@ public class User {
 	 * @param session
 	 */
 	public void logout(HttpSession session) {
+		System.out.println("\nlogout()");
 		if(null != session){
 			session.invalidate();
-			System.out.println("-------------session.invalidate-------------");
+			System.out.println("SessionInvalidate\n");
 		}
 	}
 	

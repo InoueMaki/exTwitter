@@ -4,25 +4,17 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
    version="2.5">
-   
+
+	
 	<servlet>
-		<servlet-name>Bt</servlet-name>
-		<servlet-class>exTwitter.Bt</servlet-class>
+		<servlet-name>SessionTest</servlet-name>
+		<servlet-class>exTwitter.SessionTest</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Bt</servlet-name>
-		<url-pattern>/Bt</url-pattern>
+		<servlet-name>SessionTest</servlet-name>
+		<url-pattern>/SessionTest</url-pattern>
 	</servlet-mapping>
 
-
-	<servlet>
-		<servlet-name>test</servlet-name>
-		<servlet-class>exBot.test</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>test</servlet-name>
-		<url-pattern>/test</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 	<servlet-name>Tweet</servlet-name>
