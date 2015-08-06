@@ -6,23 +6,11 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<% 
-	Integer flg = (Integer)session.getAttribute("delflg");	//ツイート削除後かどうかのフラグを取得
-	session.setAttribute("delflg",0);	//セッションの値を0にしておく
-	int flgInt;	//フラグの値を代入する（JavaScriptで使う）
-	if(flg == null){	//フラグがnullの場合
-  		flgInt = 0;	//フラグの値を0とする
- 	}
- 	else{
- 		flgInt = flg.intValue();	//フラグの値を代入
- 	}
- %>
- 
 <!doctype html>
 <html>
 	<head>
 		<title>単発ツイート削除</title>
-		<jsp:include page="header.jsp" />
+		<jsp:include page="../exTwitterTemplate/header.jsp" />
 	
 	<!-- タイトル -->
 		<div id="a">
@@ -30,7 +18,7 @@
 				単発ツイート削除
 			</div>
 		<!-- フォームの配置（delBtnは後で作成する） -->
-			<form method="post" action="Controller" onsubmit="return jump();">
+			<form method="post" action="../Controller" onsubmit="return jump();">
 				<center>
 				<!-- テーブル -->
 					<table class="tweet">
@@ -64,42 +52,7 @@
 				</form>
 			</center>
 		</div>
-	<script type="text/javascript">	
+		
+	<script type="text/javascript" src="once-del.js"></script>
 	
-	//画面遷移許可フラグを宣言
-	var jmpFlg = 0;
-	
-		//ツイート登録確認ダイアログを表示
-		function delBtn(i){
-			if(window.confirm('ツイート削除しますか？')){
-				var element = document.getElementById("del"+i);
-				element.name="del";
-				jmpFlg = 1;//画面遷移許可フラグ
-				
-			}
-			else{
-				window.alert('キャンセルしました');
-			}
-		}
-		
-		//画面遷移後最初に読み込まれる関数
-		function disp(){
-			<% out.print( "var flgInt = " + flgInt + ";" ); %>	//Javaで処理した値を挿入
-			if(flgInt == 1)	window.alert('登録ツイートを削除しました');	//フラグが投稿成功状態の場合ダイアログを表示
-			else if(flgInt == -1) window.alert('登録ツイートの削除に失敗しました');	//失敗の場合のダイアログ
-		}
-		
-		//onsubmitで呼ばれる関数
-		//「jmpFlg」は「delBtn」でOKをクリックすると「1」になる
-		function jump(){
-			if(jmpFlg==1){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
-		window.onload = disp;
-		
-		</script>
 </html>		

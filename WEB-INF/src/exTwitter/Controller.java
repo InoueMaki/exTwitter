@@ -3,7 +3,6 @@ package exTwitter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,16 +43,16 @@ public class Controller extends HttpServlet {
 			if(user.login(userName,password)){
 				session = request.getSession(true);
 				session.setAttribute("loginFlag", "login");
-				url = "menuUI.jsp";
+				url = "exTwitterTemplate/menu.jsp";
 			}else{
 				session.setAttribute("err","ユーザ名とパスワードが一致しません");
-				url = "loginUI.jsp";
+				url = "user/login.jsp";
 			}
 
 		}else if(command.equals("ログアウト")){
 			User user = new User();
 			user.logout(session);
-			url = "loginUI.jsp";
+			url = "user/login.jsp";
 			
 		}else if(command .equals("ユーザー登録")){
 			String userName = request.getParameter("user_name");
@@ -62,17 +61,17 @@ public class Controller extends HttpServlet {
 			User user = new User();
 			user.signup(userName,password);
 			
-			url = "loginUI.jsp";
+			url = "user/login.jsp";
 
 		}else if(session!=null && hasSession(session)){//ログイン以外、かつ、sessionある時
 
 			if(command .equals("メニュー")){
-				url = "menuUI.jsp";
+				url = "exTwitterTemplate/menu.jsp";
 
 			}else if(command .equals("単発")){
 				Once once = new Once();
 				once.getOnceBean(session);
-				url = "OnceUI.jsp";
+				url = "once/once_form.jsp";
 
 			}else if(command .equals("単発登録")){
 				String text = request.getParameter("text");
@@ -89,7 +88,7 @@ public class Controller extends HttpServlet {
 
 				session.setAttribute("onceflg", 1);
 
-				url = "OnceUI.jsp";
+				url = "once/once_form.jsp";
 
 			}else if(command .equals("単発削除")){
 				String onceId = request.getParameter("del");
@@ -98,15 +97,13 @@ public class Controller extends HttpServlet {
 				once.deleteOnceTweet(onceId);
 				once.getOnceBean(session);
 
-				//session.setAttribute("delflg", 1);
-
-				url = "OnceDelUI.jsp";
+				url = "once/once_del.jsp";
 
 			}else if(command .equals("定期")){
 				Routine routine = new Routine();
 				routine.getRoutineBean(session);
 
-				url = "RoutineUI.jsp";
+				url = "routine/routine_form.jsp";
 
 			}else if(command .equals("定期登録")){
 				String title = request.getParameter("title");
@@ -131,7 +128,7 @@ public class Controller extends HttpServlet {
 				routine.getRoutineBean(session);
 				session.setAttribute("flg", 1);
 
-				url = "RoutineUI.jsp";
+				url = "routine/routine_form.jsp";
 
 			}else if(command .equals("定期削除")){
 				String routineId = request.getParameter("del");
@@ -140,7 +137,7 @@ public class Controller extends HttpServlet {
 				routine.deleteRoutineTweet(routineId);
 				routine.getRoutineBean(session);
 
-				url = "RoutinedelUI.jsp";
+				url = "routine/routine_del.jsp";
 			
 				////////////////////////////////////////
 				//新しい画面が増えたときはここに追加//
@@ -153,7 +150,7 @@ public class Controller extends HttpServlet {
 			}
 
 		}else{//セッション切れの時
-			url="redirect.jsp";
+			url="exTwitterTemplate/redirect.jsp";
 		}
 
 		//画面遷移

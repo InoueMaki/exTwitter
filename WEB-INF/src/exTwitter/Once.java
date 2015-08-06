@@ -182,7 +182,7 @@ public class Once {
 			dbm.getConnection();
 
 			//仮クエリ
-			dbm.createPreparedStatement("UPDATE once SET posted = 1 where once_id =?");
+			dbm.createPreparedStatement("UPDATE once SET posted = 2 where once_id =?");
 			//仮クエリ補完
 			dbm.setString(1, onceId);
 			

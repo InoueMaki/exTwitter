@@ -9,7 +9,7 @@
 				<CENTER>
 					<H1>メニュー画面</H1>
 					<!-- 各画面への遷移(必要性検討中<-ヘッダで十分？) -->
-					<FORM METHOD="POST" ACTION="Controller">
+					<FORM METHOD="POST" ACTION="../Controller">
 						<TABLE class="center">
 							<TR>
 								<TD ><button class="menuButton" value="単発" name="btn">単発ツイート</button>

@@ -10,7 +10,7 @@
 		<!--[if lt IE 9]>
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 		<![endif]-->
-		<LINK rel="stylesheet" type="text/css" href="style.css">
+		<LINK rel="stylesheet" type="text/css" href="../style.css">
 	</HEAD>
 	
 	<BODY>
@@ -19,7 +19,7 @@
 			<H1>ログイン画面</H1>
 			<div id="login">
 				<!-- ユーザ名・パスワード入力 -->
-				<FORM METHOD="POST" ACTION="../exTwitter/Controller">
+				<FORM METHOD="POST" ACTION="../Controller">
 					<TABLE class="login" border="0">
 						<TR><TD><center><INPUT type="text" name="user_name" name="user_name" required size=50 minlength=1 maxlength=16 pattern="^[0-9a-zA-Z]+$" placeholder="ユーザ名" autocomplete="off" autofocus></center></td></tr>
 						<TR><TD><center><INPUT type="password" name="password" required size=50 minlength=4 maxlength=16 autocomplete="off" pattern="^[0-9a-zA-Z]+$" placeholder="パスワード" ></center></td></tr>
@@ -30,8 +30,7 @@
 			</div>			
 			<!-- 入力ミス等で戻ってきたときの処理 -->
 			<%
-			String error =(String)session.getAttribute("err");
-			session.setAttribute("err",null);
+			String error =(String)request.getAttribute("err");
 			if (error!=null){%>
 				<H3><font color=red><%=error%></font></H3>
 			<%}else{%>
