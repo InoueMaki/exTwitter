@@ -152,7 +152,7 @@ session.setAttribute("flg",0);
 			<br>
 			
 			<%
-				if(tweetList.size()!=0){
+				if(tweetList != null && tweetList.size() != 0){
 					/*以下、定期ツイート一覧の表示*/
 					out.print("登録されている定期ツイート一覧");
 					out.print("<div align=\"right\"><font size=\"5\">");

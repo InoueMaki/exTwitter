@@ -3,6 +3,7 @@ package exTwitter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class Controller extends HttpServlet {
 		response.setContentType("text/plain;charset=UTF-8");
 
 		//セッション取得
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 
 		//押されたボタンの情報を取得
 		String command = request.getParameter("btn");
@@ -45,13 +46,22 @@ public class Controller extends HttpServlet {
 				session.setAttribute("loginFlag", "login");
 				url = "menuUI.jsp";
 			}else{
-				request.setAttribute("err","ユーザ名とパスワードが一致しません");
+				session.setAttribute("err","ユーザ名とパスワードが一致しません");
 				url = "loginUI.jsp";
 			}
 
 		}else if(command.equals("ログアウト")){
 			User user = new User();
 			user.logout(session);
+			url = "loginUI.jsp";
+			
+		}else if(command .equals("ユーザー登録")){
+			String userName = request.getParameter("user_name");
+			String password = request.getParameter("pass1");
+			
+			User user = new User();
+			user.signup(userName,password);
+			
 			url = "loginUI.jsp";
 
 		}else if(session!=null && hasSession(session)){//ログイン以外、かつ、sessionある時
@@ -131,7 +141,7 @@ public class Controller extends HttpServlet {
 				routine.getRoutineBean(session);
 
 				url = "RoutinedelUI.jsp";
-				
+			
 				////////////////////////////////////////
 				//新しい画面が増えたときはここに追加//
 				////////////////////////////////////////

@@ -15,23 +15,25 @@ public class Routine {
 	 * @param session
 	 */
 	public void getRoutineBean(HttpSession session) {
-		
+
 		System.out.println("\ngetRoutineBean()\n");
-		
+
 		// 必要なインスタンスを生成
 		ArrayList<RoutineBean> tweetList = new ArrayList<RoutineBean>();
 		DBManager dbm = new DBManager();
 		Date date = new Date();
 		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
 
-		String qry = "select * from routine where posted=0 and end_date>'"
-			+ sdfDate.format(date) + "'";
-
 		try {
 			dbm.getConnection();
 
+			//仮クエリ
+			dbm.createPreparedStatement( "select * from routine where posted=0 and end_date>?");
+			//仮クエリ補完
+			dbm.setString(1,sdfDate.format(date));
+
 			// 定期ツイートのリザルトセットを取得
-			ResultSet rs = dbm.getResultSet(qry);
+			ResultSet rs = dbm.getRSByPreSmt();
 
 			// リザルトセットをアレイリストに直す
 			while (rs.next()) {
@@ -43,10 +45,10 @@ public class Routine {
 				rBean.setStartDate(rs.getString("start_date"));
 				rBean.setEndDate(rs.getString("end_date"));
 				rBean.setPostTime(rs.getString("post_time").substring(0,5));
-				
+
 				tweetList.add(rBean);
 			}
-			
+
 			// beanをセッション情報に保存
 			session.setAttribute("tweetList", tweetList);
 
@@ -87,7 +89,7 @@ public class Routine {
 			String[] weekdaysStr, String[] daysStr) {
 
 		System.out.println("\ninsertRoutineTweet()\n");
-		
+
 		String[] strDays;
 
 		//weekdayStrかdaysStrのどちらかしか使わないため、使う方をstrDaysにコピー
@@ -123,21 +125,16 @@ public class Routine {
 		DBManager dbm = new DBManager();
 		try {
 			dbm.getConnection();
-			
-			/*//クエリ生成
-			String qry = "INSERT INTO routine VALUES("+routineID+",'"+
-			text+"',"+0+",'"+startYear+"-"+formatStr(startMonth)+"-"+formatStr(startDay)+
-			"','"+endYear+"-"+formatStr(endMonth)+"-"+formatStr(endDay)+"','"+
-			formatStr(tweetHour)+":"+formatStr(tweetMinute)+":00','"+title+"')";*/
-			
+
+			//日付・時間を表すStringのフォーマット修正
 			String startDate = startYear+"-"+formatStr(startMonth)+"-"+formatStr(startDay);
 			String endDate = endYear+"-"+formatStr(endMonth)+"-"+formatStr(endDay);
 			String tweetTime = formatStr(tweetHour)+":"+formatStr(tweetMinute)+":00";
-			
+
 			//仮クエリ作成
 			String qry = "INSERT INTO routine VALUES(?,?,0,?,?,?,?)";
 			dbm.createPreparedStatement(qry);
-			
+
 			//仮クエリ補完
 			dbm.setInt(1,routineId);
 			dbm.setString(2,text);
@@ -179,26 +176,26 @@ public class Routine {
 	private int getRoutineId() {
 
 		System.out.println("\ngetRoutineId()\n");
-		
+
 		int routineId = -1;
 
 		DBManager dbm = new DBManager();
 
 		try {
-
 			dbm.getConnection();
 
-			ResultSet rs = dbm.getResultSet("SELECT * FROM numbering");
+			dbm.createPreparedStatement("SELECT * FROM numbering");
+			ResultSet rs = dbm.getRSByPreSmt();
 
 			while(rs.next()){
 				routineId = rs.getInt("routine_id");
 			}
-			
+
 			//仮クエリ
 			dbm.createPreparedStatement("UPDATE numbering SET routine_id=?");
 			//クエリ補完
 			dbm.setInt(1,routineId+1);
-			
+
 			dbm.exeUpdateByPreSmt();
 
 		} catch (SQLException e) {
@@ -227,7 +224,7 @@ public class Routine {
 
 		try {
 			dbm.getConnection();
-			
+
 			/*String qry = "INSERT INTO monthly values";
 
 			for(int i=0;i<days.size();i++){
@@ -236,7 +233,7 @@ public class Routine {
 					qry = qry+",";
 				}
 			}*/
-			
+
 			//仮クエリ
 			String qry = "INSERT INTO monthly values(?,?)";
 			dbm.createPreparedStatement(qry);
@@ -246,8 +243,8 @@ public class Routine {
 				dbm.setInt(2, days.get(i));
 				dbm.addBatch();
 			}
-			
-			dbm.exeUpdateByPreSmt();
+
+			dbm.exeBatch();
 
 			bool = true;
 
@@ -270,13 +267,13 @@ public class Routine {
 	private boolean insertIntoWeekly(int routineID,ArrayList<Integer>  days) {
 
 		System.out.println("\ninsertIntoWeekly()\n");
-		
+
 		boolean bool;
 		DBManager dbm = new DBManager();
 
 		try {
 			dbm.getConnection();
-			
+
 			/*String qry = "INSERT INTO weekly values";
 
 			//クエリ編集
@@ -286,7 +283,7 @@ public class Routine {
 					qry = qry+",";
 				}
 			}*/
-			
+
 			//仮クエリ
 			String qry = "INSERT INTO weekly values(?,?)";
 			dbm.createPreparedStatement(qry);
@@ -296,8 +293,8 @@ public class Routine {
 				dbm.setInt(2, days.get(i));
 				dbm.addBatch();
 			}
-			
-			dbm.exeUpdateByPreSmt();
+
+			dbm.exeBatch();
 
 			bool = true;
 
@@ -319,11 +316,6 @@ public class Routine {
 	public boolean deleteRoutineTweet(String routineId) {
 
 		System.out.println("\ndeleteRoutineTweet()\n");
-		
-		//postedを1に変更(検索にひっかからなくするため)
-		String qry = "UPDATE routine SET posted = 1 where routine_id = "+ routineId;
-
-		System.out.println("qry");
 
 		boolean bool;
 		DBManager dbm = new DBManager();
@@ -331,7 +323,12 @@ public class Routine {
 		try {
 			dbm.getConnection();
 
-			dbm.exeUpdate(qry);
+			//仮クエリ
+			dbm.createPreparedStatement("UPDATE routine SET posted = 1 where routine_id = ?");
+			//仮クエリ補完
+			dbm.setString(1,routineId);
+
+			dbm.exeUpdateByPreSmt();
 
 			bool = true;
 

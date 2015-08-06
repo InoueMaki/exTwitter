@@ -37,7 +37,8 @@ public class Once {
 
 			dbm.getConnection();
 			
-			ResultSet rs = dbm.getResultSet("select * from once where posted = 0");	
+			dbm.createPreparedStatement("select * from once where posted = 0");
+			ResultSet rs = dbm.getRSByPreSmt();	
 
 			while(rs.next()){	//resultSetの最後まで繰り返す
 				OnceBean data = new OnceBean();
@@ -99,9 +100,7 @@ public class Once {
 			dbm.getConnection();
 			
 			//仮クエリ
-			String qry ="insert into once values (?,?,?,0)";
-			
-			dbm.createPreparedStatement(qry);
+			dbm.createPreparedStatement("insert into once values (?,?,?,0)");
 			
 			//仮クエリを補完
 			dbm.setInt(1, onceId);
@@ -139,15 +138,15 @@ public class Once {
 		try{
 			dbm.getConnection();
 			
-			ResultSet rs = dbm.getResultSet("SELECT * FROM numbering");
+			dbm.createPreparedStatement("SELECT * FROM numbering");
+			ResultSet rs = dbm.getRSByPreSmt();
 
 			while(rs.next()){
 				onceId = rs.getInt("once_id");
 			}
 			
 			//仮クエリ
-			String qry = "UPDATE numbering SET once_id=?";
-			dbm.createPreparedStatement(qry);
+			dbm.createPreparedStatement("UPDATE numbering SET once_id=?");
 			//仮クエリ補完
 			dbm.setInt(1,onceId+1);
 			
@@ -183,9 +182,8 @@ public class Once {
 			dbm.getConnection();
 
 			//仮クエリ
-			String qry = "UPDATE once SET posted = 1 where once_id =?";
-			
-			dbm.createPreparedStatement(qry);
+			dbm.createPreparedStatement("UPDATE once SET posted = 1 where once_id =?");
+			//仮クエリ補完
 			dbm.setString(1, onceId);
 			
 			dbm.exeUpdateByPreSmt();

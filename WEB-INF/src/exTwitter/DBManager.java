@@ -204,34 +204,49 @@ public class DBManager {
 
 		return count;
 	}
-	
-	public void setInt(int index,int data){
-		try {
-			preSmt.setInt(index,data);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void setString(int index,String data){
-		try {
-			preSmt.setString(index,data);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void addBatch(){
-		try {
-			preSmt.addBatch();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	/**
+	 * PreparedStatement#setInt
+	 * @param index
+	 * @param data
+	 * @throws SQLException 
+	 */
+	public void setInt(int index,int data) throws SQLException{
+		preSmt.setInt(index,data);
 	}
 
+	/**
+	 * PreparedStatement#setString
+	 * @param index
+	 * @param data
+	 * @throws SQLException 
+	 */
+	public void setString(int index,String data) throws SQLException{
+		preSmt.setString(index,data);
+	}
+
+	/**
+	 * PreparedStatement#addBatch
+	 * @throws SQLException 
+	 */
+	public void addBatch() throws SQLException{
+		preSmt.addBatch();
+	}
+
+	/**
+	 * PreparedStatement#executeBatch
+	 * 更新した件数を出力する。
+	 * @throws SQLException 
+	 */
+	public void exeBatch() throws SQLException{
+		int [] count;
+		count = preSmt.executeBatch();
+		int result = 0;
+		for(int i=0;i<count.length;i++){
+			result = result + count[i];
+		}
+		System.out.println("exeBatch result : "+result);
+	}
 
 	/**
 	 * <b>closeConnection</b><br/>
