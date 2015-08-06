@@ -23,33 +23,34 @@ public class User {
 	 * @return
 	 */
 	public boolean login(String userName, String password) {
-		
+		System.out.println("\nlogin()\n");
 		//passwordのハッシュ値計算
 		Hash hash = new Hash();
 		String hashPW = hash.hash(password);
-		
-		// クエリ生成
-		String qry = "SELECT * from user where " + "(user_name = '" + userName
-				+ "' " + "and password = '" + hashPW + "')";
-		
-		System.out.println(qry);
 		
 		boolean bool;
 		DBManager dbm = new DBManager();
 		
 		try {
-			dbm.getConnection("excite");
-
-			ResultSet rs = dbm.getResultSet(qry);
+			dbm.getConnection();
+			
+			//仮クエリ
+			dbm.createPreparedStatement("SELECT * from user where (user_name = ? and password = ?)");
+			//仮クエリ補完
+			dbm.setString(1,userName);
+			dbm.setString(2,hashPW);
+			
+			ResultSet rs = dbm.getRSByPreSmt();
 			
 			if (rs.next()) {//ユーザーが存在する時
 				bool = true;
-				
+				System.out.println("\nlogin success");
 			}else{//存在しない時
 				bool = false;
+				System.out.println("\nlogin denied");
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			bool = false;
 			
@@ -65,18 +66,16 @@ public class User {
 	 * @param session
 	 */
 	public void logout(HttpSession session) {
+		System.out.println("\nlogout()");
 		if(null != session){
 			session.invalidate();
-			System.out.println("-------------session.invalidate-------------");
+			System.out.println("SessionInvalidate\n");
 		}
 	}
 	
-	//テストユーザー登録用。PWハッシュ対応。
+	//ユーザー登録用。PWハッシュ対応。
 	//userName,passwordを入力してから実行すること。
-	public static void main(String[] args) {
-		
-		String userName = "aiueo";
-		String password = "aiueo";
+	public void signup(String userName, String password) {
 		
 		Hash hash = new Hash();
 		String hashPW =  hash.hash(password);
@@ -84,11 +83,26 @@ public class User {
 		DBManager dbm = new DBManager();
 		
 		try {
-			dbm.getConnection("C:/servletbook/apache-tomcat/excite");
+			dbm.getConnection();
+			dbm.createPreparedStatement("SELECT max(user_id) from user");
 			
-			String qry = "INSERT INTO user VALUES(121,'"+hashPW+"',1,'"+userName+"')";
+			ResultSet rs = dbm.getRSByPreSmt();
 			
-			dbm.exeUpdate(qry);
+			int userId = 0;
+			while(rs.next()){
+				userId = rs.getInt("max(user_id)");
+			}
+			
+			System.out.println("userID : "+userId);
+			
+			//仮クエリ
+			dbm.createPreparedStatement("INSERT INTO user VALUES(?,?,1,?)");
+			//仮クエリ補完
+			dbm.setInt(1,userId+1);
+			dbm.setString(2, hashPW);
+			dbm.setString(3, userName);
+			
+			dbm.exeUpdateByPreSmt();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

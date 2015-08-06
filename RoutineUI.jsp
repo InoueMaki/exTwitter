@@ -106,7 +106,7 @@ session.setAttribute("flg",0);
 			<!--</form>-->
 			<!-- ここまでフォームの配置 -->
 			<%
-				if(tweetList.size()!=0){
+				if(tweetList != null && tweetList.size() != 0){
 					/*以下、定期ツイート一覧の表示*/
 					out.print("<br><div align=\"left\"><font size=\"4\">登録ツイート一覧</font></div>");
 					out.print("<br>");

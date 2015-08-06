@@ -18,7 +18,7 @@
 		<div id="a">
 			<div id="label">定期ツイート削除</div>
 			<%
-				if(tweetList.size()!=0){
+				if(tweetlist != null && tweetList.size() != 0){
 					/*以下、定期ツイート一覧の表示*/
 					out.print("登録されている定期ツイート一覧<br><br>");
 					out.print("<form action='Controller' onsubmit='return jump();' method='post'>");

@@ -25,6 +25,8 @@ public class Once {
 	 */
 	public boolean getOnceBean(HttpSession session) {
 
+		System.out.println("\ngetOnceBean()\n");
+		
 		onceList = new ArrayList<OnceBean>();	//onceListを初期化
 
 		DBManager dbm = new DBManager();	//DB接続クラスのインスタンス
@@ -33,17 +35,17 @@ public class Once {
 
 		try {
 
-			dbm.getConnection("excite");
-
-			ResultSet rs = dbm.getResultSet("select * from once where posted = 0");	
+			dbm.getConnection();
+			
+			dbm.createPreparedStatement("select * from once where posted = 0");
+			ResultSet rs = dbm.getRSByPreSmt();	
 
 			while(rs.next()){	//resultSetの最後まで繰り返す
 				OnceBean data = new OnceBean();
 				data.setOnceId(rs.getInt("once_id"));
 				data.setReserveTime(rs.getString("reserve_time").substring(0,16));	//サブストリングを取っているのは、「秒」を表示させないようにするため
 				data.setPosted(rs.getInt("posted"));
-				String text = rs.getString("text");
-				data.setText(text);
+				data.setText(rs.getString("text"));
 				onceList.add(data);//リストに要素を追加
 			}
 
@@ -75,7 +77,9 @@ public class Once {
 	public boolean insertOnceTweet(String text, String chk, String year,
 			String month, String day, String hour, String minute) {
 
-		String qry = "";
+		System.out.println("\ninsertOnceTweet()\n");
+		
+		boolean bool = false;
 		int onceId = getOnceIdFromDB();
 		String reserveTime = "";
 
@@ -89,19 +93,21 @@ public class Once {
 			reserveTime = year + "-" + formatStr(month) + "-" + formatStr(day) +" " + formatStr(hour) + ":" + formatStr(minute) + ":00";
 		}
 
-		qry = new String("insert into once values (" + onceId + ", '" + text + "', '" + reserveTime + "', " + 0 + " ); ");
-		System.out.println(qry);	//デバッグ用
-
+		
 		DBManager dbm = new DBManager();
-
-		boolean bool = false;
-
+		
 		try {
-			dbm.getConnection("excite");
-
-			int count=0;
-			count = dbm.exeUpdate(qry);
-			System.out.println("onceInsertCount:"+count);
+			dbm.getConnection();
+			
+			//仮クエリ
+			dbm.createPreparedStatement("insert into once values (?,?,?,0)");
+			
+			//仮クエリを補完
+			dbm.setInt(1, onceId);
+			dbm.setString(2, text);
+			dbm.setString(3, reserveTime);
+			
+			dbm.exeUpdateByPreSmt();
 
 			bool = true;
 
@@ -123,22 +129,28 @@ public class Once {
 	 */
 	private int getOnceIdFromDB() {
 
+		System.out.println("\ngetOnceId()\n");
+		
 		int onceId = -1;
 
 		DBManager dbm = new DBManager();
 
 		try{
-
-			dbm.getConnection("excite");
-
-			ResultSet rs = dbm.getResultSet("SELECT * FROM numbering");
+			dbm.getConnection();
+			
+			dbm.createPreparedStatement("SELECT * FROM numbering");
+			ResultSet rs = dbm.getRSByPreSmt();
 
 			while(rs.next()){
 				onceId = rs.getInt("once_id");
 			}
-
-			dbm.exeUpdate("UPDATE numbering SET once_id="+(onceId+1));
-
+			
+			//仮クエリ
+			dbm.createPreparedStatement("UPDATE numbering SET once_id=?");
+			//仮クエリ補完
+			dbm.setInt(1,onceId+1);
+			
+			dbm.exeUpdateByPreSmt();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,21 +171,22 @@ public class Once {
 	 */
 	public boolean deleteOnceTweet(String onceId) {
 
+		System.out.println("\ndeleteOnceTweet()\n");
+		
 		boolean bool = false;
 
 		//DB接続の準備
 		DBManager dbm = new DBManager();
 
 		try{
+			dbm.getConnection();
 
-			dbm.getConnection("excite");
-
-			//postedを1に変更(検索にひっかからなくするため)
-			String qry = "UPDATE once SET posted = 1 where once_id = "+ onceId;
-			System.out.println(qry);
-
-			int count = dbm.exeUpdate(qry);
-			System.out.println(count);
+			//仮クエリ
+			dbm.createPreparedStatement("UPDATE once SET posted = 1 where once_id =?");
+			//仮クエリ補完
+			dbm.setString(1, onceId);
+			
+			dbm.exeUpdateByPreSmt();
 
 			bool = true;
 

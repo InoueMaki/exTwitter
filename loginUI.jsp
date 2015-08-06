@@ -30,7 +30,8 @@
 			</div>			
 			<!-- 入力ミス等で戻ってきたときの処理 -->
 			<%
-			String error =(String)request.getAttribute("err");
+			String error =(String)session.getAttribute("err");
+			session.setAttribute("err",null);
 			if (error!=null){%>
 				<H3><font color=red><%=error%></font></H3>
 			<%}else{%>
