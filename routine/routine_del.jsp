@@ -13,15 +13,16 @@
 <html>
 	<head>
 		<title>定期ツイート削除</title>
-	<jsp:include page="header.jsp" />
+		<jsp:include page="../exTwitterTemplate/header.jsp" />
+
 	<!--以下、定期ツイート一覧の表示-->
 		<div id="a">
 			<div id="label">定期ツイート削除</div>
 			<%
-				if(tweetlist != null && tweetList.size() != 0){
+				if(tweetList.size()!=0){
 					/*以下、定期ツイート一覧の表示*/
 					out.print("登録されている定期ツイート一覧<br><br>");
-					out.print("<form action='Controller' onsubmit='return jump();' method='post'>");
+					out.print("<form action='../Controller' onsubmit='return jump();' method='post'>");
 					out.print("<center>");
 					/*テーブル*/
 					out.print("<table class=\"tweet\">");
@@ -56,49 +57,6 @@
 			%>
 				
 		</div>
-	<script type="text/javascript">
-		
-		var jmp=0;
-		
-		//<!--削除の確認ダイアログ-->
-		function delComfirmDialog(i){
-			var tr=document.getElementById(i);
-			var child = tr.childNodes;
-			var str="以下のツイートを削除してよろしいですか？\n\n"+
-					"タイトル\n"+child[1].innerHTML+"\n\n"+
-					"本文\n"+child[6].value+"\n\n"+
-					"開始日\n"+child[3].innerHTML+"\n\n"+
-					"終了日\n"+child[4].innerHTML+"\n\n"+
-					"時刻\n"+child[5].innerHTML+"\n\n";
-					
-					if(confirm(str)){
-						child[7].name="del";
-						jmp=1;
-					}
-		}
-		
-		//<!--onsubmitで動く関数-->
-		function jump(){
-			if(jmp==1){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-
-		//<!--削除完了ダイアログ-->
-		function doneDialog(){
-			var flg=0;
-			<% out.print("flg=" + flg + ";" );%>
-			if(flg==2){
-				alert("削除完了しました！");
-			}
-		}
-		
-		//<!--画面ロード時に実行する関数設定-->
-		window.onload = doneDialog;
-		
-	</script>
+	<script type="text/javascript" src="routine-del.js"></script>
 </body>
 </html>

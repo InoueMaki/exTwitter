@@ -6,7 +6,7 @@
 
 	<HEAD>
 		<TITLE>ユーザー登録</TITLE>
-		<LINK rel="stylesheet" type="text/css" href="style.css">
+		<LINK rel="stylesheet" type="text/css" href="../style.css">
 	</HEAD>
 	
 	<BODY>
@@ -15,7 +15,7 @@
 			<H1>ユーザー登録</H1>
 			
 			<!-- ユーザ名・パスワード入力 -->
-			<FORM METHOD="POST" onsubmit="return check()" ACTION="../exTwitter/Controller">
+			<FORM METHOD="POST" onsubmit="return check()" ACTION="../Controller">
 				<TABLE class="login" border="0">
 					<TR><TD><INPUT type="text" name="user_name" name="user_name" style="font-size:30px;" required size=50 minlength=1 maxlength=16 pattern="^[0-9a-zA-Z]+$" placeholder="ユーザ名" autocomplete="off" autofocus>
 					<TR><TD><INPUT type="password" name="pass1" id="pass1" style="font-size:30px;"required size=50 minlength=4 maxlength=16 autocomplete="off" pattern="^[0-9a-zA-Z]+$" placeholder="パスワード" >

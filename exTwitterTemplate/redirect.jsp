@@ -7,7 +7,7 @@
 		<SCRIPT type="text/javascript">
 			// 画面遷移コントローラに移動
 			function link(){
-			location.href="loginUI.jsp";
+			location.href="../user/login.jsp";
 			}
 		</SCRIPT>
 		<TITLE>Session TimeOut</TITLE>

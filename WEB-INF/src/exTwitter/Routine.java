@@ -324,7 +324,7 @@ public class Routine {
 			dbm.getConnection();
 
 			//仮クエリ
-			dbm.createPreparedStatement("UPDATE routine SET posted = 1 where routine_id = ?");
+			dbm.createPreparedStatement("UPDATE routine SET posted = 2 where routine_id = ?");
 			//仮クエリ補完
 			dbm.setString(1,routineId);
 
