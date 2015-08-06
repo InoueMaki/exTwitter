@@ -22,35 +22,35 @@
 			</tr>
 		</table>
 	</div>
-	<ul id="header2">
-		<li><a href="#">MENU▼(修正中)</a>
-		<!--
-			<ul>
+	<div id="header2">
+		<div class="menu">
+		    <label for="Panel1"><span class="css-bar"></span>MENU</label>
+		    <input type="checkbox" id="Panel1" class="on-off" />
+		    <ul>
 	 			<li>
-					<FORM METHOD="POST" ACTION="Controller" style="display:inline">
+					<FORM METHOD="POST" ACTION="Controller" name="myForm">
 	 					<input type="hidden" name = "btn" VALUE="メニュー" >
-	 					<a href="#" onclick="document.myForm.submit()">メニュー画面</a>
+	 					<a href="#" onclick="document.myForm.submit()">メニュー画面へ</a>
 	 				</form>
 	 			</li>
 	 			<li>
-	 				<FORM METHOD="POST" ACTION="Control" name="myForm2">
+	 				<FORM METHOD="POST" ACTION="Controller" name="myForm2">
 	 					<input type="hidden" name = "btn" VALUE="単発" >
 	 					<a href="#" onclick="document.myForm2.submit()">単発ツイート</a>
 	 				</form>
 	 			</li>
 	 			<li>
-	 				<FORM METHOD="POST" ACTION="Control" name="myForm3">
+	 				<FORM METHOD="POST" ACTION="Controller" name="myForm3">
 	 					<input type="hidden" name = "btn" VALUE="定期" >
 	 					<a href="#" onclick="document.myForm3.submit()">定期ツイート</a>
 	 				</form>
 	 			</li>
 	 			<li>
-	 				<FORM METHOD="POST" ACTION="Control" name="myForm4">
+	 				<FORM METHOD="POST" ACTION="Controller" name="myForm4">
 	 					<input type="hidden" name = "btn" VALUE="ログアウト" >
 	 					<a href="#" onclick="document.myForm4.submit()">ログアウト</a>
 	 				</form>
 	 			</li>
-	 		</ul>
-	 	-->
-	 	</li>
-	</ul>
+		    </ul>
+		</div>
+	</div>

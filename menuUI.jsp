@@ -45,11 +45,4 @@
 			</div>
 		</div>
 	</BODY>
-	<script type="text/javascript">
-		$("#header2 li").hover(function() {
-			$(this).children('ul').show();
-		}, function() {
-			$(this).children('ul').hide();
-		});
-	</script>
 </HTML>

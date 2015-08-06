@@ -235,7 +235,6 @@ input[type=radio]{
 		WIDTH:130px;
 		HEIGHT:40px;
 	}
-	
 }
 
 @media screen and (max-width: 850px) {
@@ -343,6 +342,12 @@ input[type=radio]{
 }
 
 @media screen and (max-width: 500px) {
+	li,ui{
+		display:inline;
+		height:auto;
+		list-style-type:none;
+	}
+
 	textarea{
 		width: 80%;
 		height: 100px;
@@ -386,21 +391,76 @@ input[type=radio]{
 		background: #1e90ff;
 		margin: 0px;
 	}
-	#header2 a{
-		font-size: 18px;
-		display: block;
-		width:90%;
-		text-decoration: none;
+	
+	.menu label {
+	    background: #1e90ff;
+	    color: #fff;
+	    padding: 10px;
+	    display: block;
+	    margin: 0px;
+	    text-align: center;
+	}
+
+	.menu a{
 		padding: 10px;
-		color: #000;
+		display: block;
+		color: #FFF;
+		text-decoration: none;
+		background: #1e90ff;
 	}
-	li,ui{
-		display:inline;
-		height:auto;
-		list-style-type:none;
+	
+	.menu input[type="checkbox"].on-off{
+	    display: none;
 	}
-	#header2 li ul{
-		display: none;
+
+	.menu ul {
+	    -webkit-transition: all 0.5s;
+	    -moz-transition: all 0.5s;
+	    -ms-transition: all 0.5s;
+	    -o-transition: all 0.5s;
+	    transition: all 0.5s;
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+	    text-align: center;
+	}
+
+	.menu li {
+	    text-align: center;
+	}
+
+	.menu input[type="checkbox"].on-off + ul{
+	    height: 0;
+	    overflow: hidden;
+	}
+
+	.menu input[type="checkbox"].on-off:checked + ul{
+	    height: 150px;
+	}
+	.css-bar{
+	  display: inline-block;
+	  position: relative;
+	  margin: 0 10px 3px 0;
+	  padding: 0;
+	  background: #FFF;
+	}
+	.css-bar, .css-bar:before, .css-bar:after{
+	  width: 18px;
+	  height: 3px;
+	}
+	.css-bar:before, .css-bar:after{
+	  display: block;
+	  content: "";
+	  position: absolute;
+	  top: 50%;
+	  left: 0;
+	  background: #FFF;
+	}
+	.css-bar:before{
+	  margin-top: -8px;
+	}
+	.css-bar:after{
+	  margin-top: 4px;
 	}
 	
 	#pc{
