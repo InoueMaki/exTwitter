@@ -4,7 +4,7 @@
 	<HEAD>
 		<TITLE>メニュー画面</TITLE>
 		<jsp:include page="header.jsp" />
-	</HEAD>>
+	</HEAD>
 	
 	<BODY>
 		<jsp:include page="menu_bar.jsp" />
