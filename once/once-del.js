@@ -25,5 +25,3 @@
 				return false;
 			}
 		}
-		
-		window.onload = disp;

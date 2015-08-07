@@ -11,13 +11,17 @@
 	<head>
 		<title>単発ツイート削除</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
+	</head>
 	
-	<!-- タイトル -->
+	<body>
+		<jsp:include page="../exTwitterTemplate/menu_bar.jsp" />
+	
+		<!-- タイトル -->
 		<div id="a">
 			<div id="label">
 				単発ツイート削除
 			</div>
-		<!-- フォームの配置（delBtnは後で作成する） -->
+		<!-- フォームの配置 -->
 			<form method="post" action="../Controller" onsubmit="return jump();">
 				<center>
 				<!-- テーブル -->
@@ -45,14 +49,11 @@
 						</tbody>
 					</table>
 				<!-- こここまでTBL -->
+				</center>
 				</form>
-				<br>
-				<form method="post" action="Controller">
-					<button id="button" name="btn"  value="単発">戻る</button>
-				</form>
-			</center>
 		</div>
-		
+	</body>
+	
 	<script type="text/javascript" src="once-del.js"></script>
 	
 </html>		

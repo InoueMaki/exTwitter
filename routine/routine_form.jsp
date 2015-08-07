@@ -14,6 +14,11 @@ ArrayList<RoutineBean> tweetList = (ArrayList<RoutineBean>)session.getAttribute(
 	<head>
 		<title>定期ツイート作成</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
+	</head>
+	
+	<body>
+		<jsp:include page="../exTwitterTemplate/menu_bar.jsp" />
+		
 		<!-- タイトル -->
 		<div id="a">
 			<div id="label">
@@ -100,55 +105,64 @@ ArrayList<RoutineBean> tweetList = (ArrayList<RoutineBean>)session.getAttribute(
 			</form>
 			<!--</form>-->
 			<!-- ここまでフォームの配置 -->
-			<%
-				if(tweetList.size()!=0){
-					/*以下、定期ツイート一覧の表示*/
-					out.print("<br><div align=\"left\"><font size=\"4\">登録ツイート一覧</font></div>");
-					out.print("<br>");
-					out.print("<div align=\"right\"><font size=\"5\">");
-					out.print("<form action=\"../Controller\" method=\"post\">");
-						out.print("<button class=\"btn\" id=\"button\"  name=\"btn\" value=\"定期削除\">削除画面へ</button>");
-					out.print("</form>");
-					out.print("</font></div><br>");
-					/*テーブル*/
-					out.print("<center>");
-					out.print("<table class=\"tweet\">");
-						out.print("<thead>");
-							out.print("<tr>");
-								out.print("<th>タイトル</th>");
-								out.print("<th>本文</th>");
-								out.print("<th>時刻</th>");
-								out.print("<th>開始日</th>");
-								out.print("<th>終了日</th>");
-							out.print("</tr>");
-						out.print("</thead>");
-						out.print("<tbody>");
-						for(int i=0;i<tweetList.size();i++){
-							out.print("<tr>");
-							out.print("<td data-label=\"タイトル\">" + tweetList.get(i).getTitle() + "</td>");
-							out.print("<td data-label=\"本文\">" + tweetList.get(i).getSnippet() + "</td>");
-							out.print("<td data-label=\"時間\">" + tweetList.get(i).getPostTime() + "</td>");
-							out.print("<td data-label=\"開始日\">" + tweetList.get(i).getStartDate() + "</td>");
-							out.print("<td data-label=\"終了日\">" + tweetList.get(i).getEndDate() + "</td>");
-							out.print("</tr>");
-						}
-						out.print("</tbody>");/*テーブル終わり*/
-					out.print("</table>");/*テーブル終わり*/
-					out.print("</center>");/*テーブル終わり*/
-				}
-			%>
+			
+			<% if(tweetList!=null && tweetList.size()!=0){ %>
+					<!-- 以下、定期ツイート一覧の表示 -->
+					 <br><div align="left"><font size="4">登録ツイート一覧</font></div> 
+					 <br> 
+					 <div align="right"><font size="5"> 
+					 <form action="../Controller" method="post"> 
+						 <button class="btn" id="button"  name="btn" value="定期削除">削除画面へ</button> 
+					 </form> 
+					 </font></div><br> 
+					<!-- テーブル -->
+					 <center> 
+					 <table class="tweet"> 
+						 <thead> 
+							 <tr> 
+								 <th>タイトル</th> 
+								 <th>本文</th> 
+								 <th>時刻</th> 
+								 <th>開始日</th> 
+								 <th>終了日</th> 
+							 </tr> 
+						 </thead> 
+						 <tbody> 
+						<%for(int i=0;i<tweetList.size();i++){%> 
+							 <tr> 
+							 <td data-label="タイトル"> <%= tweetList.get(i).getTitle() %> </td> 
+							 <td data-label="本文"> <%= tweetList.get(i).getSnippet() %> </td> 
+							 <td data-label="時間"><%= tweetList.get(i).getPostTime() %> </td> 
+							 <td data-label="開始日"> <%= tweetList.get(i).getStartDate() %> </td> 
+							 <td data-label="終了日"> <%= tweetList.get(i).getEndDate() %> </td> 
+							 </tr> 
+						<%}%> 
+						 </tbody> 
+					 </table> 
+					 </center> 
+				<%}%> 
+			
 			<!--定期ツイート一覧表示終わり-->
 		</div><!--<div id="a">終わり-->
 		
 <%	
 	/*フラグ受け取り*/
-	Integer flg = (Integer)(session.getAttribute("flg"));
+	Integer flg;
+	if((session.getAttribute("flg"))!=null){
+		flg = (Integer)(session.getAttribute("flg"));
+	}else{
+		flg = 0;
+	}
 	session.setAttribute("flg",0);
 %>
 
-	<%if(flg!=0){%>
-		<input type="hidden" id="flg" value="1">
-	<%}%>
+<% 
+	if(flg!=0){
+		out.print("<input type='hidden' id='flg' value='1'>");
+	}else{
+		out.print("<input type='hidden' id='flg' value='0'>");
+	}
+%>
 
 	<script type="text/javascript"src="routine-form.js"></script>
 	

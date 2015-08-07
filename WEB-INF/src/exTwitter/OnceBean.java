@@ -22,7 +22,7 @@ public class OnceBean {
 	public String getText() {
 		return text;
 	}
-	void setText(String text){
+	public void setText(String text){
 		if (text.length() > 25){
 			this.text = text.substring(0,25) + "…";
 		}
