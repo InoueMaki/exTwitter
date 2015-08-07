@@ -5,16 +5,20 @@ p{
 	margin:40px auto;
 }
 
+/*メニュー段組用*/
 table.center{
     margin: 0 auto;  
 	text-align:center;
 }
 
+/*ログイン段組用*/
 table.login{
     margin: 0 auto;  
 	text-align:center;
 }
 
+
+/*登録ツイート表示用*/
 table.tweet{
 	width:95%;
 	border-collapse:collapse;
@@ -22,43 +26,33 @@ table.tweet{
 	padding:0;
 	margin:0;
 }
-
 table.tweet tr{
 	border:1px solid #000;
 	padding:3px;
 }
-
 table.tweet th, table.tweet td{
 	padding:10px;
 	font-size:20px;
 	border:1px solid #000;
 	text-align:center;
 }
-
 table.tweet th{
 	letter-spacing:1px;
 }
 
+/*ログイン画面のテキストボックス（ID入力）*/
 #login input[type="text"]{
 	font-size:30px;
 	width:95%;
 }
 
+/*ログイン画面のパスワード入力欄*/
 #login input[type="password"]{
 	font-size:30px;
 	width:95%;
 }
 
-#twitbl{
-	display: table;
-	width: 90%;
-}
-
-.textLogin {
-	width:800px;
-	margin: 0 auto;
-}
-
+/*テキストエリアの設定（ツイート本文入力）*/
 textarea{
 	width: 400px;
 	height: 200px;
@@ -66,18 +60,20 @@ textarea{
 	font-size: 22px ;
 }
 
+/*数値入力のテンプレ（基本的に2桁の数値）*/
 input[type="number"]{
 	width: 50px;
 	height: 30px;
 	font-size: 20px;
 }
-
+/*4桁のnumberは別に設定*/
 #year,#start_year,#end_year{
 	width: 70px;
 	height: 30px;
 	font-size: 20px;
 }
 
+/*ヘッダー以外の画面のテンプレ*/
 #a {
 	display: table;
 	width: 900px;
@@ -87,14 +83,16 @@ input[type="number"]{
 	padding: 20px;
 }
 
+/*携帯用（初期状態で非表示）*/
 #mobile{
 	display:none;
 }
-
+/*携帯用（初期状態で非表示）*/
 #b {
 	display: none;
 }
 
+/*通常のヘッダのテンプレ*/
 #header1 {
 	display: block;
 	width: 900px;
@@ -106,10 +104,12 @@ input[type="number"]{
 	background: #1e90ff;
 }
 
+/*携帯のヘッダのテンプレ（初期状態で非表示）*/
 #header2{
 	display: none;
 }
 
+/*ヘッダのボタンテンプレ*/
 .headerButton {
 	font-weight:bold;
 	font-size:20px;
@@ -118,6 +118,7 @@ input[type="number"]{
 	HEIGHT:40px;
 }
 
+/*メニューのボタンテンプレ*/
 .menuButton{
 	font-weight:bold;
 	color:#001000;
@@ -125,11 +126,13 @@ input[type="number"]{
 	font-size:45px;
 }
 
+/*メニューの説明文のテンプレ*/
 .box {
     border: 1px solid #FF3400;
 	font-size:30px;
 }
 
+/*各画面のラベル*/
 #label {
 	margin: 0 auto;
 	margin-bottom: 30px;
@@ -138,25 +141,30 @@ input[type="number"]{
 	padding: 5px;
 }
 
+/*その他ボタンの設定*/
 #button {
 	width:140px;
 	height:40px;
 	font-size: 20px;
 }
 
+/*チェックボックス？*/
 #check{
 	font-size: 20px;
 }
 
+/*定期ツイート登録画面のセンタリング用*/
 #inputbox{
 	text-align: center;
 }
 
+/* YYYY年,MM月,DD日など、時間関係を単位ごとにまとめるための要素 */
 #time{
 	display: inline-block;
 	padding: 5px;
 }
 
+/*ボタン用タグその2*/
 #button2{
 	width:80px;
 	height:30px;
