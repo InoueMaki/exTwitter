@@ -148,7 +148,7 @@ input[type="number"]{
 	font-size: 20px;
 }
 
-/*チェックボックス？*/
+/*単発ツイートの日付指定チェックボックス*/
 #check{
 	font-size: 20px;
 }
@@ -171,45 +171,52 @@ input[type="number"]{
 	font-size:20px;
 }
 
+/*ツイートのタイトル用*/
 .twt_title {
 	width:200px;
 	height:30px;
 	font-size:20px;
 }
 
+/*チェックボックス全般*/
 input[type=checkbox]{
 	width:20px;
 	height:20px;
 	padding: 5px;
 }
 
+/*ラジオボタン全般*/
 input[type=radio]{
 	width:20px;
 	height:20px;
 	padding: 5px;
 }
 	 
+/*曜日指定フォーム用*/
 #week{
 	display: inline-block;
 	padding: 5px
 }
 
+/*ツイート周期入力フォーム用*/
 #routine{
 	padding: 5px;
 }
 
+/*曜日指定フォームのチェックボックス用*/
 #chk{
 	display: inline-block;
 	padding: 2px;
 }
 
+/*routine要素の内部要素*/
 #routine_in{
 	display: inline-block;
 	padding: 2px;
 }
 
 
-
+/*レイアウトが崩れ始めるあたりのウィンドウ幅*/
 @media screen and (max-width: 1000px) {
 
 	.textLogin {
@@ -240,6 +247,7 @@ input[type=radio]{
 	}
 }
 
+/*登録テーブルの表示が崩れ始めるあたりのウィンドウ幅*/
 @media screen and (max-width: 850px) {
 	table.tweet th, table.tweet td{
 		font-size:17px;
@@ -250,6 +258,8 @@ input[type=radio]{
 		font-size:17px;
 	}
 }
+
+/*ヘッダが崩れ始めるあたりのウィンドウ幅*/
 @media screen and (max-width: 750px) {
 
 	#label {
@@ -305,6 +315,7 @@ input[type=radio]{
 	}
 }
 
+/*画面の大きいスマホ？基本レイアウトはそのまま、テーブルだけ変化*/
 @media screen and (max-width: 600px) {
 	table.tweet th, table.tweet td{
 		border:0;
@@ -344,6 +355,7 @@ input[type=radio]{
 
 }
 
+/*ふつうのスマホ*/
 @media screen and (max-width: 500px) {
 	li,ui{
 		display:inline;
@@ -532,6 +544,8 @@ input[type=radio]{
 		width:50%;
 	}
 }
+
+/*画面小さいデバイス用？*/
 @media screen and (max-width: 350px) {
 	.textLogin {
 		width: 250px;
