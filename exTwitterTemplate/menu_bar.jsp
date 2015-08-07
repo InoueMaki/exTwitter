@@ -25,25 +25,25 @@
 		    <input type="checkbox" value="" id="Panel1" class="on-off" />
 		    <ul>
 	 			<li>
-					<FORM METHOD="POST" ACTION="Controller" name="myForm">
+					<FORM METHOD="POST" ACTION="../Controller" name="myForm">
 	 					<input type="hidden" name = "btn" VALUE="メニュー" >
 	 					<a href="#" onclick="document.myForm.submit()">メニュー画面へ</a>
 	 				</form>
 	 			</li>
 	 			<li>
-	 				<FORM METHOD="POST" ACTION="Controller" name="myForm2">
+	 				<FORM METHOD="POST" ACTION="../Controller" name="myForm2">
 	 					<input type="hidden" name = "btn" VALUE="単発" >
 	 					<a href="#" onclick="document.myForm2.submit()">単発ツイート</a>
 	 				</form>
 	 			</li>
 	 			<li>
-	 				<FORM METHOD="POST" ACTION="Controller" name="myForm3">
+	 				<FORM METHOD="POST" ACTION="../Controller" name="myForm3">
 	 					<input type="hidden" name = "btn" VALUE="定期" >
 	 					<a href="#" onclick="document.myForm3.submit()">定期ツイート</a>
 	 				</form>
 	 			</li>
 	 			<li>
-	 				<FORM METHOD="POST" ACTION="Controller" name="myForm4">
+	 				<FORM METHOD="POST" ACTION="../Controller" name="myForm4">
 	 					<input type="hidden" name = "btn" VALUE="ログアウト" >
 	 					<a href="#" onclick="document.myForm4.submit()">ログアウト</a>
 	 				</form>
