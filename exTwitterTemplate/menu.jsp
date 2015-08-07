@@ -4,7 +4,14 @@
 	<HEAD>
 		<TITLE>メニュー画面</TITLE>
 		<jsp:include page="header.jsp" />
+	</HEAD>>
+	
+	<BODY>
+		<jsp:include page="menu_bar.jsp" />
+	
 		<div id="a">
+		
+		<!-- PC用画面 -->
 			<div id="pc">
 				<CENTER>
 					<H1>メニュー画面</H1>
@@ -21,6 +28,8 @@
 					</FORM>
 				</CENTER>
 			</div>
+			
+			<!-- スマホ用画面 -->
 			<div id="mobile">
 				<CENTER>
 					<H1>メニュー画面</H1>
@@ -43,6 +52,7 @@
 					</FORM>
 				</CENTER>
 			</div>
+			
 		</div>
 	</BODY>
 </HTML>

@@ -4,6 +4,7 @@
 
 <HTML>
 	<HEAD>
+	<jsp:include page="header.jsp"/>
 		<SCRIPT type="text/javascript">
 			// 画面遷移コントローラに移動
 			function link(){
@@ -14,10 +15,11 @@
 	</HEAD>
 
 	<BODY onload="setTimeout('link()',3*1000)">
-		<H1>
-			セッションが切断されています。<BR>3秒後にログイン画面に戻ります。
-		</H1>
-		
+		<div id="a">
+			<H1>
+				セッションが切断されています。<BR>3秒後にログイン画面に戻ります。
+			</H1>
+		</div>
 	</body>
 </html>
 

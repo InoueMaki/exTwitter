@@ -6,11 +6,7 @@
 
 	<HEAD>
 		<TITLE>ログイン画面</TITLE>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-		<![endif]-->
-		<LINK rel="stylesheet" type="text/css" href="../style.css">
+		<jsp:include page="../exTwitterTemplate/header.jsp" />
 	</HEAD>
 	
 	<BODY>
@@ -30,10 +26,10 @@
 			</div>			
 			<!-- 入力ミス等で戻ってきたときの処理 -->
 			<%
-			String error =(String)request.getAttribute("err");
+			String error =(String)session.getAttribute("err");
+			session.setAttribute("err",null);
 			if (error!=null){%>
 				<H3><font color=red><%=error%></font></H3>
-			<%}else{%>
 			<%}%>
 		</CENTER>
 	</BODY>
