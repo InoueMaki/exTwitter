@@ -4,23 +4,25 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 
 	<div id="header1">
-		<table>
-			<tr>
-				<FORM METHOD="POST" ACTION="../Controller" style="display:inline">
-					<td width="800">
+		<FORM METHOD="POST" ACTION="../Controller" style="display:inline">
+			<table>
+				<tr>
+					<td class="width800">
 						<button class="headerButton" name = "btn" VALUE="メニュー" >メニュー</button>
 						<button class="headerButton" name = "btn" VALUE="単発" >単発ツイート</button>
 						<button class="headerButton" name = "btn" VALUE="定期" >定期ツイート</button>
-					<td align="right">
+					</td>
+					<td>
 						<button class="headerButton" name = "btn" VALUE="ログアウト" >ログアウト</button>
-				</form>
-			</tr>
-		</table>
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<div id="header2">
 		<div class="menu">
 		    <label for="Panel1"><span class="css-bar"></span>MENU</label>
-		    <input type="checkbox" id="Panel1" class="on-off" />
+		    <input type="checkbox" value="" id="Panel1" class="on-off" />
 		    <ul>
 	 			<li>
 					<FORM METHOD="POST" ACTION="Controller" name="myForm">
