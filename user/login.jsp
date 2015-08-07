@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 
 <!-- ログイン画面 -->
-
+<!DOCTYPE html>
 <HTML>
 
 	<HEAD>
