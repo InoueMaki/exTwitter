@@ -9,13 +9,12 @@
 	<%	
 		//現在時刻の取得
 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MINUTE,+5-(cal.get(Calendar.MINUTE)%5));
 		int now_minute = cal.get(Calendar.MINUTE);
-		cal.add(Calendar.MINUTE,+5-(now_minute%5));
 		int now_year = cal.get(Calendar.YEAR);
 		int now_month = cal.get(Calendar.MONTH)+1;
 		int now_day = cal.get(Calendar.DATE);
 		int now_hour = cal.get(Calendar.HOUR_OF_DAY);
-		now_minute = cal.get(Calendar.MINUTE);
 		//ここまで
 		
 		Integer flg;

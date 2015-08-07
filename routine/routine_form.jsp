@@ -2,10 +2,20 @@
 <%@page import="exTwitter.RoutineBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.lang.*"%>
+<%@ page import="java.util.Calendar"%>
 
 <%
-/*定期ツイート一覧受け取り*/
-ArrayList<RoutineBean> tweetList = (ArrayList<RoutineBean>)session.getAttribute("tweetList");
+	//定期ツイート一覧受け取り
+	ArrayList<RoutineBean> tweetList = (ArrayList<RoutineBean>)session.getAttribute("tweetList");
+
+	//現在時刻の取得
+	Calendar cal = Calendar.getInstance();
+	int nowYear = cal.get(Calendar.YEAR);
+	int nowMonth = cal.get(Calendar.MONTH)+1;
+	int nowDay = cal.get(Calendar.DATE);
+	int nowHour = cal.get(Calendar.HOUR_OF_DAY);
+	cal.add(Calendar.MINUTE,+5-(cal.get(Calendar.MINUTE)%5));
+	int nowMinute = cal.get(Calendar.MINUTE);
 %>
 
 <!doctype html>
@@ -42,22 +52,22 @@ ArrayList<RoutineBean> tweetList = (ArrayList<RoutineBean>)session.getAttribute(
 							期間
 						</div>
 						<div id="time">
-							<input type="number" class="inp_4num" id="start_year" name="st_y" value=2015 max=2020 min=2015 step=1 >年</input>
-							<input type="number" class="inp_2num" id="start_month" name="st_m" value=1 max=12 min=1 step=1 >月</input>
-							<input type="number" class="inp_2num" id="start_day" name="st_d" value=1 max=31 min=1 step=1 >日</input>
+							<input type="number" class="inp_4num" id="start_year" name="st_y" value=<%= nowYear %> max=2020 min=2015 step=1 >年
+							<input type="number" class="inp_2num" id="start_month" name="st_m" value=<%= nowMonth %> max=12 min=1 step=1 >月
+							<input type="number" class="inp_2num" id="start_day" name="st_d" value=<%= nowDay %> max=31 min=1 step=1 >日
 						</div>
 						<div id="time">～　
-							<input type="number" class="inp_4num" id="end_year" name="end_y" value=2015 max=2020 min=2015 step=1 >年</input>
-							<input type="number" class="inp_2num" id="end_month" name="end_m" value=1 max=12 min=1 step=1 >月</input>
-							<input type="number" class="inp_2num" id="end_day" name="end_d" value=1 max=31 min=1 step=1 >日</input>
+							<input type="number" class="inp_4num" id="end_year" name="end_y" value=<%= nowYear+1 %> max=2020 min=2015 step=1 >年
+							<input type="number" class="inp_2num" id="end_month" name="end_m" value=<%= nowMonth %> max=12 min=1 step=1 >月
+							<input type="number" class="inp_2num" id="end_day" name="end_d" value=<%= nowDay %> max=31 min=1 step=1 >日
 						</div>
 							<br>
 						<div id="time">
 							ツイートする時刻
 						</div>
 						<div id="time">
-							<input type="number" class="inp_2num" id="tweet_hour" name="twt_h" value=0 max=23 min=0 step=1 >時</input>
-							<input type="number" class="inp_2num" id="tweet_minute" name="twt_m" value=0 max=55 min=0 step=5 >分</input>
+							<input type="number" class="inp_2num" id="tweet_hour" name="twt_h" value=<%= nowHour %> max=23 min=0 step=1 >時</input>
+							<input type="number" class="inp_2num" id="tweet_minute" name="twt_m" value=<%= nowMinute %> max=55 min=0 step=5 >分</input>
 						</div>
 					</div>
 				<!--期間と時刻終わり-->

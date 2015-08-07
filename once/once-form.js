@@ -37,8 +37,7 @@
 			if(window.confirm('ツイート登録しますか？')){
 				if(checkDate(Obj)){
 						return true;
-				}
-				else{
+				}else{
 						window.alert('日時の指定が過去になっています');
 						return false;
 				}

@@ -21,7 +21,7 @@
 						<TR><TD><center><INPUT type="password" name="password" required size=50 minlength=4 maxlength=16 autocomplete="off" pattern="^[0-9a-zA-Z]+$" placeholder="パスワード" ></center></td></tr>
 					</TABLE>
 					<br>
-					<button value="ログイン" name="btn" style="font-size:40px" color:black">ログイン</button>
+					<button value="ログイン" name="btn" style="font-size:40px; color:black">ログイン</button>
 				</FORM>
 			</div>			
 			<!-- 入力ミス等で戻ってきたときの処理 -->
