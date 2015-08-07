@@ -40,6 +40,11 @@ table.tweet th{
 	letter-spacing:1px;
 }
 
+/*tdのwidthを800にするクラス*/
+td.width800{
+	width: 800px;
+}
+
 /*ログイン画面のテキストボックス（ID入力）*/
 #login input[type="text"]{
 	font-size:30px;
