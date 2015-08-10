@@ -24,6 +24,9 @@
 							<TR>
 								<TD ><button class="menuButton" value="定期" name="btn">定期ツイート</button>
 								<TD><DIV class="box">週報や業務報告書など<BR>定期的な連絡用</DIV>
+							<TR>
+								<TD><button class="menuButton" value="スケジュール" name="btn">スケジュール</button>
+								<TD><DIV class="box">ツイートの登録状況を<BR>閲覧できます</DIV>
 						</TABLE>
 					</FORM>
 				</CENTER>
@@ -46,6 +49,12 @@
 								<TD>
 									<center><button class="menuButton" value="定期" name="btn">定期ツイート</button></center>
 									<DIV class="box">週報や業務報告書など<BR>定期的な連絡用<BR><BR></DIV>
+								</TD>
+							</TR>
+							<TR>
+								<TD>
+									<center><button class="menuButton" value="スケジュール" name="btn">スケジュール</button></center>
+									<DIV class="box">ツイートの登録状況を<BR>閲覧できます<BR><BR></DIV>
 								</TD>
 							</TR>
 						</TABLE>
