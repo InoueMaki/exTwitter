@@ -45,6 +45,10 @@ td.width800{
 	width: 800px;
 }
 
+.large{
+	font-size:large;
+}
+
 /*ログイン画面のテキストボックス（ID入力）*/
 #login input[type="text"]{
 	font-size:30px;
