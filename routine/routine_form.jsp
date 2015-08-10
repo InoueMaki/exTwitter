@@ -37,7 +37,7 @@
 			
 			<!-- 以下、フォームの配置 -->
 			<!--<form action="test">-->
-			<form action="../Controller" onsubmit="return errorCheck()" method="post">
+			<form class="large" action="../Controller" onsubmit="return errorCheck()" method="post">
 				<center>
 					
 				<!-- ツイートのタイトルと本文の入力フォーム -->
