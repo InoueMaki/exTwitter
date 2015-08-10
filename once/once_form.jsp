@@ -40,7 +40,7 @@
 			
 			<!-- 以下、フォームの配置 -->
 				<center>
-					<form method="post" action="../Controller" onSubmit="return twbtn(this)">
+					<form class="large" method="post" action="../Controller" onSubmit="return twbtn(this)">
 				<!-- ツイートのタイトルと本文の入力フォーム -->
 					<textarea name="text" maxlength="140" placeholder="ツイートを入力してね" required></textarea><br>
 				<!-- ツイート終わり -->
