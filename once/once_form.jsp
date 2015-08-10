@@ -67,7 +67,7 @@
 				<button id="button" name="btn" value="単発登録">ツイート登録</button>
 			</form>
 			<br>
-			<div align="left">登録ツイート一覧</div>
+			<div id="font30px" align="left">登録ツイート一覧</div>
 			<div align="right">
 				<form method="post" action="../Controller">
 					<button id="button" name="btn" value="単発削除">削除画面へ</button>
