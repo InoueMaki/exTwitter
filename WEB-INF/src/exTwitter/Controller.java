@@ -138,7 +138,17 @@ public class Controller extends HttpServlet {
 				routine.getRoutineBean(session);
 
 				url = "routine/routine_del.jsp";
-			
+			}else if(command.equals("スケジュール")){
+				String strYear = request.getParameter("scheYear");
+				String strMonth = request.getParameter("scheMonth");
+				Scheduler sche = new Scheduler();
+				if(strYear!=null && strMonth!=null){
+					System.out.println(strYear);
+					sche.setYM(strYear, strMonth,session);
+				}
+				sche.createSchedule(session);
+				url = "schedule/schedule.jsp";				
+				
 				////////////////////////////////////////
 				//新しい画面が増えたときはここに追加//
 				////////////////////////////////////////
