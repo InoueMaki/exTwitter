@@ -37,7 +37,7 @@
 			
 			<!-- 以下、フォームの配置 -->
 			<!--<form action="test">-->
-			<form class="large" action="../Controller" onsubmit="return errorCheck()" method="post">
+			<form action="../Controller" onsubmit="return errorCheck()" method="post">
 				<center>
 					
 				<!-- ツイートのタイトルと本文の入力フォーム -->
@@ -118,7 +118,7 @@
 			
 			<% if(tweetList!=null && tweetList.size()!=0){ %>
 					<!-- 以下、定期ツイート一覧の表示 -->
-					 <br><div id="font30px" align="left"><font size="4">登録ツイート一覧</font></div> 
+					 <br><div align="left"><font size="4">登録ツイート一覧</font></div> 
 					 <br> 
 					 <div align="right"><font size="5"> 
 					 <form action="../Controller" method="post"> 

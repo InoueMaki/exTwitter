@@ -160,7 +160,7 @@ public class Controller extends HttpServlet {
 			}
 
 		}else{//セッション切れの時
-			url="exTwitterTemplate/redirect.jsp";
+			url="schedule/schedule.jsp";
 		}
 
 		//画面遷移
