@@ -1,0 +1,170 @@
+@charset "utf-8";
+
+/* 年月指定移動用input */
+input.scheYear{
+	width:80px;
+}
+input.scheMonth{
+	width:40px;
+}
+
+/* 指定年月移動ボタン */
+button.moveBtn{
+	font-size:20px;
+	color:black;
+}
+
+/* 上部カレンダー対応年月表示＋単発・定期カラー表示テーブル */
+table.headPanel{
+	width:90%;
+	height:30px;
+}
+
+/* カレンダー対応年月表示 */
+p.scheYM{
+	font-size:1.5em;
+	margin: 0px;
+}
+
+/* 単発・定期カラー表示 */
+p.sampleOnce{
+	background-color:#FFB000;
+	margin: 0px;
+}
+p.sampleRoutine{
+	background-color:#99cc99;
+	margin: 0px;
+}
+
+/* 左カレンダー・右詳細、並列表示用テーブル*/
+table.frame{
+	width:100%;
+}
+
+/* カレンダー配置 */
+td.scheTBL{
+	width:60%;
+	vertical-align:top;
+}
+/* 詳細配置 */
+td.twtTBL{
+	vertical-align:top;
+	width:40%;
+}
+
+/* カレンダー用テーブル*/
+table.schedule{
+	border-collapse: collapse;
+	border:1px solid #a9a9a9;
+	width:100%;
+	padding:0px;
+	margin:0px;
+	margin-right:10px;
+}
+
+/* 詳細用テーブル*/
+table.detail{
+	visibility:hidden;
+}
+
+/* カレンダー曜日 */
+td.scheWeek{
+	width:12%;
+	height:20px;
+	margin:0px;
+	padding:2px;
+	background-color:#f0f8ff;
+	text-align:center;
+	border:1px solid #a9a9a9;
+}
+td.scheWeekSun{
+	width:12%;
+	height:20px;
+	margin:0px;
+	padding:2px;
+	background-color:#f56060;
+	text-align:center;
+	border-top:1px solid #a9a9a9;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+td.scheWeekSat{
+	width:12%;
+	height:20px;
+	margin:0px;
+	padding:2px;
+	background-color:#6060f5;
+	text-align:center;
+	border-top:1px solid #a9a9a9;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+
+/* カレンダー日付 */
+td.scheDate{
+	background-color:#F5F5DC;
+	text-align:right;
+	font-size:1.2em;
+	border-top:1px solid #a9a9a9;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+td.scheDateSun{
+	background-color:#f5a0a0;
+	text-align:right;
+	font-size:1.2em;
+	border-top:1px solid #a9a9a9;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+td.scheDateSat{
+	background-color:#a0a0f5;
+	text-align:right;
+	font-size:1.2em;
+	border-top:1px solid #a9a9a9;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+
+/* カレンダーツイートボタン配置 */
+td.scheTweet{
+	background-color:#F5F5DC;
+	height:80px;
+	vertical-align:top;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+td.scheTweetSun{
+	background-color:#f5a0a0;
+	height:80px;
+	vertical-align:top;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+td.scheTweetSat{
+	background-color:#a0a0f5;
+	height:80px;
+	vertical-align:top;
+	border-left:1px solid #a9a9a9;
+	border-right:1px solid #a9a9a9;
+}
+
+/* 単発・定期詳細表示ボタン格納DIV */
+div.scheBtn{
+	text-align : center ;
+	margin:0px;
+}
+
+/* 単発・定期詳細表示ボタン */
+button.scheOnceBtn{
+	background-color:#FFB000;
+	margin-top:1%;
+	font-size:15px;
+	text-align:center;
+}
+button.scheRoutineBtn{
+	background-color:#99cc99;
+	margin-top:1%;
+	font-size:15px;
+	text-align:center;
+}
