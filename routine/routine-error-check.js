@@ -11,7 +11,6 @@ function hasTextError(text){
 	}else{
 		return false;
 	}
-
 }
 
 //期間の終了が現在より過去でないか

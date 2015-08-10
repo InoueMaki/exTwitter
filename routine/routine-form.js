@@ -147,7 +147,7 @@
 			//各項目にエラーがあるかチェック
 			
 			if(hasTextError(text)){
-				errorMessage = errorMessage + "・投稿できない文字が含まれています。\n投稿できない文字列は「RT」「#」「@」「D」「M」「DM」です。\n\n";
+				errorMessage = errorMessage + "・投稿できない文字列が含まれています。\n投稿できない文字列は「RT」「#」「@」「D」「M」「DM」です。\n\n";
 				noError = 0;
 			} 
 			if(hasDateError1(endYear,endMonth,endDay)){

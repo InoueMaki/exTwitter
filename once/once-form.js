@@ -25,25 +25,65 @@
 			 var now = new Date();
 			 var chkDate = new Date(Obj.year.value , (Obj.month.value-1) , Obj.day.value , Obj.hour.value, Obj.minute.value, 59);
 			 if(now.getTime() > chkDate.getTime()){
-			 	return false;
+			 	return true;
 			 }
 			 else{
-			 	return true;
+			 	return false;
 			 }
 		}
 		
 		//ツイート登録確認ダイアログを表示
 		function twbtn(Obj){
-			if(window.confirm('ツイート登録しますか？')){
-				if(checkDate(Obj)){
-						return true;
-				}else{
-						window.alert('日時の指定が過去になっています');
-						return false;
+		
+			if(errorCheck(Obj)){
+				if(window.confirm('ツイート登録しますか？')){
+					return true;
 				}
 			}
-			else{
-				window.alert('キャンセルしました');
+			
+			return false;
+			
+		}
+		
+		
+		//エラーチェックする関数
+		function errorCheck(Obj){
+			
+			var chk = document.getElementById("chk1");
+			
+			var errorMessage = "入力内容に以下の誤りがあります。\n\n";
+			var noError = 1;
+			
+			if(hasTextError(Obj)){
+				errorMessage = errorMessage+"・投稿できない文字列が含まれています。\n投稿できない文字列は「RT」「#」「@」「D」「M」「DM」です。\n\n";
+				noError =0;
+			}
+			
+			if(chk.checked && checkDate(Obj)){
+				errorMessage = errorMessage+"・日時が現在よりも過去になっています。\n\n";
+				noError =0;
+			}
+			
+			if(noError==1){
+				return true;
+			}else{
+				alert(errorMessage);
+				return false;
+			}
+		}
+		
+		//禁止文字列がないか
+		function hasTextError(Obj){
+	
+			var text = Obj.text.value;
+			var hasTabooWord = 0;
+	
+			if(text.indexOf("RT")!=-1 || text.indexOf("#")!=-1 || text.indexOf("@")!=-1 || text.indexOf("D")!=-1 || text.indexOf("M")!=-1 || text.indexOf("DM")!=-1){
+				hasTabooWord = 1;
+			}
+			if(hasTabooWord == 1){
+				return true;//禁止文字列を含んでいる
+			}else{
 				return false;
 			}
 		}
