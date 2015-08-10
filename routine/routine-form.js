@@ -1,6 +1,8 @@
 		
-		/* 日付を指定する入力フォームを追加する関数 */
-		var i = 1; /* i-1 = 入力フォームを追加した回数 */
+		document.write("<script type='text/javascript' src='routine-error-check.js'></script>");
+		
+		//日付を指定する入力フォームを追加する関数
+		var i = 1; //i-1 = 入力フォームを追加した回数 
 		function addElement() { 
 			if(document.getElementById("seldays").childNodes.length<=31){
 				Tr  = document.createElement("Tr");
@@ -20,7 +22,7 @@
 			}
 		} 
 	
-		/*追加した要素を削除する関数*/
+		//追加した要素を削除する関数
 		function removeElement(id) { 
 			var element = document.getElementById(id);
 			var tbl = document.getElementsByTagName("tbody").item(1);
@@ -28,7 +30,7 @@
 		} 
 
 		
-		/*「曜日指定」と「日付指定」で表示切替する関数*/
+		//「曜日指定」と「日付指定」で表示切替する関数
 		function entryChange(){
 			radio = document.getElementsByName('entryPlan');
 			if(radio[0].checked) {
@@ -43,16 +45,16 @@
 		}
 		
 		
-		/*入力情報確認ダイアログを表示する関数*/
+		//////入力情報確認ダイアログを表示する関数
 		function tweet(){
 			var days=[];
 			radio = document.getElementsByName('entryPlan');
 			
-			/*ツイート周期の文字列を生成する。*/
-			/*ラジオボタンによる表示切替に合わせてダイアログに表示する文字列を切り替える。*/
+			//ツイート周期の文字列を生成する。
+			//ラジオボタンによる表示切替に合わせてダイアログに表示する文字列を切り替える。
 			if(radio[0].checked){
 				
-				/*-指定曜日の受け取り*/
+				//指定曜日の受け取り
 				var strDays="指定した曜日\n";
 				var dayList=["","月","火","水","木","金","土","日"];
 				
@@ -62,7 +64,7 @@
 					}
 				}
 			}else{	
-				/*指定日付の受け取り*/
+				//指定日付の受け取り//
 				var strDays="指定した日付\n";
 				for(var j=0;j<i;j++){
 					if(document.getElementById("num"+j)) {
@@ -73,17 +75,17 @@
 					days[days.length]="月末"
 				}
 			}
-			/*データから文字列生成*/
+			//データから文字列生成
 			for(var j=0;j<days.length;j++){
-				//<!--文字の間にコンマを挟むための処理-->
+				//文字の間にコンマを挟むための処理
 				if(j!=0){
 					strDays=strDays+",";
 				}
 				strDays=strDays+days[j];
 			}
-			/*ツイート周期の文字列の生成終わり*/
+			//ツイート周期の文字列の生成終わり
 			
-			/*ダイアログに表示する文字列の生成*/
+			//ダイアログに表示する文字列の生成
 			var strDialog="ツイートの内容は以下でよろしいですか？\n\n\n"+
 					"タイトル\n"+document.getElementById("title").value+"\n\n"+
 					"本文\n"+document.getElementById("text").value+"\n\n"+
@@ -93,10 +95,11 @@
 					strDays;
 					
 					return confirm(strDialog);
-			}/*入力情報確認ダイアログ関数終わり*/
+			}
+			//////入力情報確認ダイアログ関数終わり
 		
 		
-		/*「平日」にチェックが入った時の処理*/
+		//「平日」にチェックが入った時の処理
 		function chkWeek(){
 			wd = document.getElementById("chk8");
 			if(wd.checked){
@@ -111,7 +114,7 @@
 		}
 		
 		
-		/*「月末のみ」にチェックが入った時の処理*/
+		//「月末のみ」にチェックが入った時の処理
 		function onlyMonthend(){
 			ome = document.getElementById("onlyMonthend");
 			if(ome.checked){
@@ -126,34 +129,67 @@
 			}
 		}
 		
-		
-		/*エラーチェックし、エラーない時ツイート登録関数を呼び出す関数*/
+		//////エラーチェックし、エラーない時ツイート登録関数を呼び出す関数
 		function errorCheck(){
-		
-			var err=1;
 			
-			/*ラジオボタンが「曜日指定」、かつ、チェックボックスに何もない時のチェック*/
-			var radio = document.getElementsByName('entryPlan');
-			if(radio[0].checked){
-				for(var j=1;j<=7;j++){
-					if(document.getElementById("chk"+j).checked){
-						err=0;
-					}
-				}
-			}else{
-				err=0;
+			var noError = 1;
+			var errorMessage = "入力内容に誤りがあります。\n以下の項目を修正してください。\n\n";
+			
+			//入力項目取得
+			var text = document.getElementById("text").value;
+			var startYear = document.getElementById("start_year").value;
+			var startMonth = document.getElementById("start_month").value;
+			var startDay = document.getElementById("start_day").value;
+			var endYear = document.getElementById("end_year").value;
+			var endMonth = document.getElementById("end_month").value;
+			var endDay = document.getElementById("end_day").value;
+			
+			//各項目にエラーがあるかチェック
+			
+			if(hasTextError(text)){
+				errorMessage = errorMessage + "・投稿できない文字が含まれています。\n投稿できない文字列は「RT」「#」「@」「D」「M」「DM」です。\n\n";
+				noError = 0;
+			} 
+			if(hasDateError1(endYear,endMonth,endDay)){
+				errorMessage = errorMessage + "・「期間」の終了が現在より過去になっています。\n\n";
+				noError = 0;
 			}
-			/*エラーあったらメッセージ表示、なかったらtweet登録関数呼び出し*/
-			if(err==1){
-				alert("曜日指定をしてください");
-				return false;
+			if(hasDateError2(startYear,startMonth,startDay,endYear,endMonth,endDay)){
+				errorMessage = errorMessage + "・「期間」の開始が終了よりも過去または同じになっています。\n\n";
+				noError = 0;
+			}
+			if(hasDateError3(startYear,startMonth,startDay)){
+				errorMessage = errorMessage + "・「期間」の開始で存在しない月日を入力しています。\n\n";
+				noError = 0;
+			}
+			if(hasDateError3(endYear,endMonth,endDay)){
+				errorMessage = errorMessage + "・「期間」の終了で存在しない月日を入力しています。\n\n";
+				noError = 0;
+			}
+			if(radio[0].checked){//曜日指定 or 日付指定
+				if(hasWeekSelectError()){
+					errorMessage = errorMessage + "・曜日が選択されていません。\n\n";
+					noError = 0;
+				}
+				
+				}else{
+					if(hasOverlapError()){
+						errorMessage = errorMessage + "・日付指定に被りがあります。\n\n";
+						noError = 0;
+					}
+			}
+			
+			
+			if(noError==1){
+				 return tweet();
 			}else{
-				return tweet();
+				alert(errorMessage);
+				return false;
 			}
 		}
+		//////エラーチェック関数終わり
 		
-		
-		/*登録完了ダイアログ*/
+		//登録完了ダイアログ
 		function doneDialog(){
 			var flg=document.getElementById("flg").value;
 			if(flg==1){
@@ -162,11 +198,11 @@
 		}
 		
 		
-		/*関数登録*/
+		//関数登録
 		addOnloadEvent(entryChange);
 		addOnloadEvent(doneDialog);
 		
-		/*画面開いたときに行う関数の登録をする関数*/
+		//画面開いたときに行う関数の登録をする関数
 		function addOnloadEvent(fnc){  
 			if ( typeof window.addEventListener != "undefined" ){
 				window.addEventListener( "load", fnc, false );  
