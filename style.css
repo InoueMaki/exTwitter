@@ -45,8 +45,14 @@ td.width800{
 	width: 800px;
 }
 
+/*font-sizeをlargeにするだけ*/
 .large{
 	font-size:large;
+}
+
+/*font-sizeを30pxにするだけ*/
+#font30px{
+	font-size: 30px;
 }
 
 /*ログイン画面のテキストボックス（ID入力）*/
