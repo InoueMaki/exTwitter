@@ -6,14 +6,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>test</title>
+		<title>スケジュール</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
 		<LINK rel="stylesheet" type="text/css" href="../schedule.css">
 		<script type="text/javascript" src="schedule.js"></script>
 	</head>
 	<body>
 	<jsp:include page="../exTwitterTemplate/menu_bar.jsp" />
-	
+		<div id="a">
+		<div id="label">
+				スケジュール
+			</div>
 		<!-- 年月指定移動用 -->
 		<form METHOD="POST" ACTION="../Controller">
 			<TABLE >
@@ -95,14 +98,12 @@
 					
 				</td>
 				<td class="twtTBL">
-				
 					<!-- 詳細TBL -->
 					<table class="detail" border=1 id="detail">	
 						<tbody>
 						</tbody>
 					</table>
 					<!-- ここまで。（詳細TBL） -->
-					
 				</td>
 			</tr>
 		</table>	
@@ -137,12 +138,12 @@
 					<p><%=Scheduler.RoutineBeans.get(i).get(j).getText().trim()%></p>
 					<p><%=Scheduler.RoutineBeans.get(i).get(j).getStartDate().trim()%></p>
 					<p><%=Scheduler.RoutineBeans.get(i).get(j).getEndDate().trim()%></p>
-					<p><%=(Scheduler.RoutineBeans.get(i).get(j).getPosted()==0 ? "未":"済")%></p>
 				</td>
 				<% }%>
 			</tr>
 			<% }%>
 		</table>
 		<%}%> <%-- End of (if(Scheduler.calendarDay[0]>0){ /line:44) --%>
+	</div>
 	</body>
 </html>

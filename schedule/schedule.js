@@ -27,7 +27,7 @@ function dispRoutine(id){
 	var childs = tr.children;
 	
 	var new_tr = document.createElement('tr'); 
-	new_tr.innerHTML="<td>タイトル</td><td>本文</td><td>開始日</td><td>終了日</td><td>投稿状況</td>"
+	new_tr.innerHTML="<td>タイトル</td><td>本文</td><td>開始日</td><td>終了日</td>"
 	detail.appendChild(new_tr)
 	for(var i=0;i<childs.length;i++){
 		tweets = childs[i].children;
