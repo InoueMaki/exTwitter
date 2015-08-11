@@ -147,7 +147,7 @@ public class Controller extends HttpServlet {
 					sche.setYM(strYear, strMonth,session);
 				}
 				sche.createSchedule(session);
-				url = "schedule/schedule.jsp";				
+				url = "schedule/schedule.jsp";
 				
 				////////////////////////////////////////
 				//新しい画面が増えたときはここに追加//
@@ -160,7 +160,7 @@ public class Controller extends HttpServlet {
 			}
 
 		}else{//セッション切れの時
-			url="schedule/schedule.jsp";
+			url="exTwitterTemplate/redirect.jsp";
 		}
 
 		//画面遷移
