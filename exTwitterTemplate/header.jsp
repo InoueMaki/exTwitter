@@ -3,7 +3,7 @@
 
 <%@page contentType="text/html; charset=UTF-8" %>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0 , minimum-scale=1.0 , maximum-scale=1.0 , user-scalable=no">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0 ; minimum-scale=1.0 ; maximum-scale=1.0 ; user-scalable=no">
 	<!--[if lt IE 9]>
 		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->

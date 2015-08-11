@@ -9,7 +9,6 @@ p{
 table.center{
     margin: 0 auto;  
 	text-align:center;
-	border-spacing: 20px;
 }
 
 /*ログイン段組用*/
@@ -139,28 +138,19 @@ input[type="number"]{
 	font-weight:bold;
 	color:#001000;
 	margin:8px;
-	font-size:35px;
-	width:290px;
+	font-size:45px;
 }
 
 /*メニューの説明文のテンプレ*/
 .box {
     border: 1px solid #FF3400;
-	font-size:26px;
+	font-size:30px;
 }
 
 /*各画面のラベル*/
 #label {
 	margin: 0 auto;
 	margin-bottom: 30px;
-	font-size: 300%;
-	text-align: center;
-	padding: 5px;
-}
-
-#label2 {
-	margin: 0 auto;
-	margin-bottom: 15px;
 	font-size: 300%;
 	text-align: center;
 	padding: 5px;
@@ -277,7 +267,7 @@ input[type=radio]{
 }
 
 /*登録テーブルの表示が崩れ始めるあたりのウィンドウ幅*/
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 850px) {
 	table.tweet th, table.tweet td{
 		font-size:17px;
 	}
@@ -289,7 +279,7 @@ input[type=radio]{
 }
 
 /*ヘッダが崩れ始めるあたりのウィンドウ幅*/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
 
 	#label {
 		margin: 0 auto;
@@ -314,14 +304,14 @@ input[type=radio]{
 	
 	.menuButton{
 		font-weight:bold;
+		background-color:glay;
 		color:#001000;
 		margin:8px;
 		font-size:30px;
-		width:250px;
 	}
 	.box {
     	border: 1px solid #FF3400;
-		font-size:17px;
+		font-size:18px;
 	}
 	.headerButton {
 		font-weight:bold;
@@ -385,8 +375,8 @@ input[type=radio]{
 }
 
 /*ふつうのスマホ*/
-@media screen and (max-width: 565px) {
-	li{
+@media screen and (max-width: 500px) {
+	li,ui{
 		display:inline;
 		height:auto;
 		list-style-type:none;
@@ -575,7 +565,7 @@ input[type=radio]{
 }
 
 /*画面小さいデバイス用？*/
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 350px) {
 	.textLogin {
 		width: 250px;
 		margin: 0 auto;
@@ -584,11 +574,4 @@ input[type=radio]{
 		font-size:18px;
 	}
 	
-	.menuButton{
-		font-weight:bold;
-		color:#001000;
-		margin:8px;
-		font-size:20px;
-		width: 200px;
-	}
 }

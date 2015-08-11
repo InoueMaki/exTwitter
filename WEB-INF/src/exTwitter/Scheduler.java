@@ -140,7 +140,7 @@ public class Scheduler {
 				for (int j = 0; j < ids.size(); j++) {
 					sql = String
 							.format(
-									"SELECT * FROM routine WHERE start_date<='%04d-%02d-%02d' and end_date>='%04d-%02d-%02d' and routine_id=%d",
+									"SELECT * FROM routine WHERE start_date<='%04d-%02d-%02d' and end_date>='%04d-%02d-%02d' and routine_id=%d and posted=0",
 									year, month, beforeMonthlastDay - i, year,
 									month, beforeMonthlastDay - i, ids.get(j));
 					rs = dbm.getResultSet(sql);
@@ -217,7 +217,7 @@ public class Scheduler {
 				for (int j = 0; j < ids.size(); j++) {
 					sql = String
 							.format(
-									"SELECT * FROM routine WHERE start_date<='%04d-%02d-%02d' and end_date>='%04d-%02d-%02d' and routine_id=%d",
+									"SELECT * FROM routine WHERE start_date<='%04d-%02d-%02d' and end_date>='%04d-%02d-%02d' and routine_id=%d and posted=0",
 									year, month + 1, i, year, month + 1, i, ids
 											.get(j));
 					rs = dbm.getResultSet(sql);
@@ -292,7 +292,7 @@ public class Scheduler {
 				for (int j = 0; j < ids.size(); j++) {
 					sql = String
 							.format(
-									"SELECT * FROM routine WHERE start_date<='%04d-%02d-%02d' and end_date>='%04d-%02d-%02d' and routine_id=%d",
+									"SELECT * FROM routine WHERE start_date<='%04d-%02d-%02d' and end_date>='%04d-%02d-%02d' and routine_id=%d  and posted=0",
 									year, month + 2, nextMonthDay, year,
 									month + 2, nextMonthDay, ids.get(j));
 					rs = dbm.getResultSet(sql);
