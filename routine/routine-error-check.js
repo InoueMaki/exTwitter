@@ -1,11 +1,40 @@
+//未記入の項目がないか
+function hasNoValueError(title,text){
+
+/*
+	if(title==""||text==""){
+		return true;
+	}
+*/	
+	
+	var trimedTitle = title.replace(/\s+/g,"");
+	var trimedText = text.replace(/\s+/g,"");
+	
+	if(trimedTitle==""||trimedText==""){
+		return true;
+	}
+	
+	return false;
+}
+
 //禁止文字列がないか
 function hasTextError(text){
 	
 	var hasTabooWord = 0;
 	
-	if(text.indexOf("RT")!=-1 || text.indexOf("#")!=-1 || text.indexOf("@")!=-1 || text.indexOf("D")!=-1 || text.indexOf("M")!=-1 || text.indexOf("DM")!=-1){
+	//禁止されている文字列の検査
+	if(text.indexOf("RT ")!=-1 || text.indexOf("#")!=-1 || text.indexOf("@")!=-1){
 		hasTabooWord = 1;
 	}
+	
+	//文字列の先頭の空白文字を削除
+	var trimedText = text.replace(/^\s+/g, "");
+	
+	//先頭で禁止されている文字列の検査
+	if(trimedText.substring(0,1)=="D" || trimedText.substring(0,1)=="M" || trimedText.substring(0,2)=="DM"){
+		hasTabooWord = 1;
+	}
+	
 	if(hasTabooWord == 1){
 		return true;//禁止文字列を含んでいる
 	}else{
@@ -50,6 +79,18 @@ function hasDateError3(year, month, day) {
 		return true;//存在しない日付あり
 	}
 	return false;
+}
+
+//存在しない時間かどうか
+function hasTimeError(hour,minute) {
+
+	if(hour.match(/^-?[0-9]+$/) && 0<=hour && hour<=23){
+		if(minute.match(/^-?[0-9]+$/) && 0<=minute && minute<=59){
+			return false;
+		}
+	}
+
+	return true;
 }
 
 

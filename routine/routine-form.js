@@ -136,6 +136,7 @@
 			var errorMessage = "入力内容に誤りがあります。\n以下の項目を修正してください。\n\n";
 			
 			//入力項目取得
+			var title = document.getElementById("title").value;
 			var text = document.getElementById("text").value;
 			var startYear = document.getElementById("start_year").value;
 			var startMonth = document.getElementById("start_month").value;
@@ -143,11 +144,17 @@
 			var endYear = document.getElementById("end_year").value;
 			var endMonth = document.getElementById("end_month").value;
 			var endDay = document.getElementById("end_day").value;
+			var hour = document.getElementById("tweet_hour").value;
+			var minute = document.getElementById("tweet_minute").value;
 			
 			//各項目にエラーがあるかチェック
 			
+			if(hasNoValueError(title,text)){
+				errorMessage = errorMessage + "・入力されていない項目があります。\n記入してください\n\n";
+				noError = 0;
+			}
 			if(hasTextError(text)){
-				errorMessage = errorMessage + "・投稿できない文字列が含まれています。\n投稿できない文字列は「RT」「#」「@」「D」「M」「DM」です。\n\n";
+				errorMessage = errorMessage + "・投稿できない文字列が含まれています。\n投稿できない文字列は「RT」「#」「@」\n先頭に記述できない文字列は「D」「M」「DM」です。\n\n";
 				noError = 0;
 			} 
 			if(hasDateError1(endYear,endMonth,endDay)){
@@ -164,6 +171,10 @@
 			}
 			if(hasDateError3(endYear,endMonth,endDay)){
 				errorMessage = errorMessage + "・「期間」の終了で存在しない月日を入力しています。\n\n";
+				noError = 0;
+			}
+			if(hasTimeError(hour,minute)){
+				errorMessage = errorMessage + "・不正な時間を入力しています。\n\n";
 				noError = 0;
 			}
 			if(radio[0].checked){//曜日指定 or 日付指定
