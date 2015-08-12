@@ -5,14 +5,14 @@
 <HTML>
 
 	<HEAD>
-		<TITLE>ログイン画面</TITLE>
+		<TITLE>ログイン</TITLE>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
 	</HEAD>
 	
 	<BODY>
 		<BR><BR>
 		<CENTER ID="a">
-			<H1>ログイン画面</H1>
+			<H1>ログイン</H1>
 			<div id="login">
 				<!-- ユーザ名・パスワード入力 -->
 				<FORM METHOD="POST" ACTION="../Controller">
