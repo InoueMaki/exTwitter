@@ -5,6 +5,14 @@ p{
 	margin:40px auto;
 }
 
+#select_t{
+	font-size: 20px;
+}
+
+#time_t{
+	font-size:larger;
+}
+
 /*メニュー段組用*/
 table.center{
     margin: 0 auto;  
@@ -17,7 +25,6 @@ table.login{
     margin: 0 auto;  
 	text-align:center;
 }
-
 
 /*登録ツイート表示用*/
 table.tweet{
@@ -46,14 +53,20 @@ td.width800{
 	width: 800px;
 }
 
-/*font-sizeをlargeにするだけ*/
-.large{
-	font-size:large;
+/*font-sizeをlargerにするだけ*/
+.larger{
+	font-size:20px;
+	line-height: 1.6em;
 }
 
 /*font-sizeを30pxにするだけ*/
 #font30px{
 	font-size: 30px;
+}
+
+/*font-sizeを25pxにするだけ*/
+#font25px{
+	font-size: 25px;
 }
 
 /*ログイン画面のテキストボックス（ID入力）*/
@@ -203,10 +216,6 @@ input[type="number"]{
 	font-size:20px;
 }
 
-#font30px{
-	font-size:30px;
-}
-
 /*チェックボックス全般*/
 input[type=checkbox]{
 	width:20px;
@@ -235,7 +244,6 @@ input[type=radio]{
 /*曜日指定フォームのチェックボックス用*/
 #chk{
 	display: inline-block;
-	padding: 2px;
 }
 
 /*routine要素の内部要素*/
@@ -386,6 +394,11 @@ input[type=radio]{
 
 /*ふつうのスマホ*/
 @media screen and (max-width: 565px) {
+	.larger{
+		font-size:15px;
+		line-height: 1.4em;
+	}
+
 	li{
 		display:inline;
 		height:auto;
@@ -571,6 +584,10 @@ input[type=radio]{
 	input[type=text]{
 		font-size: 12px;
 		width:50%;
+	}
+	
+	#select_t{
+		font-size: 15px;
 	}
 }
 
