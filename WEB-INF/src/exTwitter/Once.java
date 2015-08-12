@@ -26,7 +26,7 @@ public class Once {
 	public boolean getOnceBean(HttpSession session) {
 
 		System.out.println("\ngetOnceBean()\n");
-		
+
 		onceList = new ArrayList<OnceBean>();	//onceListを初期化
 
 		DBManager dbm = new DBManager();	//DB接続クラスのインスタンス
@@ -36,7 +36,7 @@ public class Once {
 		try {
 
 			dbm.getConnection();
-			
+
 			dbm.createPreparedStatement("select * from once where posted = 0");
 			ResultSet rs = dbm.getRSByPreSmt();	
 
@@ -78,7 +78,7 @@ public class Once {
 			String month, String day, String hour, String minute) {
 
 		System.out.println("\ninsertOnceTweet()\n");
-		
+
 		boolean bool = false;
 		int onceId = getOnceIdFromDB();
 		String reserveTime = "";
@@ -93,20 +93,20 @@ public class Once {
 			reserveTime = year + "-" + formatStr(month) + "-" + formatStr(day) +" " + formatStr(hour) + ":" + formatStr(minute) + ":00";
 		}
 
-		
+
 		DBManager dbm = new DBManager();
-		
+
 		try {
 			dbm.getConnection();
-			
+
 			//仮クエリ
 			dbm.createPreparedStatement("insert into once values (?,?,?,0)");
-			
+
 			//仮クエリを補完
 			dbm.setInt(1, onceId);
 			dbm.setString(2, text);
 			dbm.setString(3, reserveTime);
-			
+
 			dbm.exeUpdateByPreSmt();
 
 			bool = true;
@@ -130,28 +130,39 @@ public class Once {
 	private int getOnceIdFromDB() {
 
 		System.out.println("\ngetOnceId()\n");
-		
+
 		int onceId = -1;
 
 		DBManager dbm = new DBManager();
 
 		try{
 			dbm.getConnection();
-			
+
 			dbm.createPreparedStatement("SELECT * FROM numbering");
-			ResultSet rs = dbm.getRSByPreSmt();
+			
+			for(int i=0;i<5;i++){//once_idの更新を試行回数5回でトライ
+				try {
+					ResultSet rs = dbm.getRSByPreSmt();
 
-			while(rs.next()){
-				onceId = rs.getInt("once_id");
+					while(rs.next()){
+						onceId = rs.getInt("once_id");
+					}
+
+					//仮クエリ
+					dbm.createPreparedStatement("UPDATE numbering SET once_id=?");
+					//仮クエリ補完
+					dbm.setInt(1,onceId+1);
+
+					dbm.exeUpdateByPreSmt();
+
+					System.out.println("success 'update once_id\n'");
+					break;
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("try again 'update once_id\n'");
+				}
 			}
-			
-			//仮クエリ
-			dbm.createPreparedStatement("UPDATE numbering SET once_id=?");
-			//仮クエリ補完
-			dbm.setInt(1,onceId+1);
-			
-			dbm.exeUpdateByPreSmt();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			onceId = -1;
@@ -172,7 +183,7 @@ public class Once {
 	public boolean deleteOnceTweet(String onceId) {
 
 		System.out.println("\ndeleteOnceTweet()\n");
-		
+
 		boolean bool = false;
 
 		//DB接続の準備
@@ -185,7 +196,7 @@ public class Once {
 			dbm.createPreparedStatement("UPDATE once SET posted = 2 where once_id =?");
 			//仮クエリ補完
 			dbm.setString(1, onceId);
-			
+
 			dbm.exeUpdateByPreSmt();
 
 			bool = true;
