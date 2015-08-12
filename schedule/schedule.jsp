@@ -35,10 +35,10 @@
 		
 		
 		<!-- 年/月表示、単発/定期カラー表示 -->
-		<table border=0 class="headPanel">
+		<table class="headPanel">
 			<tr>
 				<td><p class="scheYM"><%=Scheduler.year%>年<%=Scheduler.month+1%>月</p></td>
-				<td align=left><p class="sampleOnce">単発ツイート</p><p class="sampleRoutine">定期ツイート</p></td>
+				<td><p class="sampleOnce">単発ツイート</p><p class="sampleRoutine">定期ツイート</p></td>
 			</tr>
 		</table>
 		<!-- ここまで。（年/月表示、単発/定期カラー表示） -->
@@ -63,11 +63,19 @@
 						</tr>
 						<tr>
 			<% int i;
+			String mnth="Prev";
 			for(i=0;i<Scheduler.OnceBeans.size();i++){
+				if(Scheduler.calendarDay[i]==1){
+					if(mnth=="Prev"){
+						mnth="";
+					}else{
+						mnth="Next";
+					}
+				}
 				if (i%7==0){%>
-							<td class="scheDateSun"><%=Scheduler.calendarDay[i]%></td>
+							<td class="scheDateSun<%=mnth%>"><%=Scheduler.calendarDay[i]%></td>
 				<% }else if(i%7==6){ %>
-							<td class="scheDateSat"><%=Scheduler.calendarDay[i]%></td>
+							<td class="scheDateSat<%=mnth%>"><%=Scheduler.calendarDay[i]%></td>
 						</tr>
 						<tr>
 					<% for(int j=(i-6);j<=i;j++){%>
@@ -83,12 +91,14 @@
 					<%}
 					if(Scheduler.RoutineBeans.get(j).size()>0){%>
 								<div class="scheBtn"><button class="scheRoutineBtn" onClick="dispRoutine(<%=j+1%>)"><%=Scheduler.RoutineBeans.get(j).size()%></button></div>
+					<%}else{%>
+								<div class="scheBtn"></div>	
 					<%}%>
 							</td>
 					<% }%>
 						</tr>
 				<% }else{%>
-							<td class="scheDate"><%=Scheduler.calendarDay[i]%></td>
+							<td class="scheDate<%=mnth%>"><%=Scheduler.calendarDay[i]%></td>
 				<% }
 			}%>
 						</tr>

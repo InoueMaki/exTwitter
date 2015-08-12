@@ -5,7 +5,7 @@ function dispOnce(id){
 	var childs = tr.children;
 	
 	var new_tr = document.createElement('tr'); 
-	new_tr.innerHTML="<td>本文</td><td>投稿日時</td><td>投稿状況</td>"
+	new_tr.innerHTML="<td>本文</td><td>投稿日時</td><td>投稿</td>"
 	detail.appendChild(new_tr)
 	for(var i=0;i<childs.length;i++){
 		tweets = childs[i].children;
