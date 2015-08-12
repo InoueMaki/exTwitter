@@ -54,7 +54,6 @@ public class Routine {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			tweetList = null;
 
 		}finally{
 			dbm.closeConnection();
@@ -185,19 +184,30 @@ public class Routine {
 			dbm.getConnection();
 
 			dbm.createPreparedStatement("SELECT * FROM numbering");
-			ResultSet rs = dbm.getRSByPreSmt();
 
-			while(rs.next()){
-				routineId = rs.getInt("routine_id");
+			for(int i=0;i<5;i++){//routine_idの更新を試行回数5回でトライ
+				try {
+					ResultSet rs = dbm.getRSByPreSmt();
+
+					while(rs.next()){
+						routineId = rs.getInt("routine_id");
+					}
+
+					//仮クエリ
+					dbm.createPreparedStatement("UPDATE numbering SET routine_id=?");
+					//クエリ補完
+					dbm.setInt(1,routineId+1);
+
+					dbm.exeUpdateByPreSmt();
+
+					System.out.println("success 'update routine_id\n'");
+					break;
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("try again 'update routine_id\n'");
+				}
 			}
-
-			//仮クエリ
-			dbm.createPreparedStatement("UPDATE numbering SET routine_id=?");
-			//クエリ補完
-			dbm.setInt(1,routineId+1);
-
-			dbm.exeUpdateByPreSmt();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			routineId = -1;
