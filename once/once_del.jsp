@@ -9,7 +9,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>単発ツイート削除</title>
+		<title>ツイート削除</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
 	</head>
 	
@@ -19,7 +19,7 @@
 		<!-- タイトル -->
 		<div id="a">
 			<div id="label">
-				単発ツイート削除
+				ツイート削除
 			</div>
 		<!-- フォームの配置 -->
 			<form method="post" action="../Controller" onsubmit="return jump();">
@@ -28,8 +28,8 @@
 					<table class="tweet">
 						<thead>
 							<tr>
-								<th width=10%>　</th>
-								<th width=50%>ツイート</th>
+								<th width=85px>　</th>
+								<th width=60%>ツイート</th>
 								<th>予約日時</th>
 							</tr>
 						</thead>
@@ -38,7 +38,7 @@
 							if(Once.onceList != null){
 								for(int i=0;i<Once.onceList.size();i++){
 									out.println("<tr>");
-									out.println("<td data-label=\"　\" align=\"center\"><button id=\"button\" onclick=\"delBtn("+i+")\" name=\"btn\" value=\"単発削除\">削除</button></td>");
+									out.println("<td data-label=\"　\" align=\"center\"><button id=\"button\" onclick=\"delBtn("+i+")\" name=\"btn\" value=\"単発削除\" style=\"width:80px\">削除</button></td>");
 									out.println("<td data-label=\"ツイート\" align=\"center\">" + Once.onceList.get(i).getText() + "</td>");
 									out.println("<td data-label=\"予約日時\" align=\"center\">" + Once.onceList.get(i).getReserveTime() + "</td>");
 									out.print("<input type=\"hidden\" id=\"del"+i+"\"value=\""+Once.onceList.get(i).getOnceId()+"\">");

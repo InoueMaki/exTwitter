@@ -31,7 +31,6 @@ table.tweet{
 	width:95%;
 	border-collapse:collapse;
 	border:1px solid #000;
-	padding:0;
 	margin:0;
 }
 table.tweet tr{
@@ -39,7 +38,7 @@ table.tweet tr{
 	padding:3px;
 }
 table.tweet th, table.tweet td{
-	padding:10px;
+	padding:3px;
 	font-size:20px;
 	border:1px solid #000;
 	text-align:center;
@@ -282,6 +281,7 @@ input[type=radio]{
 		WIDTH:130px;
 		HEIGHT:40px;
 	}
+	
 }
 
 /*登録テーブルの表示が崩れ始めるあたりのウィンドウ幅*/
@@ -355,11 +355,13 @@ input[type=radio]{
 /*画面の大きいスマホ？基本レイアウトはそのまま、テーブルだけ変化*/
 @media screen and (max-width: 600px) {
 	table.tweet th, table.tweet td{
+		padding:10px;
 		border:0;
 	}
 
 	table.tweet{
 		border:0;
+		width:80%;
 	}
 
 	table.tweet thead{
@@ -394,6 +396,12 @@ input[type=radio]{
 
 /*ふつうのスマホ*/
 @media screen and (max-width: 565px) {
+
+	table.tweet{
+		border:0;
+		width:90%;
+	}
+
 	.larger{
 		font-size:15px;
 		line-height: 1.4em;
@@ -593,6 +601,12 @@ input[type=radio]{
 
 /*画面小さいデバイス用？*/
 @media screen and (max-width: 380px) {
+
+	table.tweet{
+		border:0;
+		width:100%;
+	}
+	
 	.textLogin {
 		width: 250px;
 		margin: 0 auto;
