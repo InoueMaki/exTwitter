@@ -54,11 +54,22 @@
 			var errorMessage = "入力内容に以下の誤りがあります。\n\n";
 			var noError = 1;
 			
+			if(hasNoValueError(Obj)){
+				errorMessage = errorMessage + "・ツイート内容がありません。\n　記入してください\n\n";
+				noError = 0;
+			}
 			if(hasTextError(Obj)){
-				errorMessage = errorMessage+"・投稿できない文字列が含まれています。\n投稿できない文字列は「RT」「#」「@」「D」「M」「DM」です。\n\n";
+				errorMessage = errorMessage+"・投稿できない文字列が含まれています。\n　投稿できない文字列は「RT」「#」「@」\n　先頭に記述できない文字列は「D」「M」「DM」です。\n\n";
 				noError =0;
 			}
-			
+			if(hasDateError(Obj)){
+				errorMessage = errorMessage + "・存在しない月日を入力しています。\n\n";
+				noError = 0;
+			}
+			if(hasTimeError(Obj)){
+				errorMessage = errorMessage + "・不正な時間を入力しています。\n\n";
+				noError = 0;
+			}
 			if(chk.checked && checkDate(Obj)){
 				errorMessage = errorMessage+"・日時が現在よりも過去になっています。\n\n";
 				noError =0;
@@ -72,20 +83,73 @@
 			}
 		}
 		
+		//本文の記述がないか
+		function hasNoValueError(Obj){
+			
+			var text = Obj.text.value;
+			
+			var trimedText = text.replace(/\s+/g,"");
+	
+			if(trimedText==""){
+				return true;
+			}
+	
+			return false;
+		}
+		
 		//禁止文字列がないか
 		function hasTextError(Obj){
 	
 			var text = Obj.text.value;
+			
 			var hasTabooWord = 0;
 	
-			if(text.indexOf("RT")!=-1 || text.indexOf("#")!=-1 || text.indexOf("@")!=-1 || text.indexOf("D")!=-1 || text.indexOf("M")!=-1 || text.indexOf("DM")!=-1){
+			//禁止されている文字列の検査
+			if(text.indexOf("RT ")!=-1 || text.indexOf("#")!=-1 || text.indexOf("@")!=-1){
 				hasTabooWord = 1;
 			}
+	
+			//文字列の先頭の空白文字を削除
+			var trimedText = text.replace(/^\s+/g, "");
+		
+			//先頭で禁止されている文字列の検査
+			if(trimedText.substring(0,1)=="D" || trimedText.substring(0,1)=="M" || trimedText.substring(0,2)=="DM"){
+				hasTabooWord = 1;
+			}
+	
 			if(hasTabooWord == 1){
 				return true;//禁止文字列を含んでいる
 			}else{
 				return false;
 			}
+		}
+		
+		//存在しない時間かどうか
+		function hasTimeError(Obj) {
+
+			var hour = Obj.hour.value;
+			var minute = Obj.minute.value;
+
+			if(hour.match(/^-?[0-9]+$/) && 0<=hour && hour<=23){
+				if(minute.match(/^-?[0-9]+$/) && 0<=minute && minute<=59){
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		//存在しない日付かどうかチェック
+		function hasDateError(Obj) {
+
+			var year = Obj.year.value;
+			var month = Obj.month.value;
+			var day = Obj.day.value;
+
+			var dt = new Date(year, month - 1, day);
+			if(dt == null || dt.getFullYear() != year || dt.getMonth() + 1 != month || dt.getDate() != day) {
+				return true;//存在しない日付あり
+			}
+			return false;
 		}
 		
 		window.onload = disp;
