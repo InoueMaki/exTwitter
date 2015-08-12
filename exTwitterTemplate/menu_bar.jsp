@@ -7,7 +7,7 @@
 		<FORM METHOD="POST" ACTION="../Controller" style="display:inline">
 			<table>
 				<tr>
-					<td class="width800">
+					<td class="width90%">
 						<button class="headerButton" name = "btn" VALUE="メニュー" >メニュー</button>
 					</td>
 					<td>
