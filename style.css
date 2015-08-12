@@ -264,6 +264,10 @@ input[type=radio]{
 		WIDTH:130px;
 		HEIGHT:40px;
 	}
+	
+	#select_t{
+		font-size:larger;
+	}
 }
 
 /*登録テーブルの表示が崩れ始めるあたりのウィンドウ幅*/
@@ -561,6 +565,10 @@ input[type=radio]{
 	input[type=text]{
 		font-size: 12px;
 		width:50%;
+	}
+	
+	#select_t{
+		font-size:small;
 	}
 }
 
