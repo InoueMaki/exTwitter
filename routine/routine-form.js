@@ -150,11 +150,11 @@
 			//各項目にエラーがあるかチェック
 			
 			if(hasNoValueError(title,text)){
-				errorMessage = errorMessage + "・入力されていない項目があります。\n記入してください\n\n";
+				errorMessage = errorMessage + "・入力されていない項目があります。\n　記入してください\n\n";
 				noError = 0;
 			}
 			if(hasTextError(text)){
-				errorMessage = errorMessage + "・投稿できない文字列が含まれています。\n投稿できない文字列は「RT」「#」「@」\n先頭に記述できない文字列は「D」「M」「DM」です。\n\n";
+				errorMessage = errorMessage + "・投稿できない文字列が含まれています。\n　投稿できない文字列は「RT」「#」「@」\n　先頭に記述できない文字列は「D」「M」「DM」です。\n\n";
 				noError = 0;
 			} 
 			if(hasDateError1(endYear,endMonth,endDay)){

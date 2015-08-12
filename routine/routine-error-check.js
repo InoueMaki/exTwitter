@@ -1,11 +1,5 @@
 //未記入の項目がないか
 function hasNoValueError(title,text){
-
-/*
-	if(title==""||text==""){
-		return true;
-	}
-*/	
 	
 	var trimedTitle = title.replace(/\s+/g,"");
 	var trimedText = text.replace(/\s+/g,"");
