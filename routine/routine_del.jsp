@@ -20,19 +20,20 @@
 			<%
 				/*以下、定期ツイート一覧の表示*/
 				if(tweetList!=null && tweetList.size()!=0){%>
-					登録されている定期ツイート一覧<br><br>
+					<br><br>
 					<form action='../Controller' onsubmit='return jump();'method='post'> 
 					<center>
 					<!-- テーブル -->
 					<table class="tweet"> 
 							<thead>
-								<th>　</th> 
-								<th>タイトル</th> 
-								<th>本文</th> 
-								<th>時刻</th> 
-								<th width="18%">開始日</th> 
-								 <th width="18%">終了日</th> 
-							 </tr> 
+								<tr>
+									<th>　</th> 
+									<th>タイトル</th> 
+									<th>本文</th> 
+									<th>時刻</th> 
+									<th width="18%">開始日</th> 
+									<th width="18%">終了日</th> 
+							 	</tr> 
 							 </thead> 
 							 <tbody> 
 						<%for(int i=0;i<tweetList.size();i++){%>
