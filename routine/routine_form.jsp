@@ -22,7 +22,7 @@
 <html>
 	
 	<head>
-		<title>定期ツイート作成</title>
+		<title>定期ツイート登録</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
 	</head>
 	
@@ -32,12 +32,12 @@
 		<!-- タイトル -->
 		<div id="a">
 			<div id="label">
-				定期ツイート作成
+				定期ツイート登録
 			</div>
 			
 			<!-- 以下、フォームの配置 -->
 			<!--<form action="test">-->
-			<form class="large" action="../Controller" onsubmit="return errorCheck()" method="post">
+			<form action="../Controller" onsubmit="return errorCheck()" method="post">
 				<center>
 					
 				<!-- ツイートのタイトルと本文の入力フォーム -->
@@ -47,7 +47,7 @@
 				<!-- ツイート終わり -->					
 					<br>					
 				<!--ツイートの期間と時刻の入力フォーム-->
-					<div id="inputbox">
+					<div id="inputbox" class="larger">
 						<div id="time">
 							期間
 						</div>
@@ -63,7 +63,7 @@
 						</div>
 							<br>
 						<div id="time">
-							ツイートする時刻
+							ツイート時刻
 						</div>
 						<div id="time">
 							<input type="number" class="inp_2num" id="tweet_hour" name="twt_h" value=<%= nowHour %> max=23 min=0 step=1 >時</input>
@@ -72,8 +72,8 @@
 					</div>
 				<!--期間と時刻終わり-->
 				<!--ツイート周期の入力フォーム-->
-					<div id="routine">
-						<div id="routine_in">ツイート周期
+					<div id="routine" class="larger">
+						<div id="routine_in">周期
 						</div>
 						<!-- 曜日or日付 -->
 						<div id="routine_in">
@@ -82,7 +82,7 @@
 						</div>
 					</div>
 					<!--曜日指定フォームの表示-->
-					<div id="week" name="weekly">
+					<div id="week" name="weekly"  class="larger">
 						<div id="chk">
 							<input type="checkbox" class="rad_chk" name="chk" value=1 id="chk1"/><label for="chk1">月</label>
 							<input type="checkbox" class="rad_chk" name="chk" value=2 id="chk2"/><label for="chk2">火</label>
@@ -97,7 +97,7 @@
 						</div>
 					</div>
 					<!--日付指定フォームの表示-->
-					<div id="month">
+					<div id="month" class="larger">
 						<table>
 						<tbody id="seldays">
 							<tr>
@@ -109,6 +109,7 @@
 						<input type="button" value="追加入力" onclick="addElement()"> 
 					</div>
 					<br>
+					<br>
 					<button name="btn" id="button" class="btn" value="定期登録">ツイート登録</button>
 				</center>
 				
@@ -118,7 +119,7 @@
 			
 			<% if(tweetList!=null && tweetList.size()!=0){ %>
 					<!-- 以下、定期ツイート一覧の表示 -->
-					 <br><div id="font30px" align="left"><font size="4">登録ツイート一覧</font></div> 
+					 <br><div align="left"><font size="5">登録ツイート一覧</font></div> 
 					 <br> 
 					 <div align="right"><font size="5"> 
 					 <form action="../Controller" method="post"> 

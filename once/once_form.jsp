@@ -26,7 +26,7 @@
 		session.setAttribute("onceflg",0);//セッションの値を0にしておく
 	%>	
 	<head>
-		<title>単発ツイート作成</title>
+		<title>ツイート登録</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
 	</head>
 	
@@ -35,12 +35,12 @@
 	<!-- タイトル -->
 		<div id="a">
 			<div id="label">
-				単発ツイート作成
+				ツイート登録
 			</div>
 			
 			<!-- 以下、フォームの配置 -->
 				<center>
-					<form class="large" method="post" action="../Controller" onSubmit="return twbtn(this)">
+					<form method="post" action="../Controller" onSubmit="return twbtn(this)">
 				<!-- ツイートのタイトルと本文の入力フォーム -->
 					<textarea name="text" maxlength="140" placeholder="ツイートを入力してね" required></textarea><br>
 				<!-- ツイート終わり -->
@@ -67,7 +67,7 @@
 				<button id="button" name="btn" value="単発登録">ツイート登録</button>
 			</form>
 			<br>
-			<div id="font30px" align="left">登録ツイート一覧</div>
+			<div align="left" id="font25px">登録ツイート一覧</div>
 			<div align="right">
 				<form method="post" action="../Controller">
 					<button id="button" name="btn" value="単発削除">削除画面へ</button>
