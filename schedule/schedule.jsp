@@ -38,7 +38,7 @@
 		<table class="headPanel">
 			<tr>
 				<td><p class="scheYM"><%=Scheduler.year%>年<%=Scheduler.month+1%>月</p></td>
-				<td><p class="sampleOnce">単発ツイート</p><p class="sampleRoutine">定期ツイート</p></td>
+				<td><p class="sampleOnce">ツイート</p><p class="sampleRoutine">定期ツイート</p></td>
 			</tr>
 		</table>
 		<!-- ここまで。（年/月表示、単発/定期カラー表示） -->
@@ -87,7 +87,7 @@
 							<td class="scheTweet">
 					<% }
 					if(Scheduler.OnceBeans.get(j).size()>0){%>
-								<div class="scheBtn"><button class="scheOnceBtn" onClick="dispOnce(<%=j+1%>)"><%=Scheduler.OnceBeans.get(j).size()%></button></div><br/>
+								<div class="scheBtn"><button class="scheOnceBtn" onClick="dispOnce(<%=j+1%>)"><%=Scheduler.OnceBeans.get(j).size()%></button></div>
 					<%}
 					if(Scheduler.RoutineBeans.get(j).size()>0){%>
 								<div class="scheBtn"><button class="scheRoutineBtn" onClick="dispRoutine(<%=j+1%>)"><%=Scheduler.RoutineBeans.get(j).size()%></button></div>
