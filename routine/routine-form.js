@@ -91,7 +91,7 @@
 					"本文\n"+document.getElementById("text").value+"\n\n"+
 					"開始日\n"+document.getElementById("start_year").value+"年"+document.getElementById("start_month").value+"月"+document.getElementById("start_day").value+"日\n\n"+
 					"終了日\n"+document.getElementById("end_year").value+"年"+document.getElementById("end_month").value+"月"+document.getElementById("end_day").value+"日\n\n"+
-					"時刻\n"+document.getElementById("tweet_hour").value+"時"+document.getElementById("tweet_hour").value+"分\n\n"+
+					"時刻\n"+document.getElementById("tweet_hour").value+"時"+document.getElementById("tweet_minute").value+"分\n\n"+
 					strDays;
 					
 					return confirm(strDialog);
