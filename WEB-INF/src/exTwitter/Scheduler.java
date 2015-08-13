@@ -193,7 +193,7 @@ public class Scheduler {
 	 * @return
 	 */
 	private int setWeek(int count) {
-		int week = (count + 1) % 7;
+		int week = count % 7;
 		if (week == 0) {
 			week = 7;
 		}
@@ -334,20 +334,21 @@ public class Scheduler {
 	 */
 	private String int2week(int num) {
 		switch (num) {
+		
 		case 1:
-			return "日";
-		case 2:
 			return "月";
-		case 3:
+		case 2:
 			return "火";
-		case 4:
+		case 3:
 			return "水";
-		case 5:
+		case 4:
 			return "木";
-		case 6:
+		case 5:
 			return "金";
-		case 7:
+		case 6:
 			return "土";
+		case 7:
+			return "日";
 		default:
 			return "none";
 		}
