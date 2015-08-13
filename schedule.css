@@ -69,6 +69,7 @@ table.detail{
 	visibility:hidden;
 	width:inherit;
 	table-layout: fixed;
+	word-break: break-all;
 }
 
 /* カレンダー曜日 */
