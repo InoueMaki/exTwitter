@@ -91,36 +91,7 @@ public class DBManager {
 		}
 	}
 
-	/**
-	 * <b>getConnection</b><br/>
-	 * public void getConnection(String DB_name) throws SQLException<br/>
-	 * <blockquote> コネクション生成<br>
-	 * DB名を指定しアクセスを行う<br>
-	 * 最大3回までトライする </blockquote>
-	 * 
-	 * @param DB_name
-	 * @throws SQLException
-	 */
-	public void getConnection(String DB_name) throws SQLException {
-		System.out.println("DB url: " + db_base + DB_name);
-		for (int i = 0; i < 3; i++) {
-			try {
-				this.con = DriverManager.getConnection(this.db_base + DB_name);
-				this.smt = con.createStatement();
-				System.out.println("---------- Create Connection ----------\n");
-				break;
-			} catch (SQLException e) {
 
-				System.err.println("Connection Error");
-				if (i < 2) {
-					System.err.println("\tTry Again");
-				} else {
-					System.err.println("\n");
-					throw e;
-				}
-			}
-		}
-	}
 
 	/**
 	 * <b>exeUpdate</b><br/>
