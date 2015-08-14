@@ -2,6 +2,7 @@ package exTwitter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,70 +11,68 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author matsuda
- * doPostメソッドでjspからデータの受け取り、次のjspに遷移を行うクラス。
- * 再読み込みをされた場合に同じ処理を2度行わないようにするため、遷移にはリダイレクトを使う。
+ * @author matsuda doPostメソッドでjspからデータの受け取り、次のjspに遷移を行うクラス。
+ *         再読み込みをされた場合に同じ処理を2度行わないようにするため、遷移にはリダイレクトを使う。
  */
 @SuppressWarnings("serial")
 public class Controller extends HttpServlet {
 
-	public void doPost(HttpServletRequest request,
-			HttpServletResponse response)
-	throws ServletException,IOException{
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain;charset=UTF-8");
 
-		//セッション取得
+		// セッション取得
 		HttpSession session = request.getSession(true);
 
-		//押されたボタンの情報を取得
+		// 押されたボタンの情報を取得
 		String command = request.getParameter("btn");
 		System.out.println("command = " + command);
-		
-		String url="";
 
-		//以下ボタンごとの処理
-		if(command!=null && command .equals("ログイン")){
+		String url = "";
+
+		// 以下ボタンごとの処理
+		if (command != null && command.equals("ログイン")) {
 
 			String userName = request.getParameter("user_name");
-			String password =request.getParameter("password");
+			String password = request.getParameter("password");
 			User user = new User();
 
-			if(user.login(userName,password)){
+			if (user.login(userName, password)) {
 				session = request.getSession(true);
 				session.setAttribute("loginFlag", "login");
 				url = "exTwitterTemplate/menu.jsp";
-			}else{
-				session.setAttribute("err","ユーザ名とパスワードが一致しません");
+			} else {
+				session.setAttribute("err", "ユーザ名とパスワードが一致しません");
 				url = "user/login.jsp";
 			}
 
-		}else if(command.equals("ログアウト")){
+		} else if (command.equals("ログアウト")) {
 			User user = new User();
 			user.logout(session);
 			url = "user/login.jsp";
-			
-		}else if(command .equals("ユーザー登録")){
+
+		} else if (command.equals("ユーザー登録")) {
 			String userName = request.getParameter("user_name");
 			String password = request.getParameter("pass1");
-			
+
 			User user = new User();
-			user.signup(userName,password);
-			
+			user.signup(userName, password);
+
 			url = "user/login.jsp";
 
-		}else if(session!=null && hasSession(session)){//ログイン以外、かつ、sessionある時
+		} else if (session != null && hasSession(session)) {// ログイン以外、かつ、sessionある時
 
-			if(command .equals("メニュー")){
+			if (command.equals("メニュー")) {
 				url = "exTwitterTemplate/menu.jsp";
 
-			}else if(command .equals("単発")){
+			} else if (command.equals("単発")) {
 				Once once = new Once();
 				once.getOnceBean(session);
 				url = "once/once_form.jsp";
 
-			}else if(command .equals("単発登録")){
+			} else if (command.equals("単発登録")) {
 				String text = request.getParameter("text");
 				String chk = request.getParameter("chk1");
 				String year = request.getParameter("year");
@@ -81,16 +80,16 @@ public class Controller extends HttpServlet {
 				String day = request.getParameter("day");
 				String hour = request.getParameter("hour");
 				String minute = request.getParameter("minute");
-				
+
 				Once once = new Once();
-				once.insertOnceTweet(text,chk,year,month,day,hour,minute);
+				once.insertOnceTweet(text, chk, year, month, day, hour, minute);
 				once.getOnceBean(session);
 
 				session.setAttribute("onceflg", 1);
 
 				url = "once/once_form.jsp";
 
-			}else if(command .equals("単発削除")){
+			} else if (command.equals("単発削除")) {
 				String onceId = request.getParameter("del");
 				System.out.println(onceId);
 				Once once = new Once();
@@ -99,13 +98,13 @@ public class Controller extends HttpServlet {
 
 				url = "once/once_del.jsp";
 
-			}else if(command .equals("定期")){
+			} else if (command.equals("定期")) {
 				Routine routine = new Routine();
 				routine.getRoutineBean(session);
 
 				url = "routine/routine_form.jsp";
 
-			}else if(command .equals("定期登録")){
+			} else if (command.equals("定期登録")) {
 				String title = request.getParameter("title");
 				String text = request.getParameter("text");
 				String startYear = request.getParameter("st_y");
@@ -130,7 +129,7 @@ public class Controller extends HttpServlet {
 
 				url = "routine/routine_form.jsp";
 
-			}else if(command .equals("定期削除")){
+			} else if (command.equals("定期削除")) {
 				String routineId = request.getParameter("del");
 
 				Routine routine = new Routine();
@@ -138,32 +137,38 @@ public class Controller extends HttpServlet {
 				routine.getRoutineBean(session);
 
 				url = "routine/routine_del.jsp";
-			}else if(command.equals("スケジュール")){
+			} else if (command.equals("スケジュール")) {
 				String strYear = request.getParameter("scheYear");
 				String strMonth = request.getParameter("scheMonth");
-				Scheduler sche = new Scheduler();
-				if(strYear!=null && strMonth!=null){
-					System.out.println(strYear);
-					sche.setYM(strYear, strMonth,session);
+				try {
+					Scheduler sche = new Scheduler();
+					if (strYear == null || strMonth == null) {
+						Calendar cal = Calendar.getInstance();
+						
+						sche.setSchedule(session, cal.get(Calendar.YEAR),  cal.get(Calendar.MONTH)+1);
+					}else{
+						sche.setSchedule(session, Integer.parseInt(strYear), Integer.parseInt(strMonth));
+					}
+					url = "schedule/schedule.jsp";
+				} catch (Exception e) {
+					e.printStackTrace();
+					url = "exTwitterTemplate/redirect.jsp";
 				}
-				sche.createSchedule(session);
-				url = "schedule/schedule.jsp";
-				
-				////////////////////////////////////////
-				//新しい画面が増えたときはここに追加//
-				////////////////////////////////////////
-				
-			}else{
+				// //////////////////////////////////////
+				// 新しい画面が増えたときはここに追加//
+				// //////////////////////////////////////
+
+			} else {
 				PrintWriter out = response.getWriter();
 				out.println("正常に処理が行われませんでした。");
-				System.err.println("登録されていないボタン："+command);
+				System.err.println("登録されていないボタン：" + command);
 			}
 
-		}else{//セッション切れの時
-			url="exTwitterTemplate/redirect.jsp";
+		} else {// セッション切れの時
+			url = "exTwitterTemplate/redirect.jsp";
 		}
 
-		//画面遷移
+		// 画面遷移
 		response.sendRedirect(url);
 	}
 
@@ -172,9 +177,9 @@ public class Controller extends HttpServlet {
 	 * @return セッションあり→true、なし→false
 	 */
 	private boolean hasSession(HttpSession session) {
-		if(session.getAttribute("loginFlag")!=null){
+		if (session.getAttribute("loginFlag") != null) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
