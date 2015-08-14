@@ -107,7 +107,7 @@ public class ExBot {
 		// コネクション確立
 		DBManager DBM = new DBManager();
 		try {
-			DBM.getConnection("excite.db");
+			DBM.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -163,7 +163,7 @@ public class ExBot {
 		// コネクション確立
 		DBManager DBM = new DBManager();
 		try {
-			DBM.getConnection("excite.db");
+			DBM.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
