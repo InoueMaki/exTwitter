@@ -48,7 +48,9 @@ td.scheTBL{
 td.twtTBL{
 	display:block;
 	height:390px;
+	width:100%;
 	overflow-y:auto;
+	overflow-x:auto;
 	border: 1px solid gray;
 }
 
@@ -65,7 +67,7 @@ table.schedule{
 table.detail{
 	visibility:hidden;
 	min-width:100px;
-	width:100%;
+	width:250%;
 	table-layout: fixed;
 	word-break:break-word;
 	text-align:center;
