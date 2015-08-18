@@ -1,5 +1,7 @@
 package exBot;
 
+import java.util.Calendar;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -10,6 +12,7 @@ import twitter4j.TwitterFactory;
  */
 public class Tweet {
 	private Twitter twitter;
+	Calendar cal;
 	/**
 	 * <b>Tweet</b><br/>
 	 * public Tweet()<br/>
@@ -28,10 +31,12 @@ public class Tweet {
 	 */
 	public void sendTweet(String text){
 		try{
+			System.out.print("ツイート内容:");
 			twitter.updateStatus(text);
-			System.out.println("ツイート成功");
+			cal= Calendar.getInstance();
+			System.out.println("ツイート成功:" + cal.getTime().toString());
 		} catch(TwitterException e){
-			System.err.println("ツイート失敗："+text);
+			System.err.println("ツイート失敗："+ cal.getTime().toString());
 			e.printStackTrace();
 		}
 	}
