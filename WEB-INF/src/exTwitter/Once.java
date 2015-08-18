@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Once {
 
-	public static ArrayList<OnceBean> onceList;	//DB情報格納クラスを格納するリスト
+	ArrayList<OnceBean> onceList;	//DB情報格納クラスを格納するリスト
 
 	/**
 	 * 単発ツイート一覧を表示するためのBeanを作る。
@@ -48,6 +48,7 @@ public class Once {
 				data.setText(rs.getString("text"));
 				onceList.add(data);//リストに要素を追加
 			}
+			session.setAttribute("onceList",onceList);
 
 			bool = true;
 

@@ -5,6 +5,7 @@
 <%@ page import="java.lang.Integer"%>
 
 <% request.setCharacterEncoding("UTF-8"); %>
+<% ArrayList<OnceBean> onceList = (ArrayList)session.getAttribute("onceList"); %>
 
 <!doctype html>
 <html>
@@ -35,13 +36,13 @@
 						</thead>
 						<tbody>
 						<%
-							if(Once.onceList != null){
-								for(int i=0;i<Once.onceList.size();i++){
+							if(onceList != null){
+								for(int i=0;i<onceList.size();i++){
 									out.println("<tr>");
 									out.println("<td data-label=\"　\" align=\"center\"><button id=\"button\" onclick=\"delBtn("+i+")\" name=\"btn\" value=\"単発削除\" style=\"width:80px\">削除</button></td>");
-									out.println("<td data-label=\"ツイート\" align=\"center\">" + Once.onceList.get(i).getText() + "</td>");
-									out.println("<td data-label=\"予約日時\" align=\"center\">" + Once.onceList.get(i).getReserveTime() + "</td>");
-									out.print("<input type=\"hidden\" id=\"del"+i+"\"value=\""+Once.onceList.get(i).getOnceId()+"\">");
+									out.println("<td data-label=\"ツイート\" align=\"center\">" + onceList.get(i).getText() + "</td>");
+									out.println("<td data-label=\"予約日時\" align=\"center\">" + onceList.get(i).getReserveTime() + "</td>");
+									out.print("<input type=\"hidden\" id=\"del"+i+"\"value=\""+ onceList.get(i).getOnceId()+"\">");
 									out.print("</tr>");
 								}
 							}

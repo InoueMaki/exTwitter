@@ -24,6 +24,7 @@
 			flg = 0;
 		}
 		session.setAttribute("onceflg",0);//セッションの値を0にしておく
+		ArrayList<OnceBean> onceList = (ArrayList)session.getAttribute("onceList");
 	%>	
 	<head>
 		<title>ツイート登録</title>
@@ -84,11 +85,11 @@
 			</thead>
 			<tbody>
 				<%
-					if(Once.onceList != null){
-						for(int i=0;i<Once.onceList.size();i++){%>
+					if(onceList != null){
+						for(int i=0;i<onceList.size();i++){%>
 							<tr>
-								<td data-label="ツイート" align="center"><%=Once.onceList.get(i).getText()%> </td>
-								<td data-label="予約日時" align="center"><%=Once.onceList.get(i).getReserveTime()%> </td>
+								<td data-label="ツイート" align="center"><%=onceList.get(i).getText()%> </td>
+								<td data-label="予約日時" align="center"><%=onceList.get(i).getReserveTime()%> </td>
 							</tr>
 						<%}
 					}%>
