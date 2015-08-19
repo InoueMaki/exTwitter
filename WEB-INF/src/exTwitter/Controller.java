@@ -1,7 +1,6 @@
 package exTwitter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
@@ -33,7 +32,10 @@ public class Controller extends HttpServlet {
 		String url = "";
 
 		// 以下ボタンごとの処理
-		if (command != null && command.equals("ログイン")) {
+		if(command == null){
+			url = "exTwitterTemplate/error.jsp";
+		}
+		else if (command.equals("ログイン")) {
 
 			String userName = request.getParameter("user_name");
 			String password = request.getParameter("password");
@@ -53,7 +55,7 @@ public class Controller extends HttpServlet {
 			user.logout(session);
 			url = "user/login.jsp";
 
-		} else if (command.equals("ユーザー登録")) {
+		} else if ( command.equals("ユーザー登録")) {
 			String userName = request.getParameter("user_name");
 			String password = request.getParameter("pass1");
 
@@ -159,9 +161,8 @@ public class Controller extends HttpServlet {
 				// //////////////////////////////////////
 
 			} else {
-				PrintWriter out = response.getWriter();
-				out.println("正常に処理が行われませんでした。");
 				System.err.println("登録されていないボタン：" + command);
+				url = "exTwitterTemplate/error.jsp";
 			}
 
 		} else {// セッション切れの時
