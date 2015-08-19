@@ -67,34 +67,32 @@
 				<br>
 				<button id="button" name="btn" value="単発登録">ツイート登録</button>
 			</form>
-			<br>
-			<div align="left" id="font25px">登録ツイート一覧</div>
-			<div align="right">
-				<form method="post" action="../Controller">
-					<button id="button" name="btn" value="単発削除">削除画面へ</button>
-				</form>
-			</div>
-			<br>
 			<!--テーブル-->
-		<table class="tweet">
-			<thead>
-				<tr>
-					<th width=70% >ツイート</th>
-					<th>予約日時</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					if(onceList != null){
-						for(int i=0;i<onceList.size();i++){%>
+				<% if(onceList != null && onceList.size() != 0){ %>
+					<br>
+					<div align="left" id="font25px">登録ツイート一覧</div>
+					<div align="right">
+						<form method="post" action="../Controller">
+							<button id="button" name="btn" value="単発削除">削除画面へ</button>
+						</form>
+					</div>
+					<br>
+					<table class="tweet">
+						<thead>
 							<tr>
-								<td data-label="ツイート" align="center"><%=onceList.get(i).getText()%> </td>
-								<td data-label="予約日時" align="center"><%=onceList.get(i).getReserveTime()%> </td>
+								<th width=70% >ツイート</th>
+								<th>予約日時</th>
 							</tr>
-						<%}
-					}%>
-			</tbody>
-		</table>
+						</thead>
+						<tbody>
+						<% for(int i=0;i<onceList.size();i++){ %>
+							<tr>
+								<td data-label="ツイート" align="center"><%= onceList.get(i).getText() %></td>
+								<td data-label="予約日時" align="center"><%= onceList.get(i).getReserveTime() %></td>
+							</tr>
+						<% } %>
+					</table>
+				<% } %>
 				<!--テーブル終わり-->
 		</div>
 		
