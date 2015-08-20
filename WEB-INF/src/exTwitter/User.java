@@ -96,7 +96,7 @@ public class User {
 			System.out.println("userID : "+userId);
 			
 			//仮クエリ
-			dbm.createPreparedStatement("INSERT INTO user VALUES(?,?,1,?)");
+			dbm.createPreparedStatement("INSERT INTO user (user_id,password,valid,user_name) VALUES(?,?,1,?)");
 			//仮クエリ補完
 			dbm.setInt(1,userId+1);
 			dbm.setString(2, hashPW);
