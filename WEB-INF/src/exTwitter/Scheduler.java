@@ -200,8 +200,8 @@ public class Scheduler {
 			bean.setTitle(rs.getString("title"));
 			bean.setText(rs.getString("text"));
 			bean.setPostTime(trimRoutineTime(rs.getString("post_time")));
-			bean.setStartDate(rs.getString("start_date").replace("-", "/"));
-			bean.setEndDate(rs.getString("end_date").replace("-", "/"));
+			bean.setStartDate(rs.getString("start_date"));
+			bean.setEndDate(rs.getString("end_date"));
 			routine.add(bean);
 		}
 		rs.close();
