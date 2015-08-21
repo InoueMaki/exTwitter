@@ -89,19 +89,19 @@ public class Routine {
 
 		System.out.println("\ninsertRoutineTweet()\n");
 
-		String[] strDays;
+		String[] strDays = {""};
 
 		//weekdayStrかdaysStrのどちらかしか使わないため、使う方をstrDaysにコピー
-		if(entryPlan.compareTo("hoge1")==0){
+		if(entryPlan.equals("hoge1")){
 			strDays = weekdaysStr;
-		}else{
+		}else if(entryPlan.equals("hoge2")){
 			strDays = daysStr;
 		}
 
 		//曜日や日付をint型で扱いたいので、変換してアレイリストへ
 		ArrayList<Integer> intDays = new ArrayList<Integer>();
 		for(int i=0; i<strDays.length;i++){
-			if(strDays[i]!=null){
+			if(strDays[i]!=null && strDays[i]!=""){
 				try {
 					intDays.add(Integer.parseInt(strDays[i]));
 				} catch (NumberFormatException e) {
@@ -111,8 +111,8 @@ public class Routine {
 			}
 		}
 
-		//「月末」にチェックが入っているときその情報追加
-		if(monthEnd!=null && entryPlan.compareTo("hoge2")==0){
+		//「月末」の情報追加
+		if(entryPlan.equals("hoge3") || (monthEnd!=null && entryPlan.equals("hoge2"))){
 			intDays.add(0);
 		}
 
