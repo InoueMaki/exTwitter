@@ -41,6 +41,10 @@
 				document.getElementById('week').style.display = "none";
 				document.getElementById('month').style.display = "";
 
+			}else if(radio[2].checked){
+				document.getElementById('week').style.display = "none";
+				document.getElementById('month').style.display = "none";
+				
 			}
 		}
 		
@@ -63,7 +67,7 @@
 						days[days.length]=dayList[j];
 					}
 				}
-			}else{	
+			}else if(radio[1].checked){	
 				//指定日付の受け取り//
 				var strDays="指定した日付\n";
 				for(var j=0;j<i;j++){
@@ -74,6 +78,8 @@
 				if(document.getElementById("monthend").checked){
 					days[days.length]="月末"
 				}
+			}else{
+				var strDays="指定した日付\n月末のみ";
 			}
 			//データから文字列生成
 			for(var j=0;j<days.length;j++){
@@ -113,22 +119,7 @@
 			}
 		}
 		
-		
-		//「月末のみ」にチェックが入った時の処理
-		function onlyMonthend(){
-			ome = document.getElementById("onlyMonthend");
-			if(ome.checked){
-				for(var j=0;j<i;j++){
-					document.getElementById("num"+j).disabled = "true";
-				}
-				
-			}else{
-				for(var j=0;j<i;j++){
-					document.getElementById("num"+j).disabled = "";
-				}
-			}
-		}
-		
+
 		//////エラーチェックし、エラーない時ツイート登録関数を呼び出す関数
 		function errorCheck(){
 			

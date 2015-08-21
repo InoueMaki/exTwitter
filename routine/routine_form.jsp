@@ -73,12 +73,13 @@
 				<!--期間と時刻終わり-->
 				<!--ツイート周期の入力フォーム-->
 					<div id="routine" class="larger">
-						<div id="routine_in">周期
+						<div id="routine_in">周期指定
 						</div>
 						<!-- 曜日or日付 -->
 						<div id="routine_in">
-							<input type="radio" class="rad_chk" id="weekday" name="entryPlan" value="hoge1" onclick="entryChange();" checked="checked" /><label for="weekday">曜日指定</label>
-							<input type="radio" class="rad_chk" id="day" name="entryPlan" value="hoge2" onclick="entryChange();" /><label for="day">日付指定</label>
+							<input type="radio" class="rad_chk" id="weekday" name="entryPlan" value="hoge1" onclick="entryChange();" checked="checked" /><label for="weekday">曜日</label>
+							<input type="radio" class="rad_chk" id="day" name="entryPlan" value="hoge2" onclick="entryChange();" /><label for="day">日付</label>
+							<input type="radio" class="rad_chk" id="onlyMonthend" name="entryPlan" value="hoge3" onclick="entryChange();" /><label for="onlyMonthend">月末のみ</label>
 						</div>
 					</div>
 					<!--曜日指定フォームの表示-->
