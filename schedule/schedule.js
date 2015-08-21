@@ -1,11 +1,11 @@
 function dispOnce(id){
 	removeall();
 	var tr = document.getElementById("once_"+id);
-	var detail = document.getElementById("detail");
+	var detail = document.getElementById("detbody");
 	var childs = tr.children;
 	
 	var new_tr = document.createElement('tr'); 
-	new_tr.innerHTML="<td>本文</td><td>投稿日時</td><td>投稿</td>"
+	new_tr.innerHTML="<td class='oncetext'>本文</td><td>投稿時間</td><td>投稿</td>"
 	detail.appendChild(new_tr)
 	for(var i=0;i<childs.length;i++){
 		tweets = childs[i].children;
@@ -23,7 +23,7 @@ function dispOnce(id){
 function dispRoutine(id){
 	removeall();
 	var tr = document.getElementById("routine_"+id);
-	var detail = document.getElementById("detail");
+	var detail = document.getElementById("detbody");
 	var childs = tr.children;
 	
 	var new_tr = document.createElement('tr'); 
@@ -44,7 +44,7 @@ function dispRoutine(id){
 
 
 function removeall(){
-	var detail = document.getElementById("detail");
+	var detail = document.getElementById("detbody");
 	while (child = detail.lastChild) detail.removeChild(child);
 }
 

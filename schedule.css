@@ -66,8 +66,8 @@ table.schedule{
 /* 詳細用テーブル*/
 table.detail{
 	visibility:hidden;
+	width:100%;
 	min-width:100px;
-	width:250%;
 	table-layout: fixed;
 	word-break:break-word;
 	text-align:center;
@@ -215,5 +215,19 @@ button.scheRoutineBtn{
 #a {
     border: none;
     padding: 0;
+}
+
+/* 詳細用テーブル*/
+table.detail{
+	visibility:hidden;
+	min-width:100px;
+	width:250%;
+	table-layout: fixed;
+	word-break:break-word;
+	text-align:center;
+}
+.oncetext{
+	width:40%;
+
 }
 }

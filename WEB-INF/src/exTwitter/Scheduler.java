@@ -11,7 +11,7 @@ public class Scheduler {
 	ArrayList<ArrayList<OnceBean>> onceSchedule = new ArrayList<ArrayList<OnceBean>>();
 	ArrayList<ArrayList<RoutineBean>> routineSchedule = new ArrayList<ArrayList<RoutineBean>>();
 	int[] calendarDay = new int[42];
-
+	
 	public void setCalendar(int year, int month) {
 
 		Calendar cal = Calendar.getInstance();
@@ -183,7 +183,7 @@ public class Scheduler {
 		while (rs.next()) {
 			OnceBean bean = new OnceBean();
 			bean.setText(rs.getString("text"));
-			bean.setReserveTime(rs.getString("reserve_time"));
+			bean.setReserveTime(trimOnceTime(rs.getString("reserve_time")));
 			bean.setPosted(rs.getInt("posted"));
 			once.add(bean);
 		}
@@ -199,7 +199,7 @@ public class Scheduler {
 			RoutineBean bean = new RoutineBean();
 			bean.setTitle(rs.getString("title"));
 			bean.setText(rs.getString("text"));
-			bean.setPostTime(rs.getString("post_time"));
+			bean.setPostTime(trimRoutineTime(rs.getString("post_time")));
 			bean.setStartDate(rs.getString("start_date"));
 			bean.setEndDate(rs.getString("end_date"));
 			routine.add(bean);
@@ -215,47 +215,21 @@ public class Scheduler {
 		}
 		return week;
 	}
-
-	private static void show(Scheduler sch) {
-		ArrayList<ArrayList<OnceBean>> onceBeans = sch.getOnceSchedule();
-		ArrayList<ArrayList<RoutineBean>> routineBeans = sch
-				.getRoutineSchedule();
-		int[] calendarDay = sch.getCalendar();
-		System.out.println(onceBeans.size());
-		System.out.println(routineBeans.size());
-		if (onceBeans.size() == routineBeans.size()) {
-			for (int i = 0; i < onceBeans.size(); i++) {
-				System.out.println(calendarDay[i] + "日");
-				for (int j = 0; j < onceBeans.get(i).size(); j++) {
-					System.out.print("　単発 \t");
-					System.out.print("ID:"
-							+ onceBeans.get(i).get(j).getOnceId());
-					System.out.print("\ttext:"
-							+ onceBeans.get(i).get(j).getText());
-					System.out.print("\ttime:"
-							+ onceBeans.get(i).get(j).getReserveTime());
-					System.out.println("\tposted:"
-							+ onceBeans.get(i).get(j).getPosted());
-				}
-
-				for (int j = 0; j < routineBeans.get(i).size(); j++) {
-					System.out.print("　定期\t");
-					System.out.print("ID:"
-							+ routineBeans.get(i).get(j).getRoutineId());
-					System.out.print("\ttitle:"
-							+ routineBeans.get(i).get(j).getTitle());
-					System.out.print("\ttext:"
-							+ routineBeans.get(i).get(j).getText());
-					System.out.print("\tstart:"
-							+ routineBeans.get(i).get(j).getStartDate());
-					System.out.print("\tend:"
-							+ routineBeans.get(i).get(j).getEndDate());
-					System.out.println("\tposted:"
-							+ routineBeans.get(i).get(j).getPosted());
-				}
-			}
+	
+	private String trimOnceTime(String reserve_time){
+		if (reserve_time.length()>18){
+			reserve_time = reserve_time.substring(10, 16);
 		}
+		return reserve_time;
 	}
+	
+	private String trimRoutineTime(String post_time){
+		if(post_time.length()>7){
+			post_time = post_time.substring(0, 5);
+		}
+		return post_time;
+	}
+
 	
 	public void setSchedule(HttpSession session, int year,int month)throws SQLException{
 		Scheduler sch = new Scheduler();
@@ -273,17 +247,6 @@ public class Scheduler {
 		session.setAttribute("RoutineBeans", routineBeans);
 		session.setAttribute("year",year);
 		session.setAttribute("month", month);
-	}
-
-	public static void main(String[] args) throws SQLException {
-		int year = 2015;
-		int month = 8;
-
-		Scheduler sch = new Scheduler();
-		sch.setCalendar(year, month);
-		sch.setOnceSchedule(year, month);
-		sch.setRoutineSchedule(year, month);
-		show(sch);
 	}
 
 }

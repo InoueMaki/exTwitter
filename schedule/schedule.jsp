@@ -126,7 +126,8 @@
 				<td class="twtTBL">
 					<!-- 詳細TBL -->
 					<table class="detail" border=1 id="detail">	
-						<tbody>
+						<tbody id="detbody">
+							<tr>
 						</tbody>
 					</table>
 					<!-- ここまで。（詳細TBL） -->
