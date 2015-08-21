@@ -2,7 +2,11 @@
 <!-- bodyタグ内でインクルードして使うファイル -->
 
 <%@page contentType="text/html; charset=UTF-8" %>
-
+	<!-- JavaScript無効の場合、遷移する -->
+		<noscript>
+			<meta http-equiv="refresh" content="0; URL=../exTwitterTemplate/noscript.jsp">
+		</noscript>
+	<!-- JavaScript無効時の処理終わり -->
 	<div id="header1">
 		<FORM METHOD="POST" ACTION="../Controller" style="display:inline">
 			<table>
