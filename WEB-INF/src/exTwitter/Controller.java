@@ -173,6 +173,16 @@ public class Controller extends HttpServlet {
 		response.sendRedirect(url);
 	}
 
+	//スマホで「PC版ページを表示」という操作をすると、
+	//「GETメソッドがない」というエラーが出るから実装する。
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/plain;charset=UTF-8");
+		
+		response.sendRedirect("exTwitterTemplate/error.jsp");
+	}
 	/**
 	 * @param session
 	 * @return セッションあり→true、なし→false
