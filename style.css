@@ -453,6 +453,7 @@ input[type=radio]{
 
 	#a {
 		border: none;
+		padding:0;
 	}
 	
 	#header2{
