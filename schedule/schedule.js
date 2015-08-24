@@ -80,3 +80,23 @@ function getRoutineDetails(id){
 	alert(str);
 	
 }
+
+function checkInput(){
+	var year = document.getElementsByName("scheYear")[0];
+	var month = document.getElementsByName("scheMonth")[0];
+	if(year.value<2010 || 2021<year.value){
+		document.getElementById("yError").style.display="";
+		year.style.backgroundColor="pink";
+		document.getElementById("mError").style.display="none";
+		month.style.backgroundColor="white";
+		return false;
+	}
+	if(month.value<1 || 12<month.value){
+		document.getElementById("yError").style.display="none";
+		year.style.backgroundColor="white";
+		document.getElementById("mError").style.display="";
+		month.style.backgroundColor="pink";
+		return false;
+	}
+	return true;
+}

@@ -34,7 +34,7 @@
 				int[] calendarDay = (int[])session.getAttribute("calendarDay");
 		%>
 		<!-- 年月指定移動用 -->
-		<form METHOD="POST" ACTION="../Controller">
+		<form METHOD="POST" ACTION="../Controller" onSubmit="return checkInput()">
 			<TABLE >
 				<tr>
 					<td>
@@ -45,6 +45,15 @@
 						</button>
 					</td>
 				</tr>
+				<tr>
+					<td id="yError" style="display:none;color:red;">
+						2010～2020の範囲で入力してください
+					</td>
+				</tr>
+				<tr>
+					<td id="mError" style="display:none;color:red;">
+						1～12の範囲で入力してください
+					</td>
 			</table>
 		</form>
 		<!-- ここまで。（年月指定移動用） -->
