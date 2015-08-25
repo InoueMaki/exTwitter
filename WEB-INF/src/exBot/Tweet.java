@@ -30,14 +30,17 @@ public class Tweet {
 	 * @param text
 	 */
 	public void sendTweet(String text){
+		
+		cal= Calendar.getInstance();
 		try{
 			System.out.print("ツイート内容:");
 			twitter.updateStatus(text);
-			cal= Calendar.getInstance();
 			System.out.println("ツイート成功:" + cal.getTime().toString());
+			
 		} catch(TwitterException e){
 			System.err.println("ツイート失敗："+ cal.getTime().toString());
 			e.printStackTrace();
 		}
 	}
+	
 }
