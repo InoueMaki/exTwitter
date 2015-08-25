@@ -168,17 +168,18 @@
 				errorMessage = errorMessage + "・不正な時間を入力しています。\n\n";
 				noError = 0;
 			}
+			
 			if(radio[0].checked){//曜日指定 or 日付指定
 				if(hasWeekSelectError()){
 					errorMessage = errorMessage + "・曜日が選択されていません。\n\n";
 					noError = 0;
 				}
 				
-				}else{
-					if(hasOverlapError()){
-						errorMessage = errorMessage + "・日付指定に被りがあります。\n\n";
-						noError = 0;
-					}
+			}else if(radio[1].checked){
+				if(hasOverlapError()){
+					errorMessage = errorMessage + "・日付指定に被りがあります。\n\n";
+					noError = 0;
+				}
 			}
 			
 			
