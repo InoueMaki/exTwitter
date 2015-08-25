@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpSession;
 
@@ -86,9 +86,13 @@ public class Once {
 
 		//時間指定があるかないか
 		if(chk==null){
-			Date date = new Date();
-			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			reserveTime = sdf1.format(date);
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
+			Calendar cal = Calendar.getInstance();
+			
+			cal.add(Calendar.MINUTE,+5-(cal.get(Calendar.MINUTE)%5));
+			
+			reserveTime = sdf.format(cal.getTime());
 
 		}else{
 			reserveTime = year + "-" + formatStr(month) + "-" + formatStr(day) +" " + formatStr(hour) + ":" + formatStr(minute) + ":00";
