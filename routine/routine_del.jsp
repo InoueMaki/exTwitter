@@ -12,8 +12,10 @@
 	<head>
 		<title>定期ツイート削除</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
-
+	</head>
+	
 	<!--以下、定期ツイート一覧の表示-->
+	<body>
 	<jsp:include page="../exTwitterTemplate/menu_bar.jsp" />
 		<div id="a">
 			<div id="label">定期ツイート削除</div>
