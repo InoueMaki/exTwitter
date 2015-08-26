@@ -145,7 +145,8 @@
 				noError = 0;
 			}
 			if(hasTextError(text)){
-				errorMessage = errorMessage + "・投稿できない文字列が含まれています。\n　投稿できない文字列は「RT」「#」「@」\n　先頭に記述できない文字列は「D」「M」「DM」です。\n\n";
+				errorMessage = errorMessage + "・登録できない文字列が含まれています。\n　登録できない文字列は「RT」「#」「@」\n";
+				errorMessage = errorMessage + "　先頭に記述できない文字列は「d」「m」「dm」「D」「M」「DM」です。\n\n";
 				noError = 0;
 			} 
 			if(hasDateError1(endYear,endMonth,endDay)){
@@ -174,11 +175,11 @@
 					noError = 0;
 				}
 				
-				}else{
-					if(hasOverlapError()){
-						errorMessage = errorMessage + "・日付指定に被りがあります。\n\n";
-						noError = 0;
-					}
+			}else if(radio[1].checked){
+				if(hasOverlapError()){
+					errorMessage = errorMessage + "・日付指定に被りがあります。\n\n";
+					noError = 0;
+				}
 			}
 			
 			
