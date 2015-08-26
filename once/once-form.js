@@ -59,7 +59,8 @@
 				noError = 0;
 			}
 			if(hasTextError(Obj)){
-				errorMessage = errorMessage+"・投稿できない文字列が含まれています。\n　投稿できない文字列は「RT」「#」「@」\n　先頭に記述できない文字列は「D」「M」「DM」です。\n\n";
+				errorMessage = errorMessage+"・登録できない文字列が含まれています。\n　登録できない文字列は「RT」「#」「@」\n";
+				errorMessage = errorMessage+"　先頭に記述できない文字列は「d」「m」「dm」「D」「M」「DM」です。\n\n";
 				noError =0;
 			}
 			if(hasDateError(Obj)){
@@ -111,8 +112,13 @@
 	
 			//文字列の先頭の空白文字を削除
 			var trimedText = text.replace(/^\s+/g, "");
+			
+			//先頭で禁止されている文字列の検査１
+			if(trimedText.substring(0,1)=="d" || trimedText.substring(0,1)=="m" || trimedText.substring(0,2)=="dm"){
+			hasTabooWord = 1;
+	}
 		
-			//先頭で禁止されている文字列の検査
+			//先頭で禁止されている文字列の検査2
 			if(trimedText.substring(0,1)=="D" || trimedText.substring(0,1)=="M" || trimedText.substring(0,2)=="DM"){
 				hasTabooWord = 1;
 			}

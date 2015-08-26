@@ -24,7 +24,12 @@ function hasTextError(text){
 	//文字列の先頭の空白文字を削除
 	var trimedText = text.replace(/^\s+/g, "");
 	
-	//先頭で禁止されている文字列の検査
+	//先頭で禁止されている文字列の検査１
+	if(trimedText.substring(0,1)=="d" || trimedText.substring(0,1)=="m" || trimedText.substring(0,2)=="dm"){
+		hasTabooWord = 1;
+	}
+	
+	//先頭で禁止されている文字列の検査２
 	if(trimedText.substring(0,1)=="D" || trimedText.substring(0,1)=="M" || trimedText.substring(0,2)=="DM"){
 		hasTabooWord = 1;
 	}
