@@ -59,7 +59,7 @@
 							<TR>
 								<TD>
 									<center><button class="menuButton" value="単発削除" name="btn">ツイート削除</button></center>
-									<DIV class="box">予約したツイートを削除します<BR><BR></DIV>
+									<DIV class="box">予約したツイートを<BR>削除します<BR><BR></DIV>
 								</TD>
 							</TR>
 							<TR>
@@ -71,7 +71,7 @@
 							<TR>
 								<TD>
 									<center><button class="menuButton" value="定期削除" name="btn">定期ツイート削除</button></center>
-									<DIV class="box">登録定期ツイートを削除します<BR><BR></DIV>
+									<DIV class="box">登録定期ツイートを<BR>削除します<BR><BR></DIV>
 								</TD>
 							</TR>
 							<TR>
