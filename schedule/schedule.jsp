@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>スケジュール</title>
+		<title>スケジュール確認</title>
 		<jsp:include page="../exTwitterTemplate/header.jsp" />
 		<LINK rel="stylesheet" type="text/css" href="../schedule.css">
 		<script type="text/javascript" src="schedule.js"></script>
@@ -22,7 +22,7 @@
 	<jsp:include page="../exTwitterTemplate/menu_bar.jsp" />
 		<div id="a">
 		<div id="label">
-				スケジュール
+				スケジュール確認
 			</div>
 		<%if (session.getAttribute("year")!=null){
 				int year = Integer.parseInt(session.getAttribute("year").toString());
