@@ -64,7 +64,7 @@
 							</TR>
 							<TR>
 								<TD>
-									<center><button class="menuButton" value="定期" name="btn">定期ツイート</button></center>
+									<center><button class="menuButton" value="定期" name="btn">定期ツイート登録</button></center>
 									<DIV class="box">業務報告書などの<BR>定期連絡を登録します<BR><BR></DIV>
 								</TD>
 							</TR>
